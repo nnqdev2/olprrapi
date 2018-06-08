@@ -23,6 +23,7 @@ namespace OlprrApi.Storage
         public DbSet<ApOlprrInsertIncident> ApOLPRRInsertIncident { get; set; }
         public DbSet<ApOlprrGetIncidentById> ApOlprrGetIncidentById { get; set; }
         public DbSet<ApOlprrGetIncidents> ApOlprrGetIncidents { get; set; }
+        public DbSet<ApOlprrGetIncidentDataById> ApOlprrGetIncidentDataById { get; set; }
 
         public LustDbContext(DbContextOptions<LustDbContext> options) : base(options)
         {

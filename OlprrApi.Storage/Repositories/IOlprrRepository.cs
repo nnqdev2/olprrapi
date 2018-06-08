@@ -34,5 +34,7 @@ namespace OlprrApi.Storage.Repositories
 
         Task<IEnumerable<ApOlprrGetIncidentsStats>> ApOlprrGetIncidentsStats(string office, string status, string siteType, string olprrId
             , int sortColumn, int sortOrder, int pageNumber, int rowsPerPage);
+
+        Task<IEnumerable<ApOlprrGetIncidentDataById>> ApOlprrGetIncidentDataById(int olprrId);
     }
 }

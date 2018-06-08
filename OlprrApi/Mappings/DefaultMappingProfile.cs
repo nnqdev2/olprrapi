@@ -27,6 +27,7 @@ namespace OlprrApi.Mappings
             CreateMap<Storage.Entities.ApOlprrGetIncidents, Models.Response.ApOlprrGetIncidents>();
             CreateMap<Storage.Entities.ApOlprrGetIncidentsWithStats, Models.Response.ApOlprrGetIncidentsWithStats>();
             CreateMap<Storage.Entities.ApOlprrGetIncidentsStats, Models.Response.ApOlprrGetIncidentsStats>();
+            CreateMap<Storage.Entities.ApOlprrGetIncidentDataById, Models.Response.IncidentDataById>();
         }
     }
 }

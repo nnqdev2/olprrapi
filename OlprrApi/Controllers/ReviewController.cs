@@ -73,5 +73,12 @@ namespace OlprrApi.Controllers
         {
             return Ok(await _olprrReviewService.GetIncidentsStats(deqo, stat, st, id, sc, so, pn, rpp));
         }
+
+        [Route("incidentdatabyid/{olprrId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetIncidentDataById(int olprrId)
+        {
+            return Ok(await _olprrReviewService.GetIncidentDataById(olprrId));
+        }
     }
 }

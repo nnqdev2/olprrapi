@@ -18,5 +18,7 @@ namespace OlprrApi.Services
 
         Task<IEnumerable<ResponseDto.ApOlprrGetIncidentsStats>> GetIncidentsStats(string office, string status, string siteType, string olprrId
             , int sortColumn, int sortOrder, int pageNumber, int rowsPerPage);
+
+        Task<ResponseDto.IncidentDataById> GetIncidentDataById(int olprrId);
     }
 }

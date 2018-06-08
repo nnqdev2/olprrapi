@@ -606,5 +606,24 @@ namespace OlprrApi.Storage.Repositories
             }
             return apOlprrGetIncidentsStats;
         }
+
+        public async Task<IEnumerable<ApOlprrGetIncidentDataById>> ApOlprrGetIncidentDataById(int olprrId)
+        {
+            var olprrIdParam = (new SqlParameter("@OlprrId", olprrId));
+            var resultOutParam = new SqlParameter { ParameterName = "@RESULT", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            var exeSp = "execute dbo.apOLPRRGetIncidentDataByID  @OlprrId, @RESULT OUTPUT ";
+            var result =  await _dbContext.Set<ApOlprrGetIncidentDataById>().AsNoTracking().FromSql(exeSp, olprrIdParam, resultOutParam).ToListAsync();
+
+            var resultCode = (Int16)(resultOutParam.Value);
+
+            if (resultCode != 0)
+            {
+                var errorMsg = $"{exeSp} returned status code = {resultCode} for OlprrId {olprrId}.";
+                _logger.LogError(errorMsg);
+                throw new StoreProcedureNonZeroOutputParamException(errorMsg);
+            }
+            return result;
+
+        }
     }
 }

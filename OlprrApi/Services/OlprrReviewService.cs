@@ -204,5 +204,14 @@ namespace OlprrApi.Services
             }
             return resultList;
         }
+
+        public async Task<ResponseDto.IncidentDataById> GetIncidentDataById(int olprrId)
+        {
+            foreach (var result in await _lustRepository.ApOlprrGetIncidentDataById(olprrId))
+            {
+                return(_mapper.Map<EntityDto.ApOlprrGetIncidentDataById, ResponseDto.IncidentDataById>(result));
+            }
+            return null;
+        }
     }
 }
