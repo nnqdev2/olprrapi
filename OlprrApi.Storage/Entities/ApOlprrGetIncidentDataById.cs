@@ -7,6 +7,7 @@ namespace OlprrApi.Storage.Entities
     {
         [Key]
         public int OlprrId { get; set; }
+        public string ReleaseTypeCode { get; set; }
         public string ReleaseType { get; set; }
         public DateTime DateReceived { get; set; }
         public int? FacilityId { get; set; }

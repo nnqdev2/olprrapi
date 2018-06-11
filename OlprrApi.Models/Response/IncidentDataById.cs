@@ -7,6 +7,7 @@ namespace OlprrApi.Models.Response
     public class IncidentDataById
     {
         public int OlprrId { get; set; }
+        public string ReleaseTypeCode { get; set; }
         public string ReleaseType { get; set; }
         public DateTime DateReceived { get; set; }
         public int? FacilityId { get; set; }
@@ -85,7 +86,6 @@ namespace OlprrApi.Models.Response
         public int Chemical { get; set; }
         public int Unknown { get; set; }
         public int Mtbe { get; set; }
-        public int Result { get; set; }
     }
 }
 
