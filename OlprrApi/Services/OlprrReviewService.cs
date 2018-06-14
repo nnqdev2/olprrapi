@@ -50,6 +50,17 @@ namespace OlprrApi.Services
             return resultList;
         }
 
+        public async Task<IEnumerable<ResponseDto.ApOlprrGetUstLookupDataStats>> Search(RequestDto.UstSearchFilter ustSearchFilter)
+        {
+            var searchFilters = _mapper.Map<RequestDto.UstSearchFilter, EntityDto.UstSearchFilter>(ustSearchFilter);
+            var resultList = new List<ResponseDto.ApOlprrGetUstLookupDataStats>();
+            foreach (var result in await _lustRepository.ApOlprrGetUstLookupData(searchFilters))
+            {
+                resultList.Add(_mapper.Map<EntityDto.ApOlprrGetUstLookupDataStats, ResponseDto.ApOlprrGetUstLookupDataStats>(result));
+            }
+            return resultList;
+        }
+
         public async Task<ResponseDto.ApOLPRRGetContactByIdByContactType> GetContactByIdByContactType(int olprrId, string contactType)
         {
             var result = await _lustRepository.ApOLPRRGetContactByIdByContactType(olprrId,contactType);

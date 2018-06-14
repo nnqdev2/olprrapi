@@ -474,6 +474,69 @@ namespace OlprrApi.Storage.Repositories
 
         }
 
+        public async Task<IEnumerable<ApOlprrGetUstLookupDataStats>> ApOlprrGetUstLookupData(UstSearchFilter ustSearchFilter)
+        {
+            var facilityNameParam = new SqlParameter("@FacilityName", ustSearchFilter.FacilityName);
+            var facilityAddressParam = new SqlParameter("@FacilityAddress", ustSearchFilter.FacilityAddress);
+            var facilityCityParam = new SqlParameter("@FacilityCity", ustSearchFilter.FacilityCity);
+            var facilityZipParam = new SqlParameter("@FacilityZip", ustSearchFilter.FacilityZip);
+            var sortColParam = new SqlParameter("@SortColumn", ustSearchFilter.SortColumn);
+            var sortOrderParam = new SqlParameter("@SortOrder", ustSearchFilter.SortOrder);
+            var pageNumberParam = new SqlParameter("@PageNumber", ustSearchFilter.PageNumber);
+            var rowsPerPageParam = new SqlParameter("@RowsPerPage", ustSearchFilter.RowsPerPage);
+            var resultOutParam = new SqlParameter { ParameterName = "@RESULT", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            var totalRowsOutParam = new SqlParameter { ParameterName = "@TotalRows", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            var totalPagesOutParam = new SqlParameter { ParameterName = "@TotalPages", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+
+            if (facilityNameParam.Value == null) facilityNameParam.Value = DBNull.Value;
+            if (facilityAddressParam.Value == null) facilityAddressParam.Value = DBNull.Value;
+            if (facilityCityParam.Value == null) facilityCityParam.Value = DBNull.Value;
+            if (facilityZipParam.Value == null) facilityZipParam.Value = DBNull.Value;
+            if (sortColParam.Value == null) sortColParam.Value = DBNull.Value;
+            if (sortOrderParam.Value == null) sortOrderParam.Value = DBNull.Value;
+            if (pageNumberParam.Value == null) pageNumberParam.Value = DBNull.Value;
+            if (rowsPerPageParam.Value == null) rowsPerPageParam.Value = DBNull.Value;
+
+
+            var exeSp = "execute dbo.apOLPRRGetUstLookupData  @FacilityName, @FacilityAddress, @FacilityCity, @FacilityZip "
+                + " ,@SortColumn, @SortOrder, @PageNumber, @RowsPerPage, @TotalRows OUTPUT, @TotalPages OUTPUT, @RESULT OUTPUT ";
+
+
+            var result = await _dbContext.Set<ApOlprrGetUstLookupData>().AsNoTracking().FromSql(exeSp, facilityNameParam, facilityAddressParam, facilityCityParam, facilityZipParam
+                , sortColParam, sortOrderParam, pageNumberParam, rowsPerPageParam, resultOutParam, totalRowsOutParam, totalPagesOutParam).ToListAsync();
+
+            var resultCode = (Int16)(resultOutParam.Value);
+
+            if (resultCode != 0)
+            {
+                var json = JsonConvert.SerializeObject(ustSearchFilter);
+                var errorMsg = $"{exeSp} returned status code = {resultCode}. Post payload {json}.";
+                _logger.LogError(errorMsg);
+                throw new StoreProcedureNonZeroOutputParamException(errorMsg);
+            }
+
+            var rList = new List<ApOlprrGetUstLookupDataStats>();
+            foreach (var res in result)
+            {
+                rList.Add(
+                    new ApOlprrGetUstLookupDataStats()
+                    {
+                        ReqPageNumber = ustSearchFilter.PageNumber,
+                        ReqRowsPerPage = ustSearchFilter.RowsPerPage,
+                        ReqSortColumn = ustSearchFilter.SortColumn,
+                        ReqSortOrder = ustSearchFilter.SortOrder,
+                        TotalPages = (Int16)(totalPagesOutParam.Value),
+                        TotalRows = (Int16)(totalRowsOutParam.Value),
+                        FacilityName = res.FacilityName,
+                        FacilityAddress = res.FacilityAddress,
+                        FacilityCity = res.FacilityCity,
+                        FacilityZip = res.FacilityZip,
+                    }
+                );
+            }
+            return rList;
+        }
+
         public void ApRetrieveGeoLocId(string appId)
         {
             throw new NotImplementedException();
@@ -767,5 +830,6 @@ namespace OlprrApi.Storage.Repositories
             return result;
 
         }
+
     }
 }

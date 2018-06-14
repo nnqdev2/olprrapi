@@ -40,6 +40,8 @@ namespace OlprrApi.Mappings
             CreateMap<Storage.Entities.ApOlprrGetIncidentDataById, Models.Response.IncidentDataById>();
             CreateMap<Models.Request.LustSearchFilter, Storage.Entities.LustSearchFilter>();
             CreateMap<Storage.Entities.ApGetLustSearchDataStats, Models.Response.ApGetLustSearchDataStats>();
+            CreateMap<Models.Request.UstSearchFilter, Storage.Entities.UstSearchFilter>();
+            CreateMap<Storage.Entities.ApOlprrGetUstLookupDataStats, Models.Response.ApOlprrGetUstLookupDataStats>();
         }
     }
 }

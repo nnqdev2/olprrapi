@@ -36,11 +36,18 @@ namespace OlprrApi.Controllers
         }
         [Route("lustsite")]
         [HttpPost]
-        public async Task<IActionResult> Search([FromBody] Models.Request.LustSearchFilter lustSearchFilter)
+        public async Task<IActionResult> SearchLust([FromBody] Models.Request.LustSearchFilter lustSearchFilter)
         //public IActionResult Search([FromBody] Models.Request.LustSearchFilter lustSearchFilter)
         {
             //https://stackoverflow.com/questions/14202257/design-restful-query-api-with-a-long-list-of-query-parameters
             return Ok(await _olprrReviewService.Search(lustSearchFilter));
+
+        }
+        [Route("ustsite")]
+        [HttpPost]
+        public async Task<IActionResult> SearchUst([FromBody] Models.Request.UstSearchFilter ustSearchFilter)
+        {
+            return Ok(await _olprrReviewService.Search(ustSearchFilter));
 
         }
         [Route("contact/{olprrId}/{contactType}")]

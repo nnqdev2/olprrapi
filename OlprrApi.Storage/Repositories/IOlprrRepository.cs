@@ -34,6 +34,7 @@ namespace OlprrApi.Storage.Repositories
         Task<ApOlprrGetIncidentById> ApOlprrGetIncidentById(int olprrId);
         Task<ApOLPRRGetContactByIdByContactType> ApOLPRRGetContactByIdByContactType(int olprrId,string contactType);
         Task<IEnumerable<ApGetLustSearchDataStats>> ApGetLustSearchData(LustSearchFilter lustSearchFilter);
+        Task<IEnumerable<ApOlprrGetUstLookupDataStats>> ApOlprrGetUstLookupData(UstSearchFilter ustSearchFilter);
 
         // Olprr review form
         void ApRetrieveGeoLocId(string appId);

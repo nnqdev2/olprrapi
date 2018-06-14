@@ -28,6 +28,7 @@ namespace OlprrApi.Storage
 
         public DbSet<ApOlprrGetLustLookup> ApOLPRRGetLustLookup { get; set; }
         public DbSet<ApGetLustSearchData> ApGetLustSearchData { get; set; }
+        public DbSet<ApOlprrGetUstLookupData> ApOlprrGetUstLookupData { get; set; }
 
 
         public DbSet<ApOlprrInsertIncident> ApOLPRRInsertIncident { get; set; }
