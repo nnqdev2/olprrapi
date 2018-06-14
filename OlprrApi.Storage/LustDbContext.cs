@@ -16,6 +16,16 @@ namespace OlprrApi.Storage
         public DbSet<StreetTypeT> StreetTypeT { get; set; }
         public DbSet<DeqOfficeT> DeqOfficeT { get; set; }
         public DbSet<IncidentStatusT> IncidentStatusT { get; set; }
+        public DbSet<City> City { get; set; }
+        public DbSet<FileStatus> FileStatus { get; set; }
+        public DbSet<TankStatus> TankStatus { get; set; }
+        public DbSet<ZipCode> ZipCode { get; set; }
+        public DbSet<CleanupSiteType> CleanupSiteType { get; set; }
+        public DbSet<DateCompare> DateCompare { get; set; }
+        public DbSet<Region> Region { get; set; }
+        public DbSet<ProjectManager> ProjectManager { get; set; }
+
+
         public DbSet<ApOlprrGetLustLookup> ApOLPRRGetLustLookup { get; set; }
         public DbSet<ApGetLustSearchData> ApGetLustSearchData { get; set; }
 

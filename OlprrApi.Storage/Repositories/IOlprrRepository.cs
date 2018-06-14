@@ -18,6 +18,17 @@ namespace OlprrApi.Storage.Repositories
         Task<IEnumerable<StreetTypeT>> GetStreetTypes();
         Task<IEnumerable<DeqOfficeT>> GetDeqOffices();
         Task<IEnumerable<IncidentStatusT>> GetIncidentStatuses();
+        Task<IEnumerable<City>> GetCities();
+        Task<IEnumerable<FileStatus>> GetFileStatuses();
+        Task<IEnumerable<TankStatus>> GetTankStatuses();
+        Task<IEnumerable<CleanupSiteType>> GetCleanupSiteTypes();
+        Task<IEnumerable<ZipCode>> GetZipCodes();
+        Task<IEnumerable<Region>> GetRegions();
+        Task<IEnumerable<DateCompare>> GetDateCompares();
+        Task<IEnumerable<ProjectManager>> GetProjectManagers();
+
+
+
         Task<int> InsertOLPRRIncidentRecord(ApOlprrInsertIncident apOLPRRInsertIncident);
         Task<IEnumerable<ApOlprrGetLustLookup>> GetApOLPRRGetLustLookup(LustSiteAddressSearch lustSiteAddressSearch);
         Task<ApOlprrGetIncidentById> ApOlprrGetIncidentById(int olprrId);

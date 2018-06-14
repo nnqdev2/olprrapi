@@ -18,6 +18,17 @@ namespace OlprrApi.Services
         Task<IEnumerable<StreetTypeT>> GetStreetTypes();
         Task<IEnumerable<DeqOfficeT>> GetDeqOffices();
         Task<IEnumerable<IncidentStatusT>> GetIncidentStatuses();
+
+
+        Task<IEnumerable<FileStatus>> GetFileStatuses();
+        Task<IEnumerable<TankStatus>> GetTankStatuses();
+        Task<IEnumerable<ZipCode>> GetZipCodes();
+        Task<IEnumerable<DateCompare>> GetDateCompares();
+        Task<IEnumerable<CleanupSiteType>> GetCleanupSiteTypes();
+        Task<IEnumerable<City>> GetCities();
+        Task<IEnumerable<Region>> GetRegions();
+        Task<IEnumerable<ProjectManager>> GetProjectManagers();
+
         Task<int> InsertOLPRRIncidentRecord(ApOLPRRInsertIncident apOLPRRInsertIncident);
         void InsertOLPRRLogEntry(OlprrLogEntry olprrLogEntry);
     }

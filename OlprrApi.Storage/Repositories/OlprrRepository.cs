@@ -25,6 +25,14 @@ namespace OlprrApi.Storage.Repositories
         public const string StreetTypeTable = "StreetType";
         public const string DeqOfficeTable = "DeqOffice";
         public const string IncidentStatusTable = "IncidentStatus";
+        public const string TankStatusTable = "TankStatus";
+        public const string CleanupSiteTypeTable = "CleanupSiteType";
+        public const string RegionTable = "Region";
+        public const string FileStatusTable = "FileStatus";
+        public const string CityTable = "City";
+        public const string DateCompareTable = "DateCompare";
+        public const string ZipCodeTable = "ZipCode";
+        public const string ProjectManagerTable = "ProjectManager";
 
         private LustDbContext _dbContext;
         private ILogger<OlprrRepository> _logger;
@@ -82,9 +90,38 @@ namespace OlprrApi.Storage.Repositories
         {
             return await _dbContext.Set<IncidentStatusT>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables,IncidentStatusTable).ToListAsync();
         }
-
-
-
+        public async Task<IEnumerable<TankStatus>> GetTankStatuses()
+        {
+            return await _dbContext.Set<TankStatus>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables, TankStatusTable).ToListAsync();
+        }
+        public async Task<IEnumerable<FileStatus>> GetFileStatuses()
+        {
+            return await _dbContext.Set<FileStatus>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables, FileStatusTable).ToListAsync();
+        }
+        public async Task<IEnumerable<Region>> GetRegions()
+        {
+            return await _dbContext.Set<Region>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables, RegionTable).ToListAsync();
+        }
+        public async Task<IEnumerable<City>> GetCities()
+        {
+            return await _dbContext.Set<City>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables, CityTable).ToListAsync();
+        }
+        public async Task<IEnumerable<ZipCode>> GetZipCodes()
+        {
+            return await _dbContext.Set<ZipCode>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables, ZipCodeTable).ToListAsync();
+        }
+        public async Task<IEnumerable<CleanupSiteType>> GetCleanupSiteTypes()
+        {
+            return await _dbContext.Set<CleanupSiteType>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables, CleanupSiteTypeTable).ToListAsync();
+        }
+        public async Task<IEnumerable<DateCompare>> GetDateCompares()
+        {
+            return await _dbContext.Set<DateCompare>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables, DateCompareTable).ToListAsync();
+        }
+        public async Task<IEnumerable<ProjectManager>> GetProjectManagers()
+        {
+            return await _dbContext.Set<ProjectManager>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables, ProjectManagerTable).ToListAsync();
+        }
         public async Task<int> InsertOLPRRIncidentRecord(ApOlprrInsertIncident apOLPRRInsertIncident)
         {
             var result = await _dbContext.Database.ExecuteSqlCommandAsync("execute dbo.apOLPRRInsertIncident " +

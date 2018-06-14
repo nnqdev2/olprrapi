@@ -18,6 +18,16 @@ namespace OlprrApi.Mappings
             CreateMap<Storage.Entities.StreetTypeT, Models.Response.StreetTypeT>();
             CreateMap<Storage.Entities.DeqOfficeT, Models.Response.DeqOfficeT>();
             CreateMap<Storage.Entities.IncidentStatusT, Models.Response.IncidentStatusT>();
+
+            CreateMap<Storage.Entities.FileStatus, Models.Response.FileStatus>();
+            CreateMap<Storage.Entities.TankStatus, Models.Response.TankStatus>();
+            CreateMap<Storage.Entities.CleanupSiteType, Models.Response.CleanupSiteType>();
+            CreateMap<Storage.Entities.Region, Models.Response.Region>();
+            CreateMap<Storage.Entities.ZipCode, Models.Response.ZipCode>();
+            CreateMap<Storage.Entities.City, Models.Response.City>();
+            CreateMap<Storage.Entities.DateCompare, Models.Response.DateCompare>();
+            CreateMap<Storage.Entities.ProjectManager, Models.Response.ProjectManager>();
+
             CreateMap<Models.Request.ApOLPRRInsertIncident, Storage.Entities.ApOlprrInsertIncident>();
             CreateMap<Models.Request.LustSiteAddressSearch, Storage.Entities.LustSiteAddressSearch>();
             CreateMap<Storage.Entities.ApOlprrGetLustLookup, Models.Response.LustSiteAddressSearch>();

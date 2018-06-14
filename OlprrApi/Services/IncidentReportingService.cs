@@ -216,6 +216,86 @@ namespace OlprrApi.Services
             }
             return resultList;
         }
+
+        public async Task<IEnumerable<FileStatus>> GetFileStatuses()
+        {
+            var resultList = new List<FileStatus>();
+            foreach (var result in await _lustRepository.GetFileStatuses())
+            {
+                resultList.Add(_mapper.Map<EntityDto.FileStatus, FileStatus>(result));
+            }
+            return resultList;
+        }
+
+        public async Task<IEnumerable<TankStatus>> GetTankStatuses()
+        {
+            var resultList = new List<TankStatus>();
+            foreach (var result in await _lustRepository.GetTankStatuses())
+            {
+                resultList.Add(_mapper.Map<EntityDto.TankStatus, TankStatus>(result));
+            }
+            return resultList;
+        }
+
+        public async Task<IEnumerable<ZipCode>> GetZipCodes()
+        {
+            var resultList = new List<ZipCode>();
+            foreach (var result in await _lustRepository.GetZipCodes())
+            {
+                resultList.Add(_mapper.Map<EntityDto.ZipCode, ZipCode>(result));
+            }
+            return resultList;
+        }
+
+        public async Task<IEnumerable<DateCompare>> GetDateCompares()
+        {
+            var resultList = new List<DateCompare>();
+            foreach (var result in await _lustRepository.GetDateCompares())
+            {
+                resultList.Add(_mapper.Map<EntityDto.DateCompare, DateCompare>(result));
+            }
+            return resultList;
+        }
+        
+        public async Task<IEnumerable<CleanupSiteType>> GetCleanupSiteTypes()
+        {
+            var resultList = new List<CleanupSiteType>();
+            foreach (var result in await _lustRepository.GetCleanupSiteTypes())
+            {
+                resultList.Add(_mapper.Map<EntityDto.CleanupSiteType, CleanupSiteType>(result));
+            }
+            return resultList;
+        }
+
+        public async Task<IEnumerable<Region>> GetRegions()
+        {
+            var resultList = new List<Region>();
+            foreach (var result in await _lustRepository.GetRegions())
+            {
+                resultList.Add(_mapper.Map<EntityDto.Region, Region>(result));
+            }
+            return resultList;
+        }
+
+        public async Task<IEnumerable<City>> GetCities()
+        {
+            var resultList = new List<City>();
+            foreach (var result in await _lustRepository.GetCities())
+            {
+                resultList.Add(_mapper.Map<EntityDto.City, City>(result));
+            }
+            return resultList;
+        }
+
+        public async Task<IEnumerable<ProjectManager>> GetProjectManagers()
+        {
+            var resultList = new List<ProjectManager>();
+            foreach (var result in await _lustRepository.GetProjectManagers())
+            {
+                resultList.Add(_mapper.Map<EntityDto.ProjectManager, ProjectManager>(result));
+            }
+            return resultList;
+        }
     }
 }
 

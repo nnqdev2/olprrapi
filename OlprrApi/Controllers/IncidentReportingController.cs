@@ -98,6 +98,56 @@ namespace OlprrApi.Controllers
         {
             return Ok(await _olprrService.GetIncidentStatuses());
         }
+        [Route("tankstatus")]
+        [HttpGet]
+        public async Task<IActionResult> GetTankStatuses()
+        {
+            return Ok(await _olprrService.GetTankStatuses());
+        }
+        [Route("filestatus")]
+        [HttpGet]
+        public async Task<IActionResult> GetFileStatuses()
+        {
+            return Ok(await _olprrService.GetFileStatuses());
+        }
+        [Route("zipcode")]
+        [HttpGet]
+        public async Task<IActionResult> GetZipCodes()
+        {
+            return Ok(await _olprrService.GetZipCodes());
+        }
+        [Route("datecompare")]
+        [HttpGet]
+        public async Task<IActionResult> GetDateCompares()
+        {
+            return Ok(await _olprrService.GetDateCompares());
+        }
+        [Route("region")]
+        [HttpGet]
+        public async Task<IActionResult> GetRegions()
+        {
+            return Ok(await _olprrService.GetRegions());
+        }
+        [Route("city")]
+        [HttpGet]
+        public async Task<IActionResult> GetCities()
+        {
+            return Ok(await _olprrService.GetCities());
+        }
+        [Route("cleanupsitetype")]
+        [HttpGet]
+        public async Task<IActionResult> GetCleanupSiteTypes()
+        {
+            return Ok(await _olprrService.GetCleanupSiteTypes());
+        }
+        [Route("projectmanager")]
+        [HttpGet]
+        public async Task<IActionResult> GetProjectManagers()
+        {
+            return Ok(await _olprrService.GetProjectManagers());
+        }
+
+
         [Route("incident")]
         [HttpPost]
         public async Task<IActionResult> PostIncident([FromBody] Models.Request.ApOLPRRInsertIncident apOLPRRInsertIncident)
