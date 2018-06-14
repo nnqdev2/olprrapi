@@ -17,7 +17,7 @@ namespace OlprrApi.Storage
         public DbSet<DeqOfficeT> DeqOfficeT { get; set; }
         public DbSet<IncidentStatusT> IncidentStatusT { get; set; }
         public DbSet<ApOlprrGetLustLookup> ApOLPRRGetLustLookup { get; set; }
-        public DbSet<ApGetLustSearch> ApGetLustSearch { get; set; }
+        public DbSet<ApGetLustSearchData> ApGetLustSearchData { get; set; }
 
 
         public DbSet<ApOlprrInsertIncident> ApOLPRRInsertIncident { get; set; }

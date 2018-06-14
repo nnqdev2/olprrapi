@@ -321,15 +321,120 @@ namespace OlprrApi.Storage.Repositories
             };
         }
 
-        public async Task<IEnumerable<ApGetLustSearch>> ApGetLustSearch(string sqlInjectionString)
+        public async Task<IEnumerable<ApGetLustSearchDataStats>> ApGetLustSearchData(LustSearchFilter lustSearchFilter)
         {
-            sqlInjectionString = "where INC.RegulatedTankInd = 1";
 
-            var whereParam = new SqlParameter("@Where", sqlInjectionString);
+            var logCountyParam = new SqlParameter("@LogCounty", lustSearchFilter.LogCounty);
+            var logYearParam = new SqlParameter("@LogYear", lustSearchFilter.LogYear);
+            var logSeqNbrParam = new SqlParameter("@LogSeqNbr", lustSearchFilter.LogSeqNbr);
+            var facilityIdParam = new SqlParameter("@FacilityId", lustSearchFilter.FacilityId);
+            var siteNameParam = new SqlParameter("@SiteName", lustSearchFilter.SiteName);
+            var siteAddressParam = new SqlParameter("@SiteAddress", lustSearchFilter.SiteAddress);
+            var siteCityParam = new SqlParameter("@SiteCity", lustSearchFilter.SiteCity);
+            var siteZipParam = new SqlParameter("@SiteZipcode", lustSearchFilter.SiteZipcode);
+            var regionCodeParam = new SqlParameter("@RegionCode", lustSearchFilter.RegionCode);
+            var releaseSiteTypeCodeParam = new SqlParameter("@ReleaseSiteTypeCode", lustSearchFilter.ReleaseSiteTypeCode);
+            var cleanUpSiteTypeIdParam = new SqlParameter("@CleanUpSiteTypeId", lustSearchFilter.CleanUpSiteTypeId);
+            var fileStatusIdParam = new SqlParameter("@FileStatusId", lustSearchFilter.FileStatusId);
+            var projectManagerParam = new SqlParameter("@ProjectManagerCode", lustSearchFilter.ProjectManager);
+            var contactFirstNameParam = new SqlParameter("@ContactFirstName", lustSearchFilter.ContactFirstName);
+            var contactLastNameParam = new SqlParameter("@ContactLastName", lustSearchFilter.ContactLastName);
+            var contactOrganizationParam = new SqlParameter("@ContactOrganization", lustSearchFilter.ContactOrganization);
+            var tankStatusIdParam = new SqlParameter("@TankStatusId", lustSearchFilter.TankStatusId);
+            var hotAuditRejectIndParam = new SqlParameter("@HotAuditRejectInd", lustSearchFilter.HotAuditRejectInd);
+            var compareDate1IdParam = new SqlParameter("@CompareDate1Id", lustSearchFilter.CompareDate1Id);
+            var compareDate2IdParam = new SqlParameter("@CompareDate2Id", lustSearchFilter.CompareDate2Id);
+            var compareDate1IdFromDateParam = new SqlParameter("@CompareDate1IdFromDate", lustSearchFilter.CompareDate1IdFromDate);
+            var compareDate1IdToDateParam = new SqlParameter("@CompareDate1IdToDate", lustSearchFilter.CompareDate1IdToDate);
+            var compareDate2IdFromDateParam = new SqlParameter("@CompareDate2IdFromDate", lustSearchFilter.CompareDate2IdFromDate);
+            var compareDate2IdToDateParam = new SqlParameter("@CompareDate2IdToDate", lustSearchFilter.CompareDate2IdToDate);
+            var sortColParam = new SqlParameter("@SortColumn", lustSearchFilter.SortColumn);
+            var sortOrderParam = new SqlParameter("@SortOrder", lustSearchFilter.SortOrder);
+            var pageNumberParam = new SqlParameter("@PageNumber", lustSearchFilter.PageNumber);
+            var rowsPerPageParam = new SqlParameter("@RowsPerPage", lustSearchFilter.RowsPerPage);
+            var resultOutParam = new SqlParameter { ParameterName = "@RESULT", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            var totalRowsOutParam = new SqlParameter { ParameterName = "@TotalRows", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            var totalPagesOutParam = new SqlParameter { ParameterName = "@TotalPages", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
 
-            const string ExecuteApGetLustSearch = "execute dbo.apGetLustSearch @Where ";
+            if (logCountyParam.Value == null)           logCountyParam.Value = DBNull.Value;
+            if (logYearParam.Value == null)             logYearParam.Value = DBNull.Value;
+            if (logSeqNbrParam.Value == null)           logSeqNbrParam.Value = DBNull.Value;
+            if (facilityIdParam.Value == null)          facilityIdParam.Value = DBNull.Value;
+            if (siteNameParam.Value == null)            siteNameParam.Value = DBNull.Value;
+            if (siteAddressParam.Value == null)         siteAddressParam.Value = DBNull.Value;
+            if (siteCityParam.Value == null)            siteCityParam.Value = DBNull.Value;
+            if (siteZipParam.Value == null)             siteZipParam.Value = DBNull.Value;
+            if (regionCodeParam.Value == null)          regionCodeParam.Value = DBNull.Value;
+            if (releaseSiteTypeCodeParam.Value == null) releaseSiteTypeCodeParam.Value = DBNull.Value;
+            if (cleanUpSiteTypeIdParam.Value == null)   cleanUpSiteTypeIdParam.Value = DBNull.Value;
+            if (fileStatusIdParam.Value == null)        fileStatusIdParam.Value = DBNull.Value;
+            if (projectManagerParam.Value == null)      projectManagerParam.Value = DBNull.Value;
+            if (contactFirstNameParam.Value == null)    contactFirstNameParam.Value = DBNull.Value;
+            if (contactLastNameParam.Value == null)     contactLastNameParam.Value = DBNull.Value;
+            if (contactOrganizationParam.Value == null) contactOrganizationParam.Value = DBNull.Value;
+            if (tankStatusIdParam.Value == null)        tankStatusIdParam.Value = DBNull.Value;
+            if (hotAuditRejectIndParam.Value == null)   hotAuditRejectIndParam.Value = DBNull.Value;
+            if (compareDate1IdParam.Value == null)      compareDate1IdParam.Value = DBNull.Value;
+            if (compareDate2IdParam.Value == null)      compareDate2IdParam.Value = DBNull.Value;
+            if (compareDate1IdFromDateParam.Value == null)  compareDate1IdFromDateParam.Value = DBNull.Value;
+            if (compareDate1IdToDateParam.Value == null)    compareDate1IdToDateParam.Value = DBNull.Value;
+            if (compareDate2IdFromDateParam.Value == null)  compareDate2IdFromDateParam.Value = DBNull.Value;
+            if (compareDate2IdToDateParam.Value == null)    compareDate2IdToDateParam.Value = DBNull.Value;
+            if (sortColParam.Value == null)             sortColParam.Value = DBNull.Value;
+            if (sortOrderParam.Value == null)           sortOrderParam.Value = DBNull.Value;
+            if (pageNumberParam.Value == null)          pageNumberParam.Value = DBNull.Value;
+            if (rowsPerPageParam.Value == null)         rowsPerPageParam.Value = DBNull.Value;
 
-            return  await _dbContext.Set<ApGetLustSearch>().AsNoTracking().FromSql(ExecuteApGetLustSearch, whereParam).ToListAsync();
+
+            var exeSp = "execute dbo.apGetLustSearchData  @LogCounty, @LogYear, @LogSeqNbr, @FacilityId, @SiteName, @SiteAddress, @SiteCity "
+                + ", @SiteZipcode, @RegionCode, @ReleaseSiteTypeCode, @CleanUpSiteTypeId, @FileStatusId, @ProjectManagerCode, @ContactFirstName "
+                + ", @ContactLastName, @ContactOrganization, @TankStatusId, @HotAuditRejectInd, @CompareDate1Id, @CompareDate2Id "
+                + ", @CompareDate1IdFromDate, @CompareDate1IdToDate, @CompareDate2IdFromDate, @CompareDate2IdToDate "
+                + " ,@SortColumn, @SortOrder, @PageNumber, @RowsPerPage, @TotalRows OUTPUT, @TotalPages OUTPUT, @RESULT OUTPUT ";
+
+
+            var result = await _dbContext.Set<ApGetLustSearchData>().AsNoTracking().FromSql(exeSp, logCountyParam, logYearParam, logSeqNbrParam, facilityIdParam
+                , siteNameParam, siteAddressParam, siteCityParam, siteZipParam, regionCodeParam, releaseSiteTypeCodeParam, cleanUpSiteTypeIdParam
+                , fileStatusIdParam, projectManagerParam, contactFirstNameParam, contactLastNameParam, contactOrganizationParam, tankStatusIdParam
+                , hotAuditRejectIndParam, compareDate1IdParam, compareDate2IdParam, compareDate1IdFromDateParam, compareDate1IdToDateParam
+                , compareDate2IdFromDateParam, compareDate2IdToDateParam
+                , sortColParam, sortOrderParam, pageNumberParam, rowsPerPageParam, resultOutParam, totalRowsOutParam, totalPagesOutParam).ToListAsync();
+
+            var resultCode = (Int16)(resultOutParam.Value);
+
+            if (resultCode != 0)
+            {
+                var json = JsonConvert.SerializeObject(lustSearchFilter);
+                var errorMsg = $"{exeSp} returned status code = {resultCode}. Post payload {json}.";
+                _logger.LogError(errorMsg);
+                throw new StoreProcedureNonZeroOutputParamException(errorMsg);
+            }
+
+            var rList = new List<ApGetLustSearchDataStats>();
+            foreach (var res in result)
+            {
+                rList.Add(
+                    new ApGetLustSearchDataStats()
+                    {
+                        ReqPageNumber = lustSearchFilter.PageNumber,
+                        ReqRowsPerPage = lustSearchFilter.RowsPerPage,
+                        ReqSortColumn = lustSearchFilter.SortColumn,
+                        ReqSortOrder = lustSearchFilter.SortOrder,
+                        TotalPages = (Int16)(totalPagesOutParam.Value),
+                        TotalRows = (Int16)(totalRowsOutParam.Value),
+                        LustId = res.LustId,
+                        LogNumber = res.LogNumber,
+                        SiteName = res.SiteName,
+                        SiteAddress = res.SiteAddress,
+                        FirDt = res.FirDt,
+                        ClosedDt = res.ClosedDt,
+                        FacilityId = res.FacilityId,
+                        SiteScore = res.SiteScore
+                    }
+                );
+            }
+            return rList;
+
         }
 
         public void ApRetrieveGeoLocId(string appId)

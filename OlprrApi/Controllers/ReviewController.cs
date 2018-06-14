@@ -34,7 +34,7 @@ namespace OlprrApi.Controllers
         {
             return Ok(await _olprrReviewService.GetIncidentById(olprrId));
         }
-        [Route("search")]
+        [Route("lustsite")]
         [HttpPost]
         public async Task<IActionResult> Search([FromBody] Models.Request.LustSearchFilter lustSearchFilter)
         //public IActionResult Search([FromBody] Models.Request.LustSearchFilter lustSearchFilter)

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace OlprrApi.Models.Request
+namespace OlprrApi.Storage.Entities
 {
     public class LustSearchFilter
     {

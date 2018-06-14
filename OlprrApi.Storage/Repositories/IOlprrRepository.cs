@@ -22,7 +22,7 @@ namespace OlprrApi.Storage.Repositories
         Task<IEnumerable<ApOlprrGetLustLookup>> GetApOLPRRGetLustLookup(LustSiteAddressSearch lustSiteAddressSearch);
         Task<ApOlprrGetIncidentById> ApOlprrGetIncidentById(int olprrId);
         Task<ApOLPRRGetContactByIdByContactType> ApOLPRRGetContactByIdByContactType(int olprrId,string contactType);
-        Task<IEnumerable<ApGetLustSearch>> ApGetLustSearch(string sqlInjectionString);
+        Task<IEnumerable<ApGetLustSearchDataStats>> ApGetLustSearchData(LustSearchFilter lustSearchFilter);
 
         // Olprr review form
         void ApRetrieveGeoLocId(string appId);
@@ -36,5 +36,7 @@ namespace OlprrApi.Storage.Repositories
             , int sortColumn, int sortOrder, int pageNumber, int rowsPerPage);
 
         Task<IEnumerable<ApOlprrGetIncidentDataById>> ApOlprrGetIncidentDataById(int olprrId);
+
+
     }
 }

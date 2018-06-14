@@ -39,135 +39,15 @@ namespace OlprrApi.Services
             return (_mapper.Map<EntityDto.ApOlprrGetIncidentById, ResponseDto.IncidentById>(result));
         }
 
-        public async Task<IEnumerable<ResponseDto.ApGetLustSearch>> Search(RequestDto.LustSearchFilter lustSearchFilter)
+        public async Task<IEnumerable<ResponseDto.ApGetLustSearchDataStats>> Search(RequestDto.LustSearchFilter lustSearchFilter)
         {
-            //var sqlInjectionEnabledWhereStatement = buildSqlInjectionEnabledWhereStatement(lustSearchFilter);
-            var resultList = new List<ResponseDto.ApGetLustSearch>();
-            foreach (var result in await _lustRepository.ApGetLustSearch("test"))
+            var searchFilters = _mapper.Map<RequestDto.LustSearchFilter, EntityDto.LustSearchFilter>(lustSearchFilter);
+            var resultList = new List<ResponseDto.ApGetLustSearchDataStats>();
+            foreach (var result in await _lustRepository.ApGetLustSearchData(searchFilters))
             {
-                resultList.Add(_mapper.Map<EntityDto.ApGetLustSearch, ResponseDto.ApGetLustSearch>(result));
+                resultList.Add(_mapper.Map<EntityDto.ApGetLustSearchDataStats, ResponseDto.ApGetLustSearchDataStats>(result));
             }
             return resultList;
-        }
-
-        private string formatValue(string value, int len )
-        {
-            string newValue = null;
-            var temp = value.Replace("'", "''");
-            if (temp.Length > len)
-            {
-                newValue = temp.Substring(0, len);
-            } else
-            {
-                newValue = temp;
-            }
-            return newValue.Trim();
-        }
-
-        private string buildSqlInjectionEnabledWhereStatement(RequestDto.LustSearchFilter lustSearchFilter)
-        {
-            StringBuilder where = new StringBuilder(" WHERE ( ");
-            //COMPLETE LOG NUMBER SEARCH
-            if ((lustSearchFilter.logCounty != null) && (lustSearchFilter.logYear != null) && (lustSearchFilter.logSeqNbr != null))
-            {
-                where.Append(" ( INC.LogNumber = '").Append(formatValue(lustSearchFilter.logCounty,2)).Append("-")
-                    .Append(formatValue(lustSearchFilter.logYear,2)).Append("-").Append(formatValue(lustSearchFilter.logSeqNbr,4)).Append("' )  AND  ");
-            } else
-            {
-                //'REGARDLESS OF WHICH ONE OF THE TWO COUNTY INPUT CONTROLS THIS COMES FROM, 
-                //'frmSearch txtLogCounty -or- cmbCounty,
-                //'THE COUNTY VALUE WILL ONLY BE ADDED ONCE.
-                //'Log Number County Search
-                if (lustSearchFilter.logCounty != null) {
-                    where.Append(" ( INC.LogNbrCounty = '").Append(formatValue(lustSearchFilter.logCounty, 2)).Append("') AND ");
-                }
-                if (lustSearchFilter.logYear != null) {
-                    where.Append(" ( INC.LogNbrYear = '").Append(formatValue(lustSearchFilter.logYear, 2)).Append("') AND ");
-                }
-                if (lustSearchFilter.logSeqNbr != null) {
-                    where.Append(" ( INC.LogSeqNbr = '").Append(formatValue(lustSearchFilter.logSeqNbr, 4)).Append("') AND ");
-                }
-            }
-
-            //'Facility ID
-            if (lustSearchFilter.facilityId != null) {
-                where.Append(" ( INC.FacilityId = '" ).Append(formatValue(lustSearchFilter.logSeqNbr, 4)).Append("') AND ");
-            }
-
-            //'Site Name
-            if (lustSearchFilter.siteName != null)
-            {
-                var newValue = formatValue(lustSearchFilter.siteName, 40);
-                where.Append(" (( INC.SiteName LIKE '").Append(newValue)
-                    .Append("%') OR ( SNA.SiteNameAlias LIKE '").Append(newValue).Append("%')) AND ");
-            }
-
-            //'ADDRESS
-            if (lustSearchFilter.siteAddress != null) {
-                where.Append(" ( INC.SiteAddress LIKE '").Append(lustSearchFilter.siteAddress).Append("%') AND ")
-                .Append(" ( INC.SiteAddress LIKE ' % ").Append(lustSearchFilter.siteAddress).Append(" % ') AND ");
-            }
-
-            //'CITY
-            if (lustSearchFilter.siteCity != null)
-            {
-                where.Append(" ( INC.SiteCity LIKE '").Append(formatValue(lustSearchFilter.siteCity, 20)).Append("%') AND ")
-                .Append(" ( INC.SiteCity LIKE ' % ").Append(formatValue(lustSearchFilter.siteCity, 20)).Append(" % ') AND ");
-            }
-
-            //'ZIP
-            if (lustSearchFilter.siteZipcode != null)
-            {
-                where.Append(" ( INC.SiteZip LIKE '").Append(formatValue(lustSearchFilter.siteZipcode, 10)).Append("%') AND ")
-                .Append(" ( INC.SiteZip LIKE ' % ").Append(formatValue(lustSearchFilter.siteZipcode, 10)).Append(" % ') AND ");
-            }
-
-            //'REGULATED TANK
-            //if (lustSearchFilter.regInd) { 
-
-            //    .Append(" ( INC.RegulatedTankInd = 1 ) AND ")
-            //}
-
-            //'HOT TANK
-            //If Utility.IsObjectValid(searchCriteria.IsHotTank) _
-            //And searchCriteria.IsHotTank = True Then
-            //    .Append(" ( INC.HotInd = 1 ) AND ")
-            //End If
-
-            //'UNREGULATED - NON HOT TANK
-            //'-- Not a Regulated Tank, and not a HOT Tank.
-            //If Utility.IsObjectValid(searchCriteria.IsUnRegTank) _
-            //And searchCriteria.IsUnRegTank = True Then
-            //    .Append(" ( INC.RegulatedTankInd = 0 ) AND ( INC.HotInd = 0 ) AND ")
-            //End If
-
-            //'SITE TYPE
-            //If Utility.IsObjectValid(searchCriteria.SiteType) Then
-            //    .Append(" ( INC.SiteTypeId = '" + searchCriteria.SiteType.ToString + "')" + " AND ")
-            //End If
-
-            //'SITE STATUS
-            //If Utility.IsObjectValid(searchCriteria.SiteStatus) Then
-            //    .Append(" ( INC.FileStatusId = '" + searchCriteria.SiteStatus.ToString + "')" + " AND ")
-            //End If
-
-            //''PROJECT MANAGER
-            //'
-            //'add functionality to search by "Unassigned"
-            //If Utility.IsObjectValid(searchCriteria.ProjectManager) Then
-            //    Select Case searchCriteria.ProjectManager.ToString
-            //        Case "1"
-            //            .Append(" INC.LustId NOT IN (SELECT NoPM.LUSTID FROM LUST.dbo.ProjectManagerHistory NoPM)" + " AND ")
-            //        Case Else
-            //            .Append(" ( PMH.PMLogin = '" + searchCriteria.ProjectManager.ToString + "') AND PMH.EndDate IS NULL " + " AND ")
-            //    End Select
-            //End If
-
-
-
-
-
-            return where.ToString();
         }
 
         public async Task<ResponseDto.ApOLPRRGetContactByIdByContactType> GetContactByIdByContactType(int olprrId, string contactType)

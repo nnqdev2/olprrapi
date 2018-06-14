@@ -22,12 +22,14 @@ namespace OlprrApi.Mappings
             CreateMap<Models.Request.LustSiteAddressSearch, Storage.Entities.LustSiteAddressSearch>();
             CreateMap<Storage.Entities.ApOlprrGetLustLookup, Models.Response.LustSiteAddressSearch>();
             CreateMap<Storage.Entities.ApOlprrGetIncidentById, Models.Response.IncidentById>();
-            CreateMap<Storage.Entities.ApGetLustSearch, Models.Response.ApGetLustSearch>();
+            CreateMap<Storage.Entities.ApGetLustSearchDataStats, Models.Response.ApGetLustSearch>();
             CreateMap<Storage.Entities.ApOLPRRGetContactByIdByContactType, Models.Response.ApOLPRRGetContactByIdByContactType>();
             CreateMap<Storage.Entities.ApOlprrGetIncidents, Models.Response.ApOlprrGetIncidents>();
             CreateMap<Storage.Entities.ApOlprrGetIncidentsWithStats, Models.Response.ApOlprrGetIncidentsWithStats>();
             CreateMap<Storage.Entities.ApOlprrGetIncidentsStats, Models.Response.ApOlprrGetIncidentsStats>();
             CreateMap<Storage.Entities.ApOlprrGetIncidentDataById, Models.Response.IncidentDataById>();
+            CreateMap<Models.Request.LustSearchFilter, Storage.Entities.LustSearchFilter>();
+            CreateMap<Storage.Entities.ApGetLustSearchDataStats, Models.Response.ApGetLustSearchDataStats>();
         }
     }
 }
