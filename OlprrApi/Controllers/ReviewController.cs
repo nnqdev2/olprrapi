@@ -87,5 +87,12 @@ namespace OlprrApi.Controllers
         {
             return Ok(await _olprrReviewService.GetIncidentDataById(olprrId));
         }
+
+        [Route("postalcounty")]
+        [HttpGet]
+        public async Task<IActionResult> GetApOlprrCheckPostalCounty([FromQuery] int reported, [FromQuery] string uspostal)
+        {
+            return Ok(await _olprrReviewService.GetApOlprrCheckPostalCounty(reported, uspostal));
+        }
     }
 }

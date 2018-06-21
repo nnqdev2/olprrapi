@@ -48,7 +48,7 @@ namespace OlprrApi.Storage.Repositories
             , int sortColumn, int sortOrder, int pageNumber, int rowsPerPage);
 
         Task<IEnumerable<ApOlprrGetIncidentDataById>> ApOlprrGetIncidentDataById(int olprrId);
-
+        Task<ApOlprrCheckPostalCounty> ApOlprrCheckPostalCounty(int reportedCountyCode, string usPostalCountyCodeFips);
 
     }
 }

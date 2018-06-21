@@ -831,5 +831,45 @@ namespace OlprrApi.Storage.Repositories
 
         }
 
+        public async Task<ApOlprrCheckPostalCounty> ApOlprrCheckPostalCounty(int reportedCountyCode, string usPostalCountyCodeFips)
+        {
+            //IList<SqlParameter> sqlParamterList = new List<SqlParameter>();
+            //sqlParamterList.Add(new SqlParameter("@UICountyCode", reportedCountyCode));
+            //sqlParamterList.Add(new SqlParameter("@ZP4FIPSCounty", usPostalCountyCodeFips));
+            //sqlParamterList.Add(new SqlParameter{ ParameterName = "@IncidentCounty", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output });
+            //sqlParamterList.Add(new SqlParameter{ ParameterName = "@ErrorValue", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output });
+            var reportedCountyCodeParam = (new SqlParameter("@UICountyCode", reportedCountyCode));
+            var usPostalCountyCodeFipsCodeParam = (new SqlParameter("@ZP4FIPSCounty", usPostalCountyCodeFips));
+            var countyCodeParam = new SqlParameter { ParameterName = "@IncidentCounty", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            var resultOutParam = new SqlParameter { ParameterName = "@ErrorValue", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+
+            var exeSp = "execute dbo.apOLPRRCheckPostalCounty  @UICountyCode, @ZP4FIPSCounty, @IncidentCounty OUTPUT, @ErrorValue OUTPUT ";
+            var result = await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, reportedCountyCodeParam, usPostalCountyCodeFipsCodeParam, countyCodeParam, resultOutParam);
+
+            var resultCode = (Int16)(resultOutParam.Value);
+            var countyCode = 0;
+            if (countyCodeParam.Value == DBNull.Value)
+                countyCode = 0;
+            else
+                countyCode = (Int16)countyCodeParam.Value;
+            if (resultCode == 0 && result < 0)
+                resultCode = (Int16) result;
+
+            if (resultCode != 0 || result != 0)
+            {
+                var errorMsg = $"{exeSp} returned @ErrorValue = {resultCode} Result = {result} for reportedCountyCode {reportedCountyCode} usPostalCountyCodeFips {usPostalCountyCodeFips}";
+                _logger.LogError(errorMsg);
+                //throw new StoreProcedureNonZeroOutputParamException(errorMsg);
+            }
+
+            return new ApOlprrCheckPostalCounty()
+            {
+                ReportedCountyCode = reportedCountyCode,
+                UsPostalCountyCodeFips = usPostalCountyCodeFips,
+                CountyCode = countyCode,
+                ErrorCode = resultCode
+            };
+        }
+
     }
 }

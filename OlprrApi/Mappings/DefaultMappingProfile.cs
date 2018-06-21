@@ -42,6 +42,7 @@ namespace OlprrApi.Mappings
             CreateMap<Storage.Entities.ApGetLustSearchDataStats, Models.Response.ApGetLustSearchDataStats>();
             CreateMap<Models.Request.UstSearchFilter, Storage.Entities.UstSearchFilter>();
             CreateMap<Storage.Entities.ApOlprrGetUstLookupDataStats, Models.Response.ApOlprrGetUstLookupDataStats>();
+            CreateMap<Storage.Entities.ApOlprrCheckPostalCounty, Models.Response.ApOlprrCheckPostalCounty>();
         }
     }
 }

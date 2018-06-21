@@ -22,5 +22,7 @@ namespace OlprrApi.Services
             , int sortColumn, int sortOrder, int pageNumber, int rowsPerPage);
 
         Task<ResponseDto.IncidentDataById> GetIncidentDataById(int olprrId);
+
+        Task<ResponseDto.ApOlprrCheckPostalCounty> GetApOlprrCheckPostalCounty(int reportedCountyCode, string usPostalCountyCodeFips);
     }
 }

@@ -104,5 +104,12 @@ namespace OlprrApi.Services
             }
             return null;
         }
+
+        public async Task<ResponseDto.ApOlprrCheckPostalCounty> GetApOlprrCheckPostalCounty(int reportedCountyCode, string usPostalCountyCodeFips)
+        {
+            var result = await _lustRepository.ApOlprrCheckPostalCounty(reportedCountyCode, usPostalCountyCodeFips);
+            return (_mapper.Map<EntityDto.ApOlprrCheckPostalCounty, ResponseDto.ApOlprrCheckPostalCounty>(result));
+
+        }
     }
 }
