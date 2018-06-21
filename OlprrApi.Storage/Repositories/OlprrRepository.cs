@@ -373,7 +373,7 @@ namespace OlprrApi.Storage.Repositories
             var releaseSiteTypeCodeParam = new SqlParameter("@ReleaseSiteTypeCode", lustSearchFilter.ReleaseSiteTypeCode);
             var cleanUpSiteTypeIdParam = new SqlParameter("@CleanUpSiteTypeId", lustSearchFilter.CleanUpSiteTypeId);
             var fileStatusIdParam = new SqlParameter("@FileStatusId", lustSearchFilter.FileStatusId);
-            var projectManagerParam = new SqlParameter("@ProjectManagerCode", lustSearchFilter.ProjectManager);
+            var projectManagerParam = new SqlParameter("@ProjectManagerCode", lustSearchFilter.ProjectManagerCode);
             var contactFirstNameParam = new SqlParameter("@ContactFirstName", lustSearchFilter.ContactFirstName);
             var contactLastNameParam = new SqlParameter("@ContactLastName", lustSearchFilter.ContactLastName);
             var contactOrganizationParam = new SqlParameter("@ContactOrganization", lustSearchFilter.ContactOrganization);

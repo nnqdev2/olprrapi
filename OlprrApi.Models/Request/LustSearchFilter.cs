@@ -16,7 +16,7 @@ namespace OlprrApi.Models.Request
         public string ReleaseSiteTypeCode { get; set; }
         public string CleanUpSiteTypeId { get; set; }
         public int? FileStatusId { get; set; }
-        public string ProjectManager { get; set; }
+        public string ProjectManagerCode { get; set; }
         public string ContactFirstName { get; set; }
         public string ContactLastName { get; set; }
         public string ContactOrganization { get; set; }
