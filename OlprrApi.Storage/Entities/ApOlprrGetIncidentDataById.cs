@@ -87,5 +87,7 @@ namespace OlprrApi.Storage.Entities
         public int Chemical { get; set; }
         public int? Unknown { get; set; }
         public int Mtbe { get; set; }
+
+        public string InUseBy { get; set; }
     }
 }
