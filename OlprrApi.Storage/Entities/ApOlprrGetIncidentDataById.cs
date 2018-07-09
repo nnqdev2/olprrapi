@@ -13,6 +13,7 @@ namespace OlprrApi.Storage.Entities
         public int? FacilityId { get; set; }
         public string SiteName { get; set; }
         public string SiteCounty { get; set; }
+        public string SiteCountyName { get; set; }
         public string SiteAddress { get; set; }
         public string OtherAddress { get; set; }
         public string SiteCity { get; set; }
