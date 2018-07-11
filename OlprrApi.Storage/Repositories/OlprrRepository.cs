@@ -687,10 +687,7 @@ namespace OlprrApi.Storage.Repositories
 
             return apOlprrGetIncidentsWithStats;
         }
-
-
-
-
+        
         public async Task<IEnumerable<ApOlprrGetIncidents>> ApOlprrGetIncidents(string office, string status, string siteType, string olprrId
                                         , int sortColumn, int sortOrder, int pageNumber, int rowsPerPage)
         {
@@ -833,18 +830,14 @@ namespace OlprrApi.Storage.Repositories
 
         public async Task<ApOlprrCheckPostalCounty> ApOlprrCheckPostalCounty(int reportedCountyCode, string usPostalCountyCodeFips)
         {
-            //IList<SqlParameter> sqlParamterList = new List<SqlParameter>();
-            //sqlParamterList.Add(new SqlParameter("@UICountyCode", reportedCountyCode));
-            //sqlParamterList.Add(new SqlParameter("@ZP4FIPSCounty", usPostalCountyCodeFips));
-            //sqlParamterList.Add(new SqlParameter{ ParameterName = "@IncidentCounty", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output });
-            //sqlParamterList.Add(new SqlParameter{ ParameterName = "@ErrorValue", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output });
             var reportedCountyCodeParam = (new SqlParameter("@UICountyCode", reportedCountyCode));
             var usPostalCountyCodeFipsCodeParam = (new SqlParameter("@ZP4FIPSCounty", usPostalCountyCodeFips));
             var countyCodeParam = new SqlParameter { ParameterName = "@IncidentCounty", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            var countyNameParam = new SqlParameter { ParameterName = "@CountyName", SqlDbType = SqlDbType.VarChar, Size=10, Direction = ParameterDirection.Output };
             var resultOutParam = new SqlParameter { ParameterName = "@ErrorValue", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
 
-            var exeSp = "execute dbo.apOLPRRCheckPostalCounty  @UICountyCode, @ZP4FIPSCounty, @IncidentCounty OUTPUT, @ErrorValue OUTPUT ";
-            var result = await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, reportedCountyCodeParam, usPostalCountyCodeFipsCodeParam, countyCodeParam, resultOutParam);
+            var exeSp = "execute dbo.apOLPRRCheckPostalCountyData  @UICountyCode, @ZP4FIPSCounty, @IncidentCounty OUTPUT, @CountyName OUTPUT, @ErrorValue OUTPUT ";
+            var result = await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, reportedCountyCodeParam, usPostalCountyCodeFipsCodeParam, countyCodeParam, countyNameParam, resultOutParam);
 
             var resultCode = (Int16)(resultOutParam.Value);
             var countyCode = 0;
@@ -867,6 +860,7 @@ namespace OlprrApi.Storage.Repositories
                 ReportedCountyCode = reportedCountyCode,
                 UsPostalCountyCodeFips = usPostalCountyCodeFips,
                 CountyCode = countyCode,
+                CountyName = (countyNameParam.Value == DBNull.Value) ? null : (string)countyNameParam.Value,
                 ErrorCode = resultCode
             };
         }
