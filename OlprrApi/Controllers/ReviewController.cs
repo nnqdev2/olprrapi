@@ -94,5 +94,13 @@ namespace OlprrApi.Controllers
         {
             return Ok(await _olprrReviewService.GetApOlprrCheckPostalCounty(reported, uspostal));
         }
+
+        [Route("lustincident")]
+        [HttpPost]
+        public async Task<IActionResult> CreateLustIncident([FromBody] Models.Request.OlprrReviewIncident olprrReviewIncident)
+        //public IActionResult Search([FromBody] Models.Request.LustSearchFilter lustSearchFilter)
+        {
+            return Ok(await _olprrReviewService.CreateLustIncident(olprrReviewIncident));
+        }
     }
 }

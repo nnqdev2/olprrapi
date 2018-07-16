@@ -50,5 +50,7 @@ namespace OlprrApi.Storage.Repositories
         Task<IEnumerable<ApOlprrGetIncidentDataById>> ApOlprrGetIncidentDataById(int olprrId);
         Task<ApOlprrCheckPostalCounty> ApOlprrCheckPostalCounty(int reportedCountyCode, string usPostalCountyCodeFips);
 
+        Task<OlprrReviewIncidentResult> ApCreateIncidentData(OlprrReviewIncident olprrReviewIncident);
+
     }
 }

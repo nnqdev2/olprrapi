@@ -111,5 +111,12 @@ namespace OlprrApi.Services
             return (_mapper.Map<EntityDto.ApOlprrCheckPostalCounty, ResponseDto.ApOlprrCheckPostalCounty>(result));
 
         }
+
+        public async Task<ResponseDto.OlprrReviewIncidentResult> CreateLustIncident(RequestDto.OlprrReviewIncident olprrReviewIncident)
+        {
+            var incidentData = _mapper.Map<RequestDto.OlprrReviewIncident, EntityDto.OlprrReviewIncident>(olprrReviewIncident);
+            var result = await _lustRepository.ApCreateIncidentData(incidentData);
+            return (_mapper.Map<EntityDto.OlprrReviewIncidentResult, ResponseDto.OlprrReviewIncidentResult>(result));
+        }
     }
 }

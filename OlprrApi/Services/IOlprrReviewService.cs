@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OlprrApi.Models.Response;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using RequestDto = OlprrApi.Models.Request;
 using ResponseDto = OlprrApi.Models.Response;
@@ -24,5 +25,7 @@ namespace OlprrApi.Services
         Task<ResponseDto.IncidentDataById> GetIncidentDataById(int olprrId);
 
         Task<ResponseDto.ApOlprrCheckPostalCounty> GetApOlprrCheckPostalCounty(int reportedCountyCode, string usPostalCountyCodeFips);
+
+        Task<OlprrReviewIncidentResult> CreateLustIncident(RequestDto.OlprrReviewIncident olprrReviewIncident);
     }
 }

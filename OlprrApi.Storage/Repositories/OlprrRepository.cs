@@ -865,5 +865,105 @@ namespace OlprrApi.Storage.Repositories
             };
         }
 
+        public async Task<OlprrReviewIncidentResult> ApCreateIncidentData (OlprrReviewIncident olprrReviewIncident)
+        {
+            var lustIdInParam = new SqlParameter("@LustIdIN", olprrReviewIncident.LustIdIn);
+            var facilityIdParam = new SqlParameter("@FacilityId", olprrReviewIncident.FacilityId);
+            var countyIdParam = new SqlParameter("@CountyId", olprrReviewIncident.CountyId);
+            var receivedDateParam = new SqlParameter("@ReceivedDate", olprrReviewIncident.DateReceived);
+            var siteNameParam = new SqlParameter("@SiteName", olprrReviewIncident.SiteName);
+            var siteAddressParam = new SqlParameter("@SiteAddress", olprrReviewIncident.SiteAddress);
+            var siteCityParam = new SqlParameter("@SiteCity", olprrReviewIncident.SiteCity);
+            var siteZipParam = new SqlParameter("@SiteZip", olprrReviewIncident.SiteZipcode);
+            var sitePhoneParam = new SqlParameter("@SitePhone", olprrReviewIncident.SitePhone);
+            var noValidAddressParam = new SqlParameter("@NoValidAddress", olprrReviewIncident.NoValidAddress);
+            var regTankIndParam = new SqlParameter("@RegTankInd", olprrReviewIncident.RegTankInd);
+            var hotIndParam = new SqlParameter("@HotInd", olprrReviewIncident.HotInd);
+            var nonRegTankIndParam = new SqlParameter("@NonRegTankInd", olprrReviewIncident.NonRegTankInd);
+            var siteCommentParam = new SqlParameter("@SiteComment", olprrReviewIncident.InitialComment);
+            var olprrIdParam = new SqlParameter("@OlprrId", olprrReviewIncident.OlprrId);
+            var errorMessageParam = new SqlParameter { ParameterName = "@ErrorMessage", SqlDbType = SqlDbType.VarChar, Size = 200, Direction = ParameterDirection.Output };
+            var logNumberTempParam = new SqlParameter { ParameterName = "@LogNumberTemp", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            var lustIdTempParam = new SqlParameter { ParameterName = "@LustIdTemp", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var discoverDateParam = new SqlParameter("@DiscoverDate", olprrReviewIncident.DiscoveryDate);
+            var confirmationIdParam = new SqlParameter("@ConfirmationId", olprrReviewIncident.ConfirmationCode);
+            var discoveryIdParam = new SqlParameter("@DiscoveryId", olprrReviewIncident.DiscoveryCode);
+            var releaseCauseIdParam = new SqlParameter("@ReleaseCauseId", olprrReviewIncident.CauseCode);
+            var releaseSourceIdParam = new SqlParameter("@ReleaseSourceId", olprrReviewIncident.SourceId);
+            var soilParam = new SqlParameter("@SOIL", olprrReviewIncident.Soil);
+            var groundWaterParam = new SqlParameter("@GROUNDWATER", olprrReviewIncident.GroundWater);
+            var surfaceWaterParam = new SqlParameter("@SURFACEWATER", olprrReviewIncident.SurfaceWater);
+            var drinkingWaterParam = new SqlParameter("@DRINKINGWATER", olprrReviewIncident.DringkingWater);
+            var vaporParam = new SqlParameter("@VAPOR", olprrReviewIncident.Vapor);
+            var freeProductParam = new SqlParameter("@FREEPRODUCT", olprrReviewIncident.FreeProduct);
+            var unleadedGasParam = new SqlParameter("@UNLEADEDGAS", olprrReviewIncident.UnleadedGas);
+            var leadedGasParam = new SqlParameter("@LEADEDGAS", olprrReviewIncident.LeadedGas);
+            var misGasParam = new SqlParameter("@MISGAS", olprrReviewIncident.MisGas);
+            var dieselParam = new SqlParameter("@DIESEL", olprrReviewIncident.Diesel);
+            var wasteOilParam = new SqlParameter("@WASTEOIL", olprrReviewIncident.WasteOil);
+            var lubricantParam = new SqlParameter("@LUBRICANT", olprrReviewIncident.Lubricant);
+            var solventParam = new SqlParameter("@SOLVENT", olprrReviewIncident.Solvent);
+            var otherPetParam = new SqlParameter("@OTHERPET", olprrReviewIncident.OtherPet);
+            var chemicalParam = new SqlParameter("@CHEMICAL", olprrReviewIncident.Chemical);
+            var unknownParam = new SqlParameter("@UNKNOWN", olprrReviewIncident.Unknown);
+            var mtbeParam = new SqlParameter("@MTBE", olprrReviewIncident.Mtbe);
+            var heatingOilParam = new SqlParameter("@HEATINGOIL", olprrReviewIncident.HeatingOil);
+            var rpOrganizationParam = new SqlParameter("@RPOrganization", olprrReviewIncident.RpOrganization);
+            var rpFirstNameParam = new SqlParameter("@RPFirstName", olprrReviewIncident.RpFirstName);
+            var rpLastNameParam = new SqlParameter("@RPLastName", olprrReviewIncident.RpLastName);
+            var rpPhoneParam = new SqlParameter("@RPPhone", olprrReviewIncident.RpPhone);
+            var rpEmailParam = new SqlParameter("@RPEmail", olprrReviewIncident.RpEmail);
+            var rpStreetParam = new SqlParameter("@RPStreet", olprrReviewIncident.RpAddress);
+            var rpCityParam = new SqlParameter("@RPCity", olprrReviewIncident.RpCity);
+            var rpZipParam = new SqlParameter("@RPZIP", olprrReviewIncident.RpZipcode);
+            var rpStateParam = new SqlParameter("@RPState", olprrReviewIncident.RpState);
+            var rpCountryParam = new SqlParameter("@RPCountry", olprrReviewIncident.RpCountry);
+            var rpAffilCommentsParam = new SqlParameter("@RPAffilComments", olprrReviewIncident.RpAffilComments);
+            var icOrganizationParam = new SqlParameter("@ICOrganization", olprrReviewIncident.IcOrganization);
+            var icFirstNameParam = new SqlParameter("@ICFirstName", olprrReviewIncident.IcFirstName);
+            var icLastNameParam = new SqlParameter("@ICLastName", olprrReviewIncident.IcLastName);
+            var icPhoneParam = new SqlParameter("@ICPhone", olprrReviewIncident.IcPhone);
+            var icEmailParam = new SqlParameter("@ICEmail", olprrReviewIncident.IcEmail);
+            var icStreetParam = new SqlParameter("@ICStreet", olprrReviewIncident.IcAddress);
+            var icCityParam = new SqlParameter("@ICCity", olprrReviewIncident.IcCity);
+            var icZipParam = new SqlParameter("@ICZIP", olprrReviewIncident.IcZipcode);
+            var icStateParam = new SqlParameter("@ICState", olprrReviewIncident.IcState);
+            var icCountryParam = new SqlParameter("@ICCountry", olprrReviewIncident.IcCountry);
+            var icAffilCommentsParam = new SqlParameter("@ICAffilComments", olprrReviewIncident.IcAffilComments);
+            var appIdParam = new SqlParameter("@AppID", olprrReviewIncident.AppId);
+            var newSiteStatusParam = new SqlParameter("@NewSiteStatus", olprrReviewIncident.NewSiteStatus);
+
+            var exeSp = "execute dbo.apCreateIncidentData " +
+            "  @LustIdIN, @FacilityId, @CountyId,@ReceivedDate,@SiteName,@SiteAddress,@SiteCity,@SiteZip,@SitePhone,@NoValidAddress,@RegTankInd,@HotInd,@NonRegTankInd " +
+            "  ,@SiteComment,@OlprrId,@ErrorMessage OUTPUT,@LogNumberTemp OUTPUT,@LustIdTemp OUTPUT,@DiscoverDate,@ConfirmationId,@DiscoveryId,@ReleaseCauseId,@ReleaseSourceId " +
+            "  ,@SLMediaInd @GWMediaInd, @SWMediaInd, @DWMediaInd, @FVMediaInd, @FPMediaInd ,@UGContamInd , @LGContamInd, @MGContamInd, @DSContamInd, @WOContamInd " +
+            "  ,@LBContamInd, @OPContamInd , @SVContamInd, @CHContamInd, @UNContamInd, @MTBEContamInd, @HOContamInd " +
+            "  , @RPOrganization, @RPFirstName, @RPLastName, @RPPhone, @RPEmail, @RPStreet, @RPCity, @RPZIP, @RPState, @RPCountry, @RPAffilComments  " +
+            "  , @ICOrganization, @ICFirstName , @ICLastName, @ICPhone , @ICEmail, @ICStreet, @ICCity, @ICZIP, @ICState, @ICCountry, @ICAffilComments  " +
+            "  , @AppID, @NewSiteStatus ";
+
+            var result = await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, lustIdInParam, facilityIdParam, countyIdParam
+                , receivedDateParam, siteNameParam, siteAddressParam, siteCityParam, siteZipParam, sitePhoneParam, noValidAddressParam, regTankIndParam, hotIndParam, nonRegTankIndParam
+                , siteCommentParam, olprrIdParam, errorMessageParam, logNumberTempParam, lustIdTempParam, discoverDateParam, confirmationIdParam, discoveryIdParam, releaseCauseIdParam, releaseSourceIdParam
+                , soilParam, groundWaterParam, surfaceWaterParam, drinkingWaterParam, vaporParam, freeProductParam, unleadedGasParam, leadedGasParam, misGasParam, dieselParam, wasteOilParam
+                , lubricantParam, otherPetParam, solventParam, chemicalParam, unknownParam, mtbeParam, heatingOilParam
+                , rpOrganizationParam, rpFirstNameParam, rpLastNameParam, rpPhoneParam, rpEmailParam, rpStreetParam, rpCityParam, rpZipParam, rpStateParam, rpCountryParam, rpAffilCommentsParam
+                , icOrganizationParam, icFirstNameParam, icLastNameParam, icPhoneParam, icEmailParam, icStreetParam, icCityParam, icZipParam, icStateParam, icCountryParam, icAffilCommentsParam
+                , appIdParam, newSiteStatusParam);
+            if (errorMessageParam.Value != DBNull.Value)
+            {
+                var errorMsg = $"{exeSp} returned @ErrorMessage = {errorMessageParam.Value} Result = {result} for olprrId {olprrReviewIncident.OlprrId} site name {olprrReviewIncident.SiteName}";
+                _logger.LogError(errorMsg);
+                //throw new StoreProcedureNonZeroOutputParamException(errorMsg);
+            }
+            var lustIdTemp = (Int16)(lustIdTempParam.Value);
+            return new OlprrReviewIncidentResult
+            {
+                OlprrId = olprrReviewIncident.OlprrId,
+                ErrorMessage = (errorMessageParam.Value == DBNull.Value) ? null : (string)errorMessageParam.Value,
+                LogNumberTemp = (logNumberTempParam.Value == DBNull.Value) ? null : (string)logNumberTempParam.Value,
+                LustIdTemp = lustIdTemp
+            };
+        }
     }
 }
