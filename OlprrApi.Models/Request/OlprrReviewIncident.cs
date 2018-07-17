@@ -4,9 +4,9 @@ namespace OlprrApi.Models.Request
 {
     public class OlprrReviewIncident
     {
-        [Required]
+        //[Required]
         public int LustIdIn { get; set; }
-        [Required]
+        //[Required]
         public int FacilityId { get; set; }
         [Required]
         public int CountyId { get; set; }
@@ -34,7 +34,6 @@ namespace OlprrApi.Models.Request
         public string SitePhone { get; set; } = "";
 
         [Required]
-        [MaxLength(25)]
         public int NoValidAddress { get; set; } = 0;
 
         [Required]

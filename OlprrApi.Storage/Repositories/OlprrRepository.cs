@@ -882,32 +882,32 @@ namespace OlprrApi.Storage.Repositories
             var nonRegTankIndParam = new SqlParameter("@NonRegTankInd", olprrReviewIncident.NonRegTankInd);
             var siteCommentParam = new SqlParameter("@SiteComment", olprrReviewIncident.InitialComment);
             var olprrIdParam = new SqlParameter("@OlprrId", olprrReviewIncident.OlprrId);
-            var errorMessageParam = new SqlParameter { ParameterName = "@ErrorMessage", SqlDbType = SqlDbType.VarChar, Size = 200, Direction = ParameterDirection.Output };
+            var errorMessageParam = new SqlParameter { ParameterName = "@ErrorMessage", SqlDbType = SqlDbType.VarChar, Size = 1024, Direction = ParameterDirection.Output };
             var logNumberTempParam = new SqlParameter { ParameterName = "@LogNumberTemp", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
             var lustIdTempParam = new SqlParameter { ParameterName = "@LustIdTemp", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
             var discoverDateParam = new SqlParameter("@DiscoverDate", olprrReviewIncident.DiscoveryDate);
-            var confirmationIdParam = new SqlParameter("@ConfirmationId", olprrReviewIncident.ConfirmationCode);
-            var discoveryIdParam = new SqlParameter("@DiscoveryId", olprrReviewIncident.DiscoveryCode);
-            var releaseCauseIdParam = new SqlParameter("@ReleaseCauseId", olprrReviewIncident.CauseCode);
+            var confirmationIdParam = new SqlParameter("@ConfirmationCode", olprrReviewIncident.ConfirmationCode);
+            var discoveryIdParam = new SqlParameter("@DiscoveryCode", olprrReviewIncident.DiscoveryCode);
+            var releaseCauseIdParam = new SqlParameter("@ReleaseCauseCode", olprrReviewIncident.CauseCode);
             var releaseSourceIdParam = new SqlParameter("@ReleaseSourceId", olprrReviewIncident.SourceId);
-            var soilParam = new SqlParameter("@SOIL", olprrReviewIncident.Soil);
-            var groundWaterParam = new SqlParameter("@GROUNDWATER", olprrReviewIncident.GroundWater);
-            var surfaceWaterParam = new SqlParameter("@SURFACEWATER", olprrReviewIncident.SurfaceWater);
-            var drinkingWaterParam = new SqlParameter("@DRINKINGWATER", olprrReviewIncident.DringkingWater);
-            var vaporParam = new SqlParameter("@VAPOR", olprrReviewIncident.Vapor);
-            var freeProductParam = new SqlParameter("@FREEPRODUCT", olprrReviewIncident.FreeProduct);
-            var unleadedGasParam = new SqlParameter("@UNLEADEDGAS", olprrReviewIncident.UnleadedGas);
-            var leadedGasParam = new SqlParameter("@LEADEDGAS", olprrReviewIncident.LeadedGas);
-            var misGasParam = new SqlParameter("@MISGAS", olprrReviewIncident.MisGas);
-            var dieselParam = new SqlParameter("@DIESEL", olprrReviewIncident.Diesel);
-            var wasteOilParam = new SqlParameter("@WASTEOIL", olprrReviewIncident.WasteOil);
-            var lubricantParam = new SqlParameter("@LUBRICANT", olprrReviewIncident.Lubricant);
-            var solventParam = new SqlParameter("@SOLVENT", olprrReviewIncident.Solvent);
-            var otherPetParam = new SqlParameter("@OTHERPET", olprrReviewIncident.OtherPet);
-            var chemicalParam = new SqlParameter("@CHEMICAL", olprrReviewIncident.Chemical);
-            var unknownParam = new SqlParameter("@UNKNOWN", olprrReviewIncident.Unknown);
-            var mtbeParam = new SqlParameter("@MTBE", olprrReviewIncident.Mtbe);
-            var heatingOilParam = new SqlParameter("@HEATINGOIL", olprrReviewIncident.HeatingOil);
+            var soilParam = new SqlParameter("@SLMediaInd", olprrReviewIncident.Soil);
+            var groundWaterParam = new SqlParameter("@GWMediaInd", olprrReviewIncident.GroundWater);
+            var surfaceWaterParam = new SqlParameter("@SWMediaInd", olprrReviewIncident.SurfaceWater);
+            var drinkingWaterParam = new SqlParameter("@DWMediaInd", olprrReviewIncident.DringkingWater);
+            var vaporParam = new SqlParameter("@FVMediaInd", olprrReviewIncident.Vapor);
+            var freeProductParam = new SqlParameter("@FPMediaInd", olprrReviewIncident.FreeProduct);
+            var unleadedGasParam = new SqlParameter("@UGContamInd", olprrReviewIncident.UnleadedGas);
+            var leadedGasParam = new SqlParameter("@LGContamInd", olprrReviewIncident.LeadedGas);
+            var misGasParam = new SqlParameter("@MGContamInd", olprrReviewIncident.MisGas);
+            var dieselParam = new SqlParameter("@DSContamInd", olprrReviewIncident.Diesel);
+            var wasteOilParam = new SqlParameter("@WOContamInd", olprrReviewIncident.WasteOil);
+            var lubricantParam = new SqlParameter("@LBContamInd", olprrReviewIncident.Lubricant);
+            var solventParam = new SqlParameter("@SVContamInd", olprrReviewIncident.Solvent);
+            var otherPetParam = new SqlParameter("@OPContamInd", olprrReviewIncident.OtherPet);
+            var chemicalParam = new SqlParameter("@CHContamInd", olprrReviewIncident.Chemical);
+            var unknownParam = new SqlParameter("@UNContamInd", olprrReviewIncident.Unknown);
+            var mtbeParam = new SqlParameter("@MTBEContamInd", olprrReviewIncident.Mtbe);
+            var heatingOilParam = new SqlParameter("@HOContamInd", olprrReviewIncident.HeatingOil);
             var rpOrganizationParam = new SqlParameter("@RPOrganization", olprrReviewIncident.RpOrganization);
             var rpFirstNameParam = new SqlParameter("@RPFirstName", olprrReviewIncident.RpFirstName);
             var rpLastNameParam = new SqlParameter("@RPLastName", olprrReviewIncident.RpLastName);
@@ -935,8 +935,8 @@ namespace OlprrApi.Storage.Repositories
 
             var exeSp = "execute dbo.apCreateIncidentData " +
             "  @LustIdIN, @FacilityId, @CountyId,@ReceivedDate,@SiteName,@SiteAddress,@SiteCity,@SiteZip,@SitePhone,@NoValidAddress,@RegTankInd,@HotInd,@NonRegTankInd " +
-            "  ,@SiteComment,@OlprrId,@ErrorMessage OUTPUT,@LogNumberTemp OUTPUT,@LustIdTemp OUTPUT,@DiscoverDate,@ConfirmationId,@DiscoveryId,@ReleaseCauseId,@ReleaseSourceId " +
-            "  ,@SLMediaInd @GWMediaInd, @SWMediaInd, @DWMediaInd, @FVMediaInd, @FPMediaInd ,@UGContamInd , @LGContamInd, @MGContamInd, @DSContamInd, @WOContamInd " +
+            "  ,@SiteComment,@OlprrId,@ErrorMessage OUTPUT ,@LogNumberTemp  OUTPUT ,@LustIdTemp OUTPUT  ,@DiscoverDate,@ConfirmationCode,@DiscoveryCode,@ReleaseCauseCode,@ReleaseSourceId " +
+            "  ,@SLMediaInd, @GWMediaInd, @SWMediaInd, @DWMediaInd, @FVMediaInd, @FPMediaInd ,@UGContamInd , @LGContamInd, @MGContamInd, @DSContamInd, @WOContamInd " +
             "  ,@LBContamInd, @OPContamInd , @SVContamInd, @CHContamInd, @UNContamInd, @MTBEContamInd, @HOContamInd " +
             "  , @RPOrganization, @RPFirstName, @RPLastName, @RPPhone, @RPEmail, @RPStreet, @RPCity, @RPZIP, @RPState, @RPCountry, @RPAffilComments  " +
             "  , @ICOrganization, @ICFirstName , @ICLastName, @ICPhone , @ICEmail, @ICStreet, @ICCity, @ICZIP, @ICState, @ICCountry, @ICAffilComments  " +
@@ -950,13 +950,13 @@ namespace OlprrApi.Storage.Repositories
                 , rpOrganizationParam, rpFirstNameParam, rpLastNameParam, rpPhoneParam, rpEmailParam, rpStreetParam, rpCityParam, rpZipParam, rpStateParam, rpCountryParam, rpAffilCommentsParam
                 , icOrganizationParam, icFirstNameParam, icLastNameParam, icPhoneParam, icEmailParam, icStreetParam, icCityParam, icZipParam, icStateParam, icCountryParam, icAffilCommentsParam
                 , appIdParam, newSiteStatusParam);
-            if (errorMessageParam.Value != DBNull.Value)
+            if ((errorMessageParam.Value != DBNull.Value) && (((string) errorMessageParam.Value).Length > 0))
             {
                 var errorMsg = $"{exeSp} returned @ErrorMessage = {errorMessageParam.Value} Result = {result} for olprrId {olprrReviewIncident.OlprrId} site name {olprrReviewIncident.SiteName}";
                 _logger.LogError(errorMsg);
                 //throw new StoreProcedureNonZeroOutputParamException(errorMsg);
             }
-            var lustIdTemp = (Int16)(lustIdTempParam.Value);
+            var lustIdTemp = (Int32)(lustIdTempParam.Value);
             return new OlprrReviewIncidentResult
             {
                 OlprrId = olprrReviewIncident.OlprrId,
