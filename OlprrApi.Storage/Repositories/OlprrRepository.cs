@@ -527,6 +527,7 @@ namespace OlprrApi.Storage.Repositories
                         ReqSortOrder = ustSearchFilter.SortOrder,
                         TotalPages = (Int16)(totalPagesOutParam.Value),
                         TotalRows = (Int16)(totalRowsOutParam.Value),
+                        FacilityId = res.FacilityId,
                         FacilityName = res.FacilityName,
                         FacilityAddress = res.FacilityAddress,
                         FacilityCity = res.FacilityCity,
