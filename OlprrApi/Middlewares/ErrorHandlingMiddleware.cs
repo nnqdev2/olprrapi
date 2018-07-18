@@ -32,6 +32,7 @@ namespace OlprrApi.Middlewares
         private static Task HandleExceptionAsync(HttpContext context, Exception exception, ILogger logger)
         {
             logger.LogError(exception.Message);
+            logger.LogError(exception.Source);
             logger.LogError(exception.StackTrace);
             var code = HttpStatusCode.InternalServerError;
             if (exception is ResourceNotFoundException) code = HttpStatusCode.NotFound;

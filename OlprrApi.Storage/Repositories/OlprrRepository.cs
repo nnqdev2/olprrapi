@@ -933,6 +933,23 @@ namespace OlprrApi.Storage.Repositories
             var appIdParam = new SqlParameter("@AppID", olprrReviewIncident.AppId);
             var newSiteStatusParam = new SqlParameter("@NewSiteStatus", olprrReviewIncident.NewSiteStatus);
 
+            icOrganizationParam.Value = icOrganizationParam.Value ?? DBNull.Value;
+            icFirstNameParam.Value = icFirstNameParam.Value ?? DBNull.Value;
+            icLastNameParam.Value = icLastNameParam.Value ?? DBNull.Value;
+            icPhoneParam.Value = icPhoneParam.Value ?? DBNull.Value;
+            icEmailParam.Value = icEmailParam.Value ?? DBNull.Value;
+            icStreetParam.Value = icStreetParam.Value ?? DBNull.Value;
+            icCityParam.Value = icCityParam.Value ?? DBNull.Value;
+            icZipParam.Value = icZipParam.Value ?? DBNull.Value;
+            icStateParam.Value = icStateParam.Value ?? DBNull.Value;
+            icCountryParam.Value = icCountryParam.Value ?? DBNull.Value;
+            icAffilCommentsParam.Value = icAffilCommentsParam.Value ?? DBNull.Value;
+            appIdParam.Value = appIdParam.Value ?? DBNull.Value;
+            rpAffilCommentsParam.Value = rpAffilCommentsParam.Value ?? DBNull.Value;
+            rpCountryParam.Value = rpCountryParam.Value ?? DBNull.Value;
+            rpPhoneParam.Value = rpPhoneParam.Value ?? DBNull.Value;
+            rpEmailParam.Value = rpEmailParam.Value ?? DBNull.Value;
+
             var exeSp = "execute dbo.apCreateIncidentData " +
             "  @LustIdIN, @FacilityId, @CountyId,@ReceivedDate,@SiteName,@SiteAddress,@SiteCity,@SiteZip,@SitePhone,@NoValidAddress,@RegTankInd,@HotInd,@NonRegTankInd " +
             "  ,@SiteComment,@OlprrId,@ErrorMessage OUTPUT ,@LogNumberTemp  OUTPUT ,@LustIdTemp OUTPUT  ,@DiscoverDate,@ConfirmationCode,@DiscoveryCode,@ReleaseCauseCode,@ReleaseSourceId " +
