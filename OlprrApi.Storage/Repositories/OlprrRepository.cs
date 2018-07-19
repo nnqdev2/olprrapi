@@ -974,13 +974,12 @@ namespace OlprrApi.Storage.Repositories
                 _logger.LogError(errorMsg);
                 //throw new StoreProcedureNonZeroOutputParamException(errorMsg);
             }
-            var lustIdTemp = (Int32)(lustIdTempParam.Value);
             return new OlprrReviewIncidentResult
             {
                 OlprrId = olprrReviewIncident.OlprrId,
                 ErrorMessage = (errorMessageParam.Value == DBNull.Value) ? null : (string)errorMessageParam.Value,
                 LogNumberTemp = (logNumberTempParam.Value == DBNull.Value) ? null : (string)logNumberTempParam.Value,
-                LustIdTemp = lustIdTemp
+                LustIdTemp = (lustIdTempParam.Value == DBNull.Value) ? 0 : (Int32) lustIdTempParam.Value,
             };
         }
     }
