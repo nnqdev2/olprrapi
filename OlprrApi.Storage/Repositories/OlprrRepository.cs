@@ -200,7 +200,7 @@ namespace OlprrApi.Storage.Repositories
             list.Add(new SqlParameter("@CHEMICAL", apOLPRRInsertIncident.Chemical));
             list.Add(new SqlParameter("@UNKNOWN", apOLPRRInsertIncident.Unknown));
             list.Add(new SqlParameter("@MTBE", apOLPRRInsertIncident.Mtbe));
-            list.Add(new SqlParameter("@SUBMIT_DATETIME", apOLPRRInsertIncident.SubmitDateTime));
+            list.Add(new SqlParameter("@SUBMIT_DATETIME", apOLPRRInsertIncident.DateReceived));
             list.Add(new SqlParameter("@DEQ_OFFICE", apOLPRRInsertIncident.DeqOffice));
             IEnumerable<SqlParameter> myParams = list;
             return myParams;
@@ -824,6 +824,10 @@ namespace OlprrApi.Storage.Repositories
                 var errorMsg = $"{exeSp} returned status code = {resultCode} for OlprrId {olprrId}.";
                 _logger.LogError(errorMsg);
                 throw new StoreProcedureNonZeroOutputParamException(errorMsg);
+            } 
+            if (result.Count == 0)
+            {
+                throw new ResourceNotFoundException($"Resource requested - OlprrId {olprrId} not found.");
             }
             return result;
 
