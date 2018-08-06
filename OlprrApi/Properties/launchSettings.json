@@ -24,6 +24,35 @@
       "commandName": "IIS",
       "launchBrowser": true,
       "launchUrl": "http://olprrapi/sitetype"
+    },
+    "OlprrLocal": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Local"
+      },
+      "applicationUrl": "http://localhost:50000/"
+    },
+    "OlprrDevl": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://deqwebdev/review"
+    },
+    "OlprrStaging": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Staging"
+      },
+      "applicationUrl": "http://deqwebdev/review"
+    },
+    "OlprrProd": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "applicationUrl": "http://deqwebdev/review"
     }
   }
 }
