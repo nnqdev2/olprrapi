@@ -55,13 +55,17 @@ namespace OlprrApi
                 options.ForwardClientCertificate = false;
             });
 
-            var x = Configuration.GetConnectionString("LustDbConnection1");
-
             services.AddAutoMapper(typeof(Startup));
-            services.AddDbContext<LustDbContext>(
-                options => options.UseSqlServer(
-                     Configuration.GetConnectionString("LustDbConnection1")));
 
+            services.AddDbContext<LustDbContext>(options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("LustDbConnection1"));
+                },
+                ServiceLifetime.Scoped
+                );
+            //services.AddDbContext<LustDbContext>(
+            //    options => options.UseSqlServer(
+            //         Configuration.GetConnectionString("LustDbConnection1")));
             services.AddScoped<IOlprrRepository, OlprrRepository>();
             services.AddScoped<IIncidentReportingService, IncidentReportingService>();
             services.AddScoped<IOlprrReviewService, OlprrReviewService>();
