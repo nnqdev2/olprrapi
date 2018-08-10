@@ -986,5 +986,27 @@ namespace OlprrApi.Storage.Repositories
                 LustIdTemp = (lustIdTempParam.Value == DBNull.Value) ? 0 : (Int32) lustIdTempParam.Value,
             };
         }
+
+        public async Task<IEnumerable<ApGetSiteAliasByLustId>> ApGetSiteAliasByLustId(int lustId)
+        {
+            var lustIdParam = new SqlParameter("@LustId", lustId);
+            if (lustIdParam.Value == null)
+                lustIdParam.Value = DBNull.Value;
+            var exeSp = "execute dbo.ApGetSiteAliasByLustId  @LustId ";
+            return await _dbContext.Set<ApGetSiteAliasByLustId>().AsNoTracking().FromSql(exeSp,lustIdParam).ToListAsync();
+        }
+
+        public async Task<int> ApInsUpdSiteAlias(ApInsUpdSiteAlias apInsUpdSiteAlias)
+        {
+            var lustIdParam = new SqlParameter("@LustId", apInsUpdSiteAlias.LustId);
+            var lastChangeByParam = new SqlParameter("@LastChangeBy", apInsUpdSiteAlias.LastChangeBy);
+            var siteNameAliasParam = new SqlParameter("@SiteNameAlias", apInsUpdSiteAlias.SiteNameAlias);
+            var siteNameAliasIdInParam = new SqlParameter("@SiteNameAliasIdIn", apInsUpdSiteAlias.SiteNameAliasIdIn);
+            var siteNameAliasIdOutParam = new SqlParameter { ParameterName = "@SiteNameAliasIdOut", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var exeSp = "execute dbo.apInsUpdSiteAliasData @SiteNameAliasIdIn, @SiteNameAliasIdOut OUTPUT, @LustId, @SiteNameAlias, @LastChangeBy ";
+            var result = await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, siteNameAliasIdInParam, siteNameAliasIdOutParam, lustIdParam, siteNameAliasParam, lastChangeByParam);
+
+            return (Int32)(siteNameAliasIdOutParam.Value);
+        }
     }
 }

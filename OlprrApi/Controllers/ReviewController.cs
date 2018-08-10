@@ -102,5 +102,19 @@ namespace OlprrApi.Controllers
         {
             return Ok(await _olprrReviewService.CreateLustIncident(olprrReviewIncident));
         }
+
+        [Route("sitealias/{lustId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetSiteAlias(int lustId)
+        {
+            return Ok(await _olprrReviewService.GetSiteAlias(lustId));
+        }
+
+        [Route("sitealias")]
+        [HttpPost]
+        public async Task<IActionResult> InsUpdSiteAlias([FromBody] Models.Request.ApInsUpdSiteAlias apInsUpdSiteAlias)
+        {
+            return Ok(await _olprrReviewService.InsUpdSiteAlias(apInsUpdSiteAlias));
+        }
     }
 }

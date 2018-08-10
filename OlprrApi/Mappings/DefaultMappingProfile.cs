@@ -46,6 +46,10 @@ namespace OlprrApi.Mappings
 
             CreateMap<Models.Request.OlprrReviewIncident, Storage.Entities.OlprrReviewIncident>();
             CreateMap<Storage.Entities.OlprrReviewIncidentResult, Models.Response.OlprrReviewIncidentResult>();
+
+            CreateMap<Storage.Entities.ApGetSiteAliasByLustId, Models.Response.ApGetSiteAliasByLustId>();
+            CreateMap<Models.Request.ApInsUpdSiteAlias, Storage.Entities.ApInsUpdSiteAlias>();
+
         }
     }
 }

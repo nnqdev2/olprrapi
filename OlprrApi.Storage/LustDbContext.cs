@@ -36,6 +36,9 @@ namespace OlprrApi.Storage
         public DbSet<ApOlprrGetIncidents> ApOlprrGetIncidents { get; set; }
         public DbSet<ApOlprrGetIncidentDataById> ApOlprrGetIncidentDataById { get; set; }
 
+        public DbSet<ApGetPartyGridByLustId> ApGetPartyGridByLustId { get; set; }
+        public DbSet<ApGetSiteAliasByLustId> ApGetSiteAliasByLustId { get; set; }
+
         public LustDbContext(DbContextOptions<LustDbContext> options) : base(options)
         {
         }

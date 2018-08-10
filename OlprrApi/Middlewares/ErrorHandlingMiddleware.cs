@@ -36,6 +36,7 @@ namespace OlprrApi.Middlewares
             logger.LogError(exception.StackTrace);
             var code = HttpStatusCode.InternalServerError;
             if (exception is ResourceNotFoundException) code = HttpStatusCode.NotFound;
+            if (exception.Message.Contains("already exists")) code = HttpStatusCode.Conflict;
             //else if (exception is MyException) code = HttpStatusCode.BadRequest;
             var result = JsonConvert.SerializeObject(new { error = exception.Message });
             context.Response.ContentType = "application/json";

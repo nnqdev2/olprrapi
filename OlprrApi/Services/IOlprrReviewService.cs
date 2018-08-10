@@ -27,5 +27,8 @@ namespace OlprrApi.Services
         Task<ResponseDto.ApOlprrCheckPostalCounty> GetApOlprrCheckPostalCounty(int reportedCountyCode, string usPostalCountyCodeFips);
 
         Task<OlprrReviewIncidentResult> CreateLustIncident(RequestDto.OlprrReviewIncident olprrReviewIncident);
+
+        Task<IEnumerable<ApGetSiteAliasByLustId>> GetSiteAlias(int lustId);
+        Task<int> InsUpdSiteAlias(RequestDto.ApInsUpdSiteAlias apInsUpdSiteAlias);
     }
 }
