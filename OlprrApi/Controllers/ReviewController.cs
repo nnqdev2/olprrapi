@@ -114,7 +114,14 @@ namespace OlprrApi.Controllers
         [HttpPost]
         public async Task<IActionResult> InsUpdSiteAlias([FromBody] Models.Request.ApInsUpdSiteAlias apInsUpdSiteAlias)
         {
-            return Ok(await _olprrReviewService.InsUpdSiteAlias(apInsUpdSiteAlias));
+            var siteAliasId = await _olprrReviewService.InsUpdSiteAlias(apInsUpdSiteAlias);
+            if (apInsUpdSiteAlias.SiteNameAliasIdIn == 0)
+            {
+                apInsUpdSiteAlias.SiteNameAliasIdIn = siteAliasId;
+                return CreatedAtAction("InsUpdSiteAlias", new { sitenamealiasid = siteAliasId }, apInsUpdSiteAlias);
+            }
+            return NoContent();
+            //return Ok(await _olprrReviewService.InsUpdSiteAlias(apInsUpdSiteAlias));
         }
     }
 }
