@@ -28,7 +28,7 @@ namespace OlprrApi.Services
 
         Task<OlprrReviewIncidentResult> CreateLustIncident(RequestDto.OlprrReviewIncident olprrReviewIncident);
 
-        Task<IEnumerable<ApGetSiteAliasByLustId>> GetSiteAlias(int lustId);
+        Task<IEnumerable<ApGetSiteAliasByLustId2>> GetSiteAlias(int lustId);
         Task<int> InsUpdSiteAlias(RequestDto.ApInsUpdSiteAlias apInsUpdSiteAlias);
     }
 }

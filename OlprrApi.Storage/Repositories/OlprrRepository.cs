@@ -987,13 +987,26 @@ namespace OlprrApi.Storage.Repositories
             };
         }
 
-        public async Task<IEnumerable<ApGetSiteAliasByLustId>> ApGetSiteAliasByLustId(int lustId)
+        public async Task<IEnumerable<ApGetSiteAliasByLustId2>> ApGetSiteAliasByLustId(int lustId)
         {
             var lustIdParam = new SqlParameter("@LustId", lustId);
             if (lustIdParam.Value == null)
                 lustIdParam.Value = DBNull.Value;
             var exeSp = "execute dbo.ApGetSiteAliasByLustId  @LustId ";
-            return await _dbContext.Set<ApGetSiteAliasByLustId>().AsNoTracking().FromSql(exeSp,lustIdParam).ToListAsync();
+            var results =  await _dbContext.Set<ApGetSiteAliasByLustId>().AsNoTracking().FromSql(exeSp,lustIdParam).ToListAsync();
+            var resultList = new List<ApGetSiteAliasByLustId2>();
+            foreach (var result in results)
+            {
+                resultList.Add(new ApGetSiteAliasByLustId2
+                {
+                    LustId = lustId,
+                    SiteNameAlias = result.SiteNameAlias,
+                    LastChangeBy = result.LastChangeBy,
+                    LastChangeDate = result.LastChangeDate,
+                    SiteNameAliasId = result.SiteNameAliasId
+                });
+            }
+            return resultList;
         }
 
         public async Task<int> ApInsUpdSiteAlias(ApInsUpdSiteAlias apInsUpdSiteAlias)

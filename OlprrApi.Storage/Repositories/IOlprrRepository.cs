@@ -52,7 +52,7 @@ namespace OlprrApi.Storage.Repositories
 
         Task<OlprrReviewIncidentResult> ApCreateIncidentData(OlprrReviewIncident olprrReviewIncident);
 
-        Task<IEnumerable<ApGetSiteAliasByLustId>> ApGetSiteAliasByLustId(int lustId);
+        Task<IEnumerable<ApGetSiteAliasByLustId2>> ApGetSiteAliasByLustId(int lustId);
 
         Task<int> ApInsUpdSiteAlias(ApInsUpdSiteAlias apInsUpdSiteAlias);
 

@@ -119,12 +119,12 @@ namespace OlprrApi.Services
             return (_mapper.Map<EntityDto.OlprrReviewIncidentResult, ResponseDto.OlprrReviewIncidentResult>(result));
         }
 
-        public async Task<IEnumerable<ResponseDto.ApGetSiteAliasByLustId>> GetSiteAlias(int lustId)
+        public async Task<IEnumerable<ResponseDto.ApGetSiteAliasByLustId2>> GetSiteAlias(int lustId)
         {
-            var resultList = new List<ResponseDto.ApGetSiteAliasByLustId>();
+            var resultList = new List<ResponseDto.ApGetSiteAliasByLustId2>();
             foreach (var result in await _lustRepository.ApGetSiteAliasByLustId(lustId))
             {
-                resultList.Add(_mapper.Map<EntityDto.ApGetSiteAliasByLustId, ResponseDto.ApGetSiteAliasByLustId>(result));
+                resultList.Add(_mapper.Map<EntityDto.ApGetSiteAliasByLustId2, ResponseDto.ApGetSiteAliasByLustId2>(result));
             }
             return resultList;
         }
