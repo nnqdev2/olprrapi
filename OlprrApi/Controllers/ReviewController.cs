@@ -123,5 +123,12 @@ namespace OlprrApi.Controllers
             return NoContent();
             //return Ok(await _olprrReviewService.InsUpdSiteAlias(apInsUpdSiteAlias));
         }
+        [Route("sitealias/{siteNameAliasId}")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteSiteAlias(int siteNameAliasId)
+        {
+            await _olprrReviewService.ApDltSiteNameAlias(siteNameAliasId);
+            return NoContent();
+        }
     }
 }

@@ -124,86 +124,109 @@ namespace OlprrApi.Storage.Repositories
         }
         public async Task<int> InsertOLPRRIncidentRecord(ApOlprrInsertIncident apOLPRRInsertIncident)
         {
-            var result = await _dbContext.Database.ExecuteSqlCommandAsync("execute dbo.apOLPRRInsertIncident " +
-            "  @ErrNum ,@CONTRACTOR_UID, @CONTRACTOR_PWD, @REPORTED_BY, @REPORTED_BY_PHONE,  @REPORTED_BY_EMAIL, @RELEASE_TYPE, @DATE_RECEIVED,@FACILITY_ID, @SITE_NAME,@SITE_COUNTY" +
-            ", @STREET_NBR, @STREET_QUAD,@STREET_NAME,@STREET_TYPE,@SITE_ADDRESS,@SITE_CITY,@SITE_ZIPCODE,@SITE_PHONE, @INITIAL_COMMENT, @DISCOVERY_DATE, @CONFIRMATION_CODE" +
-            ", @DISCOVERY_CODE,@CAUSE_CODE,@SOURCEID,@RP_FIRSTNAME,@RP_LASTNAME,@RP_ORGANIZATION,@RP_ADDRESS,@RP_ADDRESS2,@RP_CITY,@RP_STATE,@RP_ZIPCODE,@RP_PHONE,@RP_EMAIL" +
-            ", @IC_FIRSTNAME,@IC_LASTNAME,@IC_ORGANIZATION,@IC_ADDRESS,@IC_ADDRESS2,@IC_CITY,@IC_STATE,@IC_ZIPCODE,@IC_PHONE,@IC_EMAIL" +
-            ", @GROUNDWATER,@SURFACEWATER,@DRINKINGWATER,@SOIL,@VAPOR,@FREEPRODUCT,@UNLEADEDGAS,@LEADEDGAS,@MISGAS,@DIESEL,@WASTEOIL,@HEATINGOIL,@LUBRICANT,@SOLVENT" +
-            ", @OTHERPET,@CHEMICAL,@UNKNOWN,@MTBE,@SUBMIT_DATETIME,@DEQ_OFFICE", BuildSqlParams(apOLPRRInsertIncident));
-            return result;
-        }
+            var errNumParam = (new SqlParameter { ParameterName = "@ErrNum", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output });
+            var contractorUidParam = (new SqlParameter("@CONTRACTOR_UID", apOLPRRInsertIncident.ContractorUid));
+            var contractorPwdParam = (new SqlParameter("@CONTRACTOR_PWD", apOLPRRInsertIncident.ContractorPwd));
+            var reportedByParam    = (new SqlParameter("@REPORTED_BY", apOLPRRInsertIncident.ReportedBy));
+            var reportedByPhoneParam = (new SqlParameter("@REPORTED_BY_PHONE", apOLPRRInsertIncident.ReportedByPhone));
+            var reportedByEmailParam = (new SqlParameter("@REPORTED_BY_EMAIL", apOLPRRInsertIncident.ReportedByEmail));
+            var releaseTypeParam = (new SqlParameter("@RELEASE_TYPE", apOLPRRInsertIncident.ReleaseType));
+            var dateReceivedParam = (new SqlParameter("@DATE_RECEIVED", apOLPRRInsertIncident.DateReceived));
+            var facilityIdParam = (new SqlParameter("@FACILITY_ID", apOLPRRInsertIncident.FacilityId));
+            var siteNameParam = (new SqlParameter("@SITE_NAME", apOLPRRInsertIncident.SiteName));
+            var siteCountyParam = (new SqlParameter("@SITE_COUNTY", apOLPRRInsertIncident.SiteCounty));
+            var streetNbrParam = (new SqlParameter("@STREET_NBR", apOLPRRInsertIncident.StreetNbr));
+            var streetQuadParam = (new SqlParameter("@STREET_QUAD", apOLPRRInsertIncident.StreetQuad));
+            var streetNameParam = (new SqlParameter("@STREET_NAME", apOLPRRInsertIncident.StreetName));
+            var streetTypeParam = (new SqlParameter("@STREET_TYPE", apOLPRRInsertIncident.StreetType));
+            var siteAddressParam = (new SqlParameter("@SITE_ADDRESS", apOLPRRInsertIncident.SiteAddress));
+            var siteCityParam = (new SqlParameter("@SITE_CITY", apOLPRRInsertIncident.SiteCity));
+            var siteZipcodeParam = (new SqlParameter("@SITE_ZIPCODE", apOLPRRInsertIncident.SiteZipcode));
+            var sitePhoneParam = (new SqlParameter("@SITE_PHONE", apOLPRRInsertIncident.SitePhone));
+            var initialCommentParam = (new SqlParameter("@INITIAL_COMMENT", apOLPRRInsertIncident.InitialComment));
+            var discoveryDateParam = (new SqlParameter("@DISCOVERY_DATE", apOLPRRInsertIncident.DiscoveryDate));
+            var confirmationCodeParam = (new SqlParameter("@CONFIRMATION_CODE", apOLPRRInsertIncident.ConfirmationCode));
+            var discoveryCodeParam = (new SqlParameter("@DISCOVERY_CODE", apOLPRRInsertIncident.DiscoveryCode));
+            var causeCodeParam = (new SqlParameter("@CAUSE_CODE", apOLPRRInsertIncident.CauseCode));
+            var sourceIdParam = (new SqlParameter("@SOURCEID", apOLPRRInsertIncident.SourceId));
+            var rpFistNameParam = (new SqlParameter("@RP_FIRSTNAME", apOLPRRInsertIncident.RpFirstName));
+            var rpLastNameParam = (new SqlParameter("@RP_LASTNAME", apOLPRRInsertIncident.RpLastName));
+            var rpOrganizationParam = (new SqlParameter("@RP_ORGANIZATION", apOLPRRInsertIncident.RpOrganization));
+            var rpAddressParam = (new SqlParameter("@RP_ADDRESS", apOLPRRInsertIncident.RpAddress));
+            var rpAddress2Param = (new SqlParameter("@RP_ADDRESS2", apOLPRRInsertIncident.RpAddress2));
+            var rpCityParam = (new SqlParameter("@RP_CITY", apOLPRRInsertIncident.RpCity));
+            var rpStateParam = (new SqlParameter("@RP_STATE", apOLPRRInsertIncident.RpState));
+            var rpZipcodeParam = (new SqlParameter("@RP_ZIPCODE", apOLPRRInsertIncident.RpZipcode));
+            var rpPhoneParam = (new SqlParameter("@RP_PHONE", apOLPRRInsertIncident.RpPhone));
+            var rpEmailParam = (new SqlParameter("@RP_EMAIL", apOLPRRInsertIncident.RpEmail));
+            var icFirstNameParam = (new SqlParameter("@IC_FIRSTNAME", apOLPRRInsertIncident.IcFirstName));
+            var icLastNameParam = (new SqlParameter("@IC_LASTNAME", apOLPRRInsertIncident.IcLastName));
+            var icOrganizationParam = (new SqlParameter("@IC_ORGANIZATION", apOLPRRInsertIncident.IcOrganization));
+            var icAddressParam = (new SqlParameter("@IC_ADDRESS", apOLPRRInsertIncident.IcAddress));
+            var icAddress2Param = (new SqlParameter("@IC_ADDRESS2", apOLPRRInsertIncident.IcAddress2));
+            var icCityParam = (new SqlParameter("@IC_CITY", apOLPRRInsertIncident.IcCity));
+            var icStateParam = (new SqlParameter("@IC_STATE", apOLPRRInsertIncident.IcState));
+            var icZipcodeParam = (new SqlParameter("@IC_ZIPCODE", apOLPRRInsertIncident.IcZipcode));
+            var icPhoneParam = (new SqlParameter("@IC_PHONE", apOLPRRInsertIncident.IcPhone));
+            var icEmailParam = (new SqlParameter("@IC_EMAIL", apOLPRRInsertIncident.IcEmail));
+            var groundWaterParam = (new SqlParameter("@GROUNDWATER", apOLPRRInsertIncident.GroundWater));
+            var surfaceWaterParam = (new SqlParameter("@SURFACEWATER", apOLPRRInsertIncident.SurfaceWater));
+            var drinkingWaterdParam = (new SqlParameter("@DRINKINGWATER", apOLPRRInsertIncident.DringkingWater));
+            var soilParam = (new SqlParameter("@SOIL", apOLPRRInsertIncident.Soil));
+            var vaporParam = (new SqlParameter("@VAPOR", apOLPRRInsertIncident.Vapor));
+            var freeProductParam = (new SqlParameter("@FREEPRODUCT", apOLPRRInsertIncident.FreeProduct));
+            var unleadedGasParam = (new SqlParameter("@UNLEADEDGAS", apOLPRRInsertIncident.UnleadedGas));
+            var leadedGasParam = (new SqlParameter("@LEADEDGAS", apOLPRRInsertIncident.LeadedGas));
+            var miscGasParam = (new SqlParameter("@MISCGAS", apOLPRRInsertIncident.MisGas));
+            var dieselParam = (new SqlParameter("@DIESEL", apOLPRRInsertIncident.Diesel));
+            var wasteOilParam = (new SqlParameter("@WASTEOIL", apOLPRRInsertIncident.WasteOil));
+            var heatingOilParam = (new SqlParameter("@HEATINGOIL", apOLPRRInsertIncident.HeatingOil));
+            var lubricantParam = (new SqlParameter("@LUBRICANT", apOLPRRInsertIncident.Lubricant));
+            var solventParam = (new SqlParameter("@SOLVENT", apOLPRRInsertIncident.Solvent));
+            var otherPetParam = (new SqlParameter("@OTHERPET", apOLPRRInsertIncident.OtherPet));
+            var chemicalParam = (new SqlParameter("@CHEMICAL", apOLPRRInsertIncident.Chemical));
+            var unknownParam = (new SqlParameter("@UNKNOWN", apOLPRRInsertIncident.Unknown));
+            var mtbeParam = (new SqlParameter("@MTBE", apOLPRRInsertIncident.Mtbe));
+            var submitDateTimeParam = (new SqlParameter("@SUBMIT_DATETIME", apOLPRRInsertIncident.DateReceived));
+            var deqOfficedParam = (new SqlParameter("@DEQ_OFFICE", apOLPRRInsertIncident.DeqOffice));
 
-        private IEnumerable<SqlParameter> BuildSqlParams(ApOlprrInsertIncident apOLPRRInsertIncident)
-        {
-            IList<SqlParameter> list = new List<SqlParameter>();
-            list.Add(new SqlParameter { ParameterName = "@ErrNum", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output });
-            list.Add(new SqlParameter("@CONTRACTOR_UID", apOLPRRInsertIncident.ContractorUid));
-            list.Add(new SqlParameter("@CONTRACTOR_PWD", apOLPRRInsertIncident.ContractorPwd));
-            list.Add(new SqlParameter("@REPORTED_BY", apOLPRRInsertIncident.ReportedBy));
-            list.Add(new SqlParameter("@REPORTED_BY_PHONE", apOLPRRInsertIncident.ReportedByPhone));
-            list.Add(new SqlParameter("@REPORTED_BY_EMAIL", apOLPRRInsertIncident.ReportedByEmail));
-            list.Add(new SqlParameter("@RELEASE_TYPE", apOLPRRInsertIncident.ReleaseType));
-            list.Add(new SqlParameter("@DATE_RECEIVED", apOLPRRInsertIncident.DateReceived));
-            list.Add(new SqlParameter("@FACILITY_ID", apOLPRRInsertIncident.FacilityId));
-            list.Add(new SqlParameter("@SITE_NAME", apOLPRRInsertIncident.SiteName));
-            list.Add(new SqlParameter("@SITE_COUNTY", apOLPRRInsertIncident.SiteCounty));
-            list.Add(new SqlParameter("@STREET_NBR", apOLPRRInsertIncident.StreetNbr));
-            list.Add(new SqlParameter("@STREET_QUAD", apOLPRRInsertIncident.StreetQuad));
-            list.Add(new SqlParameter("@STREET_NAME", apOLPRRInsertIncident.StreetName));
-            list.Add(new SqlParameter("@STREET_TYPE", apOLPRRInsertIncident.StreetType));
-            list.Add(new SqlParameter("@SITE_ADDRESS", apOLPRRInsertIncident.SiteAddress));
-            list.Add(new SqlParameter("@SITE_CITY", apOLPRRInsertIncident.SiteCity));
-            list.Add(new SqlParameter("@SITE_ZIPCODE", apOLPRRInsertIncident.SiteZipcode));
-            list.Add(new SqlParameter("@SITE_PHONE", apOLPRRInsertIncident.SitePhone));
-            list.Add(new SqlParameter("@INITIAL_COMMENT", apOLPRRInsertIncident.InitialComment));
-            list.Add(new SqlParameter("@DISCOVERY_DATE", apOLPRRInsertIncident.DiscoveryDate));
-            list.Add(new SqlParameter("@CONFIRMATION_CODE", apOLPRRInsertIncident.ConfirmationCode));
-            list.Add(new SqlParameter("@DISCOVERY_CODE", apOLPRRInsertIncident.DiscoveryCode));
-            list.Add(new SqlParameter("@CAUSE_CODE", apOLPRRInsertIncident.CauseCode));
-            list.Add(new SqlParameter("@SOURCEID", apOLPRRInsertIncident.SourceId));
-            list.Add(new SqlParameter("@RP_FIRSTNAME", apOLPRRInsertIncident.RpFirstName));
-            list.Add(new SqlParameter("@RP_LASTNAME", apOLPRRInsertIncident.RpLastName));
-            list.Add(new SqlParameter("@RP_ORGANIZATION", apOLPRRInsertIncident.RpOrganization));
-            list.Add(new SqlParameter("@RP_ADDRESS", apOLPRRInsertIncident.RpAddress));
-            list.Add(new SqlParameter("@RP_ADDRESS2", apOLPRRInsertIncident.RpAddress2));
-            list.Add(new SqlParameter("@RP_CITY", apOLPRRInsertIncident.RpCity));
-            list.Add(new SqlParameter("@RP_STATE", apOLPRRInsertIncident.RpState));
-            list.Add(new SqlParameter("@RP_ZIPCODE", apOLPRRInsertIncident.RpZipcode));
-            list.Add(new SqlParameter("@RP_PHONE", apOLPRRInsertIncident.RpPhone));
-            list.Add(new SqlParameter("@RP_EMAIL", apOLPRRInsertIncident.RpEmail));
-            list.Add(new SqlParameter("@IC_FIRSTNAME", apOLPRRInsertIncident.IcFirstName));
-            list.Add(new SqlParameter("@IC_LASTNAME", apOLPRRInsertIncident.IcLastName));
-            list.Add(new SqlParameter("@IC_ORGANIZATION", apOLPRRInsertIncident.IcOrganization));
-            list.Add(new SqlParameter("@IC_ADDRESS", apOLPRRInsertIncident.IcAddress));
-            list.Add(new SqlParameter("@IC_ADDRESS2", apOLPRRInsertIncident.IcAddress2));
-            list.Add(new SqlParameter("@IC_CITY", apOLPRRInsertIncident.IcCity));
-            list.Add(new SqlParameter("@IC_STATE", apOLPRRInsertIncident.IcState));
-            list.Add(new SqlParameter("@IC_ZIPCODE", apOLPRRInsertIncident.IcZipcode));
-            list.Add(new SqlParameter("@IC_PHONE", apOLPRRInsertIncident.IcPhone));
-            list.Add(new SqlParameter("@IC_EMAIL", apOLPRRInsertIncident.IcEmail));
-            list.Add(new SqlParameter("@GROUNDWATER", apOLPRRInsertIncident.GroundWater));
-            list.Add(new SqlParameter("@SURFACEWATER", apOLPRRInsertIncident.SurfaceWater));
-            list.Add(new SqlParameter("@DRINKINGWATER", apOLPRRInsertIncident.DringkingWater));
-            list.Add(new SqlParameter("@SOIL", apOLPRRInsertIncident.Soil));
-            list.Add(new SqlParameter("@VAPOR", apOLPRRInsertIncident.Vapor));
-            list.Add(new SqlParameter("@FREEPRODUCT", apOLPRRInsertIncident.FreeProduct));
-            list.Add(new SqlParameter("@UNLEADEDGAS", apOLPRRInsertIncident.UnleadedGas));
-            list.Add(new SqlParameter("@LEADEDGAS", apOLPRRInsertIncident.LeadedGas));
-            list.Add(new SqlParameter("@MISGAS", apOLPRRInsertIncident.MisGas));
-            list.Add(new SqlParameter("@DIESEL", apOLPRRInsertIncident.Diesel));
-            list.Add(new SqlParameter("@WASTEOIL", apOLPRRInsertIncident.WasteOil));
-            list.Add(new SqlParameter("@HEATINGOIL", apOLPRRInsertIncident.HeatingOil));
-            list.Add(new SqlParameter("@LUBRICANT", apOLPRRInsertIncident.Lubricant));
-            list.Add(new SqlParameter("@SOLVENT", apOLPRRInsertIncident.Solvent));
-            list.Add(new SqlParameter("@OTHERPET", apOLPRRInsertIncident.OtherPet));
-            list.Add(new SqlParameter("@CHEMICAL", apOLPRRInsertIncident.Chemical));
-            list.Add(new SqlParameter("@UNKNOWN", apOLPRRInsertIncident.Unknown));
-            list.Add(new SqlParameter("@MTBE", apOLPRRInsertIncident.Mtbe));
-            list.Add(new SqlParameter("@SUBMIT_DATETIME", apOLPRRInsertIncident.DateReceived));
-            list.Add(new SqlParameter("@DEQ_OFFICE", apOLPRRInsertIncident.DeqOffice));
-            IEnumerable<SqlParameter> myParams = list;
-            return myParams;
+
+            if (icFirstNameParam.Value == null) icFirstNameParam.Value = DBNull.Value;
+            if (icLastNameParam.Value == null) icLastNameParam.Value = DBNull.Value;
+            if (icAddressParam.Value == null) icAddressParam.Value = DBNull.Value;
+            if (icAddress2Param.Value == null) icAddress2Param.Value = DBNull.Value;
+            if (icCityParam.Value == null) icCityParam.Value = DBNull.Value;
+            if (icStateParam.Value == null) icStateParam.Value = DBNull.Value;
+            if (icZipcodeParam.Value == null) icZipcodeParam.Value = DBNull.Value;
+            if (icPhoneParam.Value == null) icPhoneParam.Value = DBNull.Value;
+            if (icEmailParam.Value == null) icEmailParam.Value = DBNull.Value;
+            if (facilityIdParam.Value == null) facilityIdParam.Value = DBNull.Value;
+            if (streetQuadParam.Value == null) streetQuadParam.Value = DBNull.Value;
+            if (streetTypeParam.Value == null) streetTypeParam.Value = DBNull.Value;
+            if (sitePhoneParam.Value == null) sitePhoneParam.Value = DBNull.Value;
+            if (rpOrganizationParam.Value == null) rpOrganizationParam.Value = DBNull.Value;
+            if (icOrganizationParam.Value == null) icOrganizationParam.Value = DBNull.Value;
+            if (rpEmailParam.Value == null) rpEmailParam.Value = DBNull.Value;
+            if (icEmailParam.Value == null) icEmailParam.Value = DBNull.Value;
+
+            var result = await _dbContext.Database.ExecuteSqlCommandAsync("execute dbo.apOLPRRInsertIncident " +
+            "  @ErrNum OUTPUT,@CONTRACTOR_UID, @CONTRACTOR_PWD, @REPORTED_BY, @REPORTED_BY_PHONE,  @REPORTED_BY_EMAIL, @RELEASE_TYPE, @DATE_RECEIVED, @FACILITY_ID" +
+            ", @SITE_NAME,@SITE_COUNTY,@STREET_NBR, @STREET_QUAD,@STREET_NAME,@STREET_TYPE,@SITE_ADDRESS,@SITE_CITY,@SITE_ZIPCODE,@SITE_PHONE" +
+            ", @INITIAL_COMMENT, @DISCOVERY_DATE, @CONFIRMATION_CODE,@DISCOVERY_CODE,@CAUSE_CODE,@SOURCEID" +
+            " ,@RP_FIRSTNAME,@RP_LASTNAME,@RP_ORGANIZATION,@RP_ADDRESS,@RP_ADDRESS2,@RP_CITY,@RP_STATE,@RP_ZIPCODE,@RP_PHONE,@RP_EMAIL" +
+            ", @IC_FIRSTNAME,@IC_LASTNAME,@IC_ORGANIZATION,@IC_ADDRESS,@IC_ADDRESS2,@IC_CITY,@IC_STATE,@IC_ZIPCODE,@IC_PHONE,@IC_EMAIL" +
+            ", @GROUNDWATER,@SURFACEWATER,@DRINKINGWATER,@SOIL,@VAPOR,@FREEPRODUCT,@UNLEADEDGAS,@LEADEDGAS,@MISCGAS,@DIESEL,@WASTEOIL,@HEATINGOIL,@LUBRICANT,@SOLVENT" +
+            ", @OTHERPET,@CHEMICAL,@UNKNOWN,@MTBE,@SUBMIT_DATETIME,@DEQ_OFFICE", 
+            errNumParam, contractorUidParam, contractorPwdParam, reportedByParam, reportedByPhoneParam, reportedByEmailParam, releaseTypeParam, dateReceivedParam, facilityIdParam
+            , siteNameParam, siteCountyParam, streetNbrParam, streetQuadParam, streetNameParam, streetTypeParam, siteAddressParam, siteCityParam, siteZipcodeParam, sitePhoneParam
+            , initialCommentParam, discoveryDateParam, confirmationCodeParam, discoveryCodeParam, causeCodeParam, sourceIdParam
+            , rpFistNameParam, rpLastNameParam, rpOrganizationParam, rpAddressParam, rpAddress2Param, rpCityParam, rpStateParam, rpZipcodeParam, rpPhoneParam, rpEmailParam
+            ,icFirstNameParam, icLastNameParam, icOrganizationParam, icAddressParam, icAddress2Param, icCityParam, icStateParam, icZipcodeParam, icPhoneParam, icEmailParam
+            ,groundWaterParam, surfaceWaterParam, drinkingWaterdParam, soilParam, vaporParam, freeProductParam, unleadedGasParam, leadedGasParam, miscGasParam, dieselParam, wasteOilParam, heatingOilParam, lubricantParam, solventParam
+            ,otherPetParam, chemicalParam, unknownParam, mtbeParam, submitDateTimeParam, deqOfficedParam     
+            );
+
+            return result;
         }
 
         public async Task<IEnumerable<ApOlprrGetLustLookup>> GetApOLPRRGetLustLookup(LustSiteAddressSearch lustSiteAddressSearch)
@@ -247,32 +270,6 @@ namespace OlprrApi.Storage.Repositories
             //https://stackoverflow.com/questions/43688324/why-does-ef-core-always-return-1-with-this-stored-procedure
             //https://stackoverflow.com/questions/45252959/entity-framework-core-using-stored-procedure-with-output-parameters
         }
-
-        //private IEnumerable<SqlParameter> BuildSqlParams(int olprrId)
-        //{
-        //    IList<SqlParameter> list = new List<SqlParameter>();
-        //    list.Add(new SqlParameter("@OlprrId", olprrId));
-        //    list.Add(new SqlParameter { ParameterName = "@ReleaseType", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output});
-        //    list.Add(new SqlParameter { ParameterName = "@ReceiveDate", SqlDbType = SqlDbType.DateTime, Direction = ParameterDirection.Output});
-        //    list.Add(new SqlParameter { ParameterName = "@FacilityId", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output});
-        //    list.Add(new SqlParameter { ParameterName = "@SiteName", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output});
-        //    list.Add(new SqlParameter { ParameterName = "@SiteCounty", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output});
-        //    list.Add(new SqlParameter { ParameterName = "@SiteAddress", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output});
-        //    list.Add(new SqlParameter { ParameterName = "@OtherAddress", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output});
-        //    list.Add(new SqlParameter { ParameterName = "@SiteCity", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output});
-        //    list.Add(new SqlParameter { ParameterName = "@SiteZipCode", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output});
-        //    list.Add(new SqlParameter { ParameterName = "@SitePhone", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output });
-        //    list.Add(new SqlParameter { ParameterName = "@SiteComment", SqlDbType = SqlDbType.DateTime, Direction = ParameterDirection.Output });
-        //    list.Add(new SqlParameter { ParameterName = "@ContractorId", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output });
-        //    list.Add(new SqlParameter { ParameterName = "@SiteStatus", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output });
-        //    list.Add(new SqlParameter { ParameterName = "@ReportedBy", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output });
-        //    list.Add(new SqlParameter { ParameterName = "@ReportedByPhone", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output });
-        //    list.Add(new SqlParameter { ParameterName = "@ContractorName", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output });
-        //    list.Add(new SqlParameter { ParameterName = "@ContractorEmail", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output });
-        //    list.Add(new SqlParameter { ParameterName = "@Result", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output });
-        //    IEnumerable<SqlParameter> myParams = list;
-        //    return myParams;
-        //}
 
         public async Task<ApOlprrGetIncidentById> ApOlprrGetIncidentById(int olprrId)
         {
@@ -1020,6 +1017,14 @@ namespace OlprrApi.Storage.Repositories
             var result = await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, siteNameAliasIdInParam, siteNameAliasIdOutParam, lustIdParam, siteNameAliasParam, lastChangeByParam);
 
             return (Int32)(siteNameAliasIdOutParam.Value);
+        }
+
+        public async Task ApDltSiteNameAlias(int siteNameAliasId)
+        {
+            var siteNameAliasIdParam = new SqlParameter("@SiteNameAliasId", siteNameAliasId);
+            var bitParam = new SqlParameter { ParameterName = "@Bit", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var exeSp = "execute dbo.apDltSiteNameAlias @SiteNameAliasId, @Bit OUTPUT ";
+            await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, siteNameAliasIdParam, bitParam);
         }
     }
 }

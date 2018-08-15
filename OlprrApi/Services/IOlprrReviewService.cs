@@ -30,5 +30,6 @@ namespace OlprrApi.Services
 
         Task<IEnumerable<ApGetSiteAliasByLustId2>> GetSiteAlias(int lustId);
         Task<int> InsUpdSiteAlias(RequestDto.ApInsUpdSiteAlias apInsUpdSiteAlias);
+        Task ApDltSiteNameAlias(int siteNameAliasId);
     }
 }

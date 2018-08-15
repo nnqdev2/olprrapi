@@ -56,5 +56,7 @@ namespace OlprrApi.Storage.Repositories
 
         Task<int> ApInsUpdSiteAlias(ApInsUpdSiteAlias apInsUpdSiteAlias);
 
+        Task ApDltSiteNameAlias(int siteNameAliasId);
+
     }
 }

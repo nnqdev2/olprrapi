@@ -134,5 +134,10 @@ namespace OlprrApi.Services
             var siteAliasData = _mapper.Map<RequestDto.ApInsUpdSiteAlias, EntityDto.ApInsUpdSiteAlias>(apInsUpdSiteAlias);
             return await _lustRepository.ApInsUpdSiteAlias(siteAliasData);
         }
+
+        public async Task ApDltSiteNameAlias(int siteNameAliasId)
+        {
+            await _lustRepository.ApDltSiteNameAlias(siteNameAliasId);
+        }
     }
 }
