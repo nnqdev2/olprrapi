@@ -38,6 +38,7 @@ namespace OlprrApi.Storage
 
         public DbSet<ApGetPartyGridByLustId> ApGetPartyGridByLustId { get; set; }
         public DbSet<ApGetSiteAliasByLustId> ApGetSiteAliasByLustId { get; set; }
+        public DbSet<Contact> Contact { get; set; }
 
         public LustDbContext(DbContextOptions<LustDbContext> options) : base(options)
         {

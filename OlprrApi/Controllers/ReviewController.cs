@@ -103,32 +103,6 @@ namespace OlprrApi.Controllers
             return Ok(await _olprrReviewService.CreateLustIncident(olprrReviewIncident));
         }
 
-        [Route("sitealias/{lustId}")]
-        [HttpGet]
-        public async Task<IActionResult> GetSiteAlias(int lustId)
-        {
-            return Ok(await _olprrReviewService.GetSiteAlias(lustId));
-        }
 
-        [Route("sitealias")]
-        [HttpPost]
-        public async Task<IActionResult> InsUpdSiteAlias([FromBody] Models.Request.ApInsUpdSiteAlias apInsUpdSiteAlias)
-        {
-            var siteAliasId = await _olprrReviewService.InsUpdSiteAlias(apInsUpdSiteAlias);
-            if (apInsUpdSiteAlias.SiteNameAliasIdIn == 0)
-            {
-                apInsUpdSiteAlias.SiteNameAliasIdIn = siteAliasId;
-                return CreatedAtAction("InsUpdSiteAlias", new { sitenamealiasid = siteAliasId }, apInsUpdSiteAlias);
-            }
-            return NoContent();
-            //return Ok(await _olprrReviewService.InsUpdSiteAlias(apInsUpdSiteAlias));
-        }
-        [Route("sitealias/{siteNameAliasId}")]
-        [HttpDelete]
-        public async Task<IActionResult> DeleteSiteAlias(int siteNameAliasId)
-        {
-            await _olprrReviewService.ApDltSiteNameAlias(siteNameAliasId);
-            return NoContent();
-        }
     }
 }

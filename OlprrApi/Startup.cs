@@ -67,8 +67,10 @@ namespace OlprrApi
             //    options => options.UseSqlServer(
             //         Configuration.GetConnectionString("LustDbConnection1")));
             services.AddScoped<IOlprrRepository, OlprrRepository>();
+            services.AddScoped<ILustRepository, LustRepository>();
             services.AddScoped<IIncidentReportingService, IncidentReportingService>();
             services.AddScoped<IOlprrReviewService, OlprrReviewService>();
+            services.AddScoped<ILustService,LustService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

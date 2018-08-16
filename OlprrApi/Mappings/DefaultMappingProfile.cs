@@ -51,6 +51,9 @@ namespace OlprrApi.Mappings
             CreateMap<Storage.Entities.ApGetSiteAliasByLustId2, Models.Response.ApGetSiteAliasByLustId2>();
             CreateMap<Models.Request.ApInsUpdSiteAlias, Storage.Entities.ApInsUpdSiteAlias>();
 
+            CreateMap<Storage.Entities.Contact, Models.Response.Contact>();
+            CreateMap<Storage.Entities.ContactsStats, Models.Response.ContactsStats>();
+
         }
     }
 }
