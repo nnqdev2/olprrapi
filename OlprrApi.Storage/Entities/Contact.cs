@@ -6,7 +6,7 @@ namespace OlprrApi.Storage.Entities
     public class Contact
     {
         [Key]
-        [Column("PartyID")]
+        //[Column("PartyID")]
         public int PartyId { get; set; }
         public string Organization { get; set; }
         public string FirstName { get; set; }

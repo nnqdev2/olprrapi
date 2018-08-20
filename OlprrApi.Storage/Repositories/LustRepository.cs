@@ -78,15 +78,16 @@ namespace OlprrApi.Storage.Repositories
             if (fNameParam.Value == null) fNameParam.Value = DBNull.Value;
             if (lNameParam.Value == null) lNameParam.Value = DBNull.Value;
             if (orgParam.Value == null) orgParam.Value = DBNull.Value;
-            var exeSp = "execute dbo.apGetPartyByFirstLastOrgNameData  @FirstName, @LastName, @PartyOrg, @SortCol, @SortOrder, @PageNumber, @RowsPerPage, @TotalRows OUTPUT, @TotalPages OUTPUT, @RESULT OUTPUT ";
-            var result = await _dbContext.Set<Contact>().AsNoTracking().FromSql(exeSp, fNameParam, lNameParam, orgParam, sortColParam, sortOrderParam, pageNumberParam, rowsPerPageParam, resultOutParam, totalRowsOutParam, totalPagesOutParam).ToListAsync();
-            var resultCode = (Int16)(resultOutParam.Value);
-            if (resultCode != 0)
-            {
-                var errorMsg = $"{exeSp} returned status code = {resultCode} for Contact Search filters: FirstName {fname}  LastName {lname} Org {org}.";
-                _logger.LogError(errorMsg);
-                throw new StoreProcedureNonZeroOutputParamException(errorMsg);
-            }
+            var exeSp = "execute dbo.apGetPartyByFirstLastOrgNameData  @FirstName, @LastName, @PartyOrg, @SortCol, @SortOrder, @PageNumber, @RowsPerPage, @TotalRows OUTPUT, @TotalPages OUTPUT ";
+            var result = await _dbContext.Set<Contact>().AsNoTracking().FromSql(exeSp, fNameParam, lNameParam, orgParam, sortColParam, sortOrderParam, pageNumberParam, rowsPerPageParam, totalRowsOutParam, totalPagesOutParam).ToListAsync();
+            //var result = await _dbContext.Set<Contact>().AsNoTracking().FromSql(exeSp, fNameParam, lNameParam, orgParam, sortColParam, sortOrderParam, pageNumberParam, rowsPerPageParam, resultOutParam, totalRowsOutParam, totalPagesOutParam).ToListAsync();
+            //var resultCode = (Int16)(resultOutParam.Value);
+            //if (resultCode != 0)
+            //{
+            //    var errorMsg = $"{exeSp} returned status code = {resultCode} for Contact Search filters: FirstName {fname}  LastName {lname} Org {org}.";
+            //    _logger.LogError(errorMsg);
+            //    throw new StoreProcedureNonZeroOutputParamException(errorMsg);
+            //}
             var contactsStats = new List<ContactsStats>();
             foreach (var res in result)
             {
