@@ -63,7 +63,7 @@ namespace OlprrApi.Storage.Repositories
             var exeSp = "execute dbo.apDltSiteNameAlias @SiteNameAliasId, @Bit OUTPUT ";
             await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, siteNameAliasIdParam, bitParam);
         }
-        public async Task<IEnumerable<ContactsStats>> ApGetPartyByFirstLastOrgName(string fname, string lname , string org, int sortColumn, int sortOrder, int pageNumber, int rowsPerPage)
+        public async Task<IEnumerable<ContactsStats>> ApGetPartyByFirstLastOrgName(string fname, string lname, string org, int sortColumn, int sortOrder, int pageNumber, int rowsPerPage)
         {
             var fNameParam = new SqlParameter("@FirstName", fname);
             var lNameParam = new SqlParameter("@LastName", lname);
@@ -73,8 +73,8 @@ namespace OlprrApi.Storage.Repositories
             var pageNumberParam = new SqlParameter("@PageNumber", pageNumber);
             var rowsPerPageParam = new SqlParameter("@RowsPerPage", rowsPerPage);
             var resultOutParam = new SqlParameter { ParameterName = "@RESULT", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
-            var totalRowsOutParam = new SqlParameter { ParameterName = "@TotalRows", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
-            var totalPagesOutParam = new SqlParameter { ParameterName = "@TotalPages", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            var totalRowsOutParam = new SqlParameter { ParameterName = "@TotalRows", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var totalPagesOutParam = new SqlParameter { ParameterName = "@TotalPages", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
             if (fNameParam.Value == null) fNameParam.Value = DBNull.Value;
             if (lNameParam.Value == null) lNameParam.Value = DBNull.Value;
             if (orgParam.Value == null) orgParam.Value = DBNull.Value;
@@ -101,8 +101,8 @@ namespace OlprrApi.Storage.Repositories
                         ReqRowsPerPage = rowsPerPage,
                         ReqSortColumn = sortColumn,
                         ReqSortOrder = sortOrder,
-                        TotalPages = (Int16)(totalPagesOutParam.Value),
-                        TotalRows = (Int16)(totalRowsOutParam.Value),
+                        TotalPages = (Int32)(totalPagesOutParam.Value),
+                        TotalRows = (Int32)(totalRowsOutParam.Value),
                         PartyId = res.PartyId,
                         Organization = res.Organization,
                         FirstName = res.FirstName,

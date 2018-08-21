@@ -41,6 +41,9 @@ namespace OlprrApi.Services
         }
         public async Task<IEnumerable<ResponseDto.ContactsStats>> GetContacts(string fname, string lname, string org, int sortColumn, int sortOrder, int pageNumber, int rowsPerPage)
         {
+            if (fname.Length > 0 && fname == "null") fname = null;
+            if (lname.Length > 0 && lname == "null") lname = null;
+            if (org.Length > 0 && org == "null") org = null;
             var resultList = new List<ResponseDto.ContactsStats>();
             foreach (var result in await _lustRepository.ApGetPartyByFirstLastOrgName(fname, lname, org, sortColumn, sortOrder, pageNumber, rowsPerPage))
             {
