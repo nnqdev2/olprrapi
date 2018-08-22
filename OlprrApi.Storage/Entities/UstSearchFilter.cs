@@ -6,6 +6,7 @@
         public string FacilityAddress { get; set; }
         public string FacilityCity { get; set; }
         public string FacilityZip { get; set; }
+        public string FacilityCounty { get; set; }
         public int SortColumn { get; set; }
         public int SortOrder { get; set; }
         public int PageNumber { get; set; }

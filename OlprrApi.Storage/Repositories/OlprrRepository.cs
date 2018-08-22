@@ -477,32 +477,34 @@ namespace OlprrApi.Storage.Repositories
             var facilityAddressParam = new SqlParameter("@FacilityAddress", ustSearchFilter.FacilityAddress);
             var facilityCityParam = new SqlParameter("@FacilityCity", ustSearchFilter.FacilityCity);
             var facilityZipParam = new SqlParameter("@FacilityZip", ustSearchFilter.FacilityZip);
+            var facilityCountyParam = new SqlParameter("@FacilityCounty", ustSearchFilter.FacilityCounty);
             var sortColParam = new SqlParameter("@SortColumn", ustSearchFilter.SortColumn);
             var sortOrderParam = new SqlParameter("@SortOrder", ustSearchFilter.SortOrder);
             var pageNumberParam = new SqlParameter("@PageNumber", ustSearchFilter.PageNumber);
             var rowsPerPageParam = new SqlParameter("@RowsPerPage", ustSearchFilter.RowsPerPage);
-            var resultOutParam = new SqlParameter { ParameterName = "@RESULT", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
-            var totalRowsOutParam = new SqlParameter { ParameterName = "@TotalRows", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
-            var totalPagesOutParam = new SqlParameter { ParameterName = "@TotalPages", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            var resultOutParam = new SqlParameter { ParameterName = "@RESULT", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var totalRowsOutParam = new SqlParameter { ParameterName = "@TotalRows", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var totalPagesOutParam = new SqlParameter { ParameterName = "@TotalPages", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
 
             if (facilityNameParam.Value == null) facilityNameParam.Value = DBNull.Value;
             if (facilityAddressParam.Value == null) facilityAddressParam.Value = DBNull.Value;
             if (facilityCityParam.Value == null) facilityCityParam.Value = DBNull.Value;
             if (facilityZipParam.Value == null) facilityZipParam.Value = DBNull.Value;
+            if (facilityCountyParam.Value == null) facilityCountyParam.Value = DBNull.Value;
             if (sortColParam.Value == null) sortColParam.Value = DBNull.Value;
             if (sortOrderParam.Value == null) sortOrderParam.Value = DBNull.Value;
             if (pageNumberParam.Value == null) pageNumberParam.Value = DBNull.Value;
             if (rowsPerPageParam.Value == null) rowsPerPageParam.Value = DBNull.Value;
 
 
-            var exeSp = "execute dbo.apOLPRRGetUstLookupData  @FacilityName, @FacilityAddress, @FacilityCity, @FacilityZip "
+            var exeSp = "execute dbo.apOLPRRGetUstLookupData  @FacilityName, @FacilityAddress, @FacilityCity, @FacilityZip, @FacilityCounty "
                 + " ,@SortColumn, @SortOrder, @PageNumber, @RowsPerPage, @TotalRows OUTPUT, @TotalPages OUTPUT, @RESULT OUTPUT ";
 
 
             var result = await _dbContext.Set<ApOlprrGetUstLookupData>().AsNoTracking().FromSql(exeSp, facilityNameParam, facilityAddressParam, facilityCityParam, facilityZipParam
-                , sortColParam, sortOrderParam, pageNumberParam, rowsPerPageParam, resultOutParam, totalRowsOutParam, totalPagesOutParam).ToListAsync();
+                , facilityCountyParam, sortColParam, sortOrderParam, pageNumberParam, rowsPerPageParam, totalRowsOutParam, totalPagesOutParam, resultOutParam).ToListAsync();
 
-            var resultCode = (Int16)(resultOutParam.Value);
+            var resultCode = (Int32)(resultOutParam.Value);
 
             if (resultCode != 0)
             {
@@ -522,13 +524,14 @@ namespace OlprrApi.Storage.Repositories
                         ReqRowsPerPage = ustSearchFilter.RowsPerPage,
                         ReqSortColumn = ustSearchFilter.SortColumn,
                         ReqSortOrder = ustSearchFilter.SortOrder,
-                        TotalPages = (Int16)(totalPagesOutParam.Value),
-                        TotalRows = (Int16)(totalRowsOutParam.Value),
+                        TotalPages = (Int32)(totalPagesOutParam.Value),
+                        TotalRows = (Int32)(totalRowsOutParam.Value),
                         FacilityId = res.FacilityId,
                         FacilityName = res.FacilityName,
                         FacilityAddress = res.FacilityAddress,
                         FacilityCity = res.FacilityCity,
                         FacilityZip = res.FacilityZip,
+                        CountyName = res.CountyName,
                     }
                 );
             }

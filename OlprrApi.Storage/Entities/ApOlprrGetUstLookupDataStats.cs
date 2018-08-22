@@ -13,5 +13,6 @@
         public string FacilityAddress { get; set; }
         public string FacilityCity { get; set; }
         public string FacilityZip { get; set; }
+        public string CountyName { get; set; }
     }
 }
