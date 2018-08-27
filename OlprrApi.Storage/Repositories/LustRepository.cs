@@ -114,7 +114,8 @@ namespace OlprrApi.Storage.Repositories
                         State = res.State,
                         Zipcode = res.Zipcode,
                         Address = res.Address,
-                        Country = res.Country
+                        Country = res.Country,
+                        Email = res.Email
                     }
                 );
             }
