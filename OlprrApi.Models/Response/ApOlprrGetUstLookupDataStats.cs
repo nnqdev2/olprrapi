@@ -14,5 +14,6 @@
         public string FacilityCity { get; set; }
         public string FacilityZip { get; set; }
         public string CountyName { get; set; }
+        public int CountyCode { get; set; }
     }
 }

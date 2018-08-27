@@ -532,6 +532,7 @@ namespace OlprrApi.Storage.Repositories
                         FacilityCity = res.FacilityCity,
                         FacilityZip = res.FacilityZip,
                         CountyName = res.CountyName,
+                        CountyCode = res.CountyCode,
                     }
                 );
             }
