@@ -52,6 +52,11 @@ namespace OlprrApi.Services
             return resultList;
         }
 
+        public async Task<ResponseDto.ApGetCountyIdAndNameFromZP4Fips> GetCountyIdAndNameFromZP4Fips(int usPostalCountyCodeFips)
+        {
+            var result = await _lustRepository.ApGetCountyIdAndNameFromZP4Fips((usPostalCountyCodeFips));
+            return (_mapper.Map<EntityDto.ApGetCountyIdAndNameFromZP4Fips, ResponseDto.ApGetCountyIdAndNameFromZP4Fips>(result));
+        }
 
     }
 }

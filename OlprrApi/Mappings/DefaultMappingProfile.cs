@@ -53,6 +53,7 @@ namespace OlprrApi.Mappings
 
             CreateMap<Storage.Entities.Contact, Models.Response.Contact>();
             CreateMap<Storage.Entities.ContactsStats, Models.Response.ContactsStats>();
+            CreateMap<Storage.Entities.ApGetCountyIdAndNameFromZP4Fips, Models.Response.ApGetCountyIdAndNameFromZP4Fips>();
 
         }
     }

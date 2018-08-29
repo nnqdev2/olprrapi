@@ -10,5 +10,7 @@ namespace OlprrApi.Storage.Repositories
         Task<int> ApInsUpdSiteAlias(ApInsUpdSiteAlias apInsUpdSiteAlias);
         Task ApDltSiteNameAlias(int siteNameAliasId);
         Task<IEnumerable<ContactsStats>> ApGetPartyByFirstLastOrgName(string fname, string lname, string org, int sortColumn, int sortOrder, int pageNumber, int rowsPerPage);
+        Task<ApGetCountyIdAndNameFromZP4Fips> ApGetCountyIdAndNameFromZP4Fips(int usPostalCountyCodeFips);
+
     }
 }

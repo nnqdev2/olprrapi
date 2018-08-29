@@ -56,5 +56,12 @@ namespace OlprrApi.Controllers
             return Ok(await _lustService.GetContacts(fname, lname, org, sc, so, pn, rpp));
         }
 
+        [Route("postalcounty/{county}")]
+        [HttpGet]
+        public async Task<IActionResult> GetCountyIdAndNameFromZP4Fips(int county)
+        {
+            return Ok(await _lustService.GetCountyIdAndNameFromZP4Fips(county));
+        }
+
     }
 }

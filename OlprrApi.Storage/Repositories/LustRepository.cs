@@ -121,5 +121,26 @@ namespace OlprrApi.Storage.Repositories
             }
             return contactsStats;
         }
+
+        public async Task<ApGetCountyIdAndNameFromZP4Fips> ApGetCountyIdAndNameFromZP4Fips(int usPostalCountyCodeFips)
+        {
+            var usPostalCountyCodeFipsCodeParam = (new SqlParameter("@ZP4FIPSCounty", usPostalCountyCodeFips));
+            var countyCodeParam = new SqlParameter { ParameterName = "@IncidentCounty", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            var countyNameParam = new SqlParameter { ParameterName = "@CountyName", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            var exeSp = "execute dbo.apGetCountyIdAndNameFromZP4Fips  @ZP4FIPSCounty, @IncidentCounty OUTPUT, @CountyName OUTPUT";
+            var result = await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, usPostalCountyCodeFipsCodeParam, countyCodeParam, countyNameParam);
+
+            int countyCode;
+            if (countyCodeParam.Value == DBNull.Value)
+                countyCode = 0;
+            else
+                countyCode = (Int16)countyCodeParam.Value;
+            return new ApGetCountyIdAndNameFromZP4Fips()
+            {
+                UsPostalCountyCodeFips = usPostalCountyCodeFips,
+                CountyCode = countyCode,
+                CountyName = (countyNameParam.Value == DBNull.Value) ? null : (string)countyNameParam.Value
+            };
+        }
     }
 }
