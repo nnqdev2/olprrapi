@@ -26,7 +26,9 @@ namespace OlprrApi.Mappings
             CreateMap<Storage.Entities.ZipCode, Models.Response.ZipCode>();
             CreateMap<Storage.Entities.City, Models.Response.City>();
             CreateMap<Storage.Entities.DateCompare, Models.Response.DateCompare>();
-            CreateMap<Storage.Entities.ProjectManager, Models.Response.ProjectManager>();
+            CreateMap<Storage.Entities.ProjectManageIncident, Models.Response.ProjectManager>();
+            CreateMap<Storage.Entities.SiteType2, Models.Response.SiteType2>();
+            CreateMap<Storage.Entities.Brownfield, Models.Response.Brownfield>();
 
             CreateMap<Models.Request.ApOLPRRInsertIncident, Storage.Entities.ApOlprrInsertIncident>();
             CreateMap<Models.Request.LustSiteAddressSearch, Storage.Entities.LustSiteAddressSearch>();
@@ -54,7 +56,8 @@ namespace OlprrApi.Mappings
             CreateMap<Storage.Entities.Contact, Models.Response.Contact>();
             CreateMap<Storage.Entities.ContactsStats, Models.Response.ContactsStats>();
             CreateMap<Storage.Entities.ApGetCountyIdAndNameFromZP4Fips, Models.Response.ApGetCountyIdAndNameFromZP4Fips>();
-
+            CreateMap<Storage.Entities.LustIncident, Models.Response.LustIncident>();
+            CreateMap<Storage.Entities.ProjectManagerIncident, Models.Response.ProjectManager>();
         }
     }
 }

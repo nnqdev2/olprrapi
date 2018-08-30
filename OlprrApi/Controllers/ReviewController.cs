@@ -25,7 +25,6 @@ namespace OlprrApi.Controllers
         [HttpPost]
         public async Task<IActionResult> LustSearch([FromBody] Models.Request.LustSiteAddressSearch lustSiteAddressSearch)
         {
-            //https://stackoverflow.com/questions/14202257/design-restful-query-api-with-a-long-list-of-query-parameters
             return Ok(await _olprrReviewService.SearchLust(lustSiteAddressSearch));
         }
         [Route("incident/{olprrId}")]
@@ -39,9 +38,7 @@ namespace OlprrApi.Controllers
         public async Task<IActionResult> SearchLust([FromBody] Models.Request.LustSearchFilter lustSearchFilter)
         //public IActionResult Search([FromBody] Models.Request.LustSearchFilter lustSearchFilter)
         {
-            //https://stackoverflow.com/questions/14202257/design-restful-query-api-with-a-long-list-of-query-parameters
             return Ok(await _olprrReviewService.Search(lustSearchFilter));
-
         }
         [Route("ustsite")]
         [HttpPost]

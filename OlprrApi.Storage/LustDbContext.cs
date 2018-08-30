@@ -23,7 +23,9 @@ namespace OlprrApi.Storage
         public DbSet<CleanupSiteType> CleanupSiteType { get; set; }
         public DbSet<DateCompare> DateCompare { get; set; }
         public DbSet<Region> Region { get; set; }
-        public DbSet<ProjectManager> ProjectManager { get; set; }
+        public DbSet<ProjectManageIncident> ProjectManager { get; set; }
+        public DbSet<SiteType2> SiteType2 { get; set; }
+        public DbSet<Brownfield> Brownfield { get; set; }
 
 
         public DbSet<ApOlprrGetLustLookup> ApOLPRRGetLustLookup { get; set; }
@@ -39,6 +41,8 @@ namespace OlprrApi.Storage
         public DbSet<ApGetPartyGridByLustId> ApGetPartyGridByLustId { get; set; }
         public DbSet<ApGetSiteAliasByLustId> ApGetSiteAliasByLustId { get; set; }
         public DbSet<Contact> Contact { get; set; }
+        public DbSet<LustIncident> LustIncident { get; set; }
+        public DbSet<ProjectManagerIncident> ProjectManagerIncident { get; set; }
 
         public LustDbContext(DbContextOptions<LustDbContext> options) : base(options)
         {

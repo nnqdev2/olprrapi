@@ -292,7 +292,25 @@ namespace OlprrApi.Services
             var resultList = new List<ProjectManager>();
             foreach (var result in await _lustRepository.GetProjectManagers())
             {
-                resultList.Add(_mapper.Map<EntityDto.ProjectManager, ProjectManager>(result));
+                resultList.Add(_mapper.Map<EntityDto.ProjectManageIncident, ProjectManager>(result));
+            }
+            return resultList;
+        }
+        public async Task<IEnumerable<SiteType2>> GetSiteType2s()
+        {
+            var resultList = new List<SiteType2>();
+            foreach (var result in await _lustRepository.GetSiteType2s())
+            {
+                resultList.Add(_mapper.Map<EntityDto.SiteType2, SiteType2>(result));
+            }
+            return resultList;
+        }
+        public async Task<IEnumerable<Brownfield>> GetBrownfields()
+        {
+            var resultList = new List<Brownfield>();
+            foreach (var result in await _lustRepository.GetBrownfields())
+            {
+                resultList.Add(_mapper.Map<EntityDto.Brownfield, Brownfield>(result));
             }
             return resultList;
         }

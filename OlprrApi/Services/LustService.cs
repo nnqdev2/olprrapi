@@ -57,6 +57,23 @@ namespace OlprrApi.Services
             var result = await _lustRepository.ApGetCountyIdAndNameFromZP4Fips((usPostalCountyCodeFips));
             return (_mapper.Map<EntityDto.ApGetCountyIdAndNameFromZP4Fips, ResponseDto.ApGetCountyIdAndNameFromZP4Fips>(result));
         }
+        public async Task<ResponseDto.LustIncident> GetIncidentByIdData(int lustId)
+        {
+            foreach (var result in await _lustRepository.ApGetIncidentByIdData(lustId))
+            {
+                return (_mapper.Map<EntityDto.LustIncident, ResponseDto.LustIncident>(result));
+            }
+            return null;
+        }
+        public async Task<IEnumerable<ResponseDto.ProjectManager>> GetCurrentProjMgr(int lustId)
+        {
+            var resultList = new List<ResponseDto.ProjectManager>();
+            foreach (var result in await _lustRepository.ApGetCurrentProjMgr(lustId))
+            {
+                resultList.Add(_mapper.Map<EntityDto.ProjectManagerIncident, ResponseDto.ProjectManager>(result));
+            }
+            return resultList;
+        }
 
     }
 }

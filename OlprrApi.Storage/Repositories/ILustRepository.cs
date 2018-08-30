@@ -11,6 +11,8 @@ namespace OlprrApi.Storage.Repositories
         Task ApDltSiteNameAlias(int siteNameAliasId);
         Task<IEnumerable<ContactsStats>> ApGetPartyByFirstLastOrgName(string fname, string lname, string org, int sortColumn, int sortOrder, int pageNumber, int rowsPerPage);
         Task<ApGetCountyIdAndNameFromZP4Fips> ApGetCountyIdAndNameFromZP4Fips(int usPostalCountyCodeFips);
+        Task<IEnumerable<LustIncident>> ApGetIncidentByIdData (int lustId);
+        Task<IEnumerable<ProjectManagerIncident>> ApGetCurrentProjMgr(int lustId);
 
     }
 }

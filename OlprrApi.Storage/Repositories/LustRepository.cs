@@ -142,5 +142,36 @@ namespace OlprrApi.Storage.Repositories
                 CountyName = (countyNameParam.Value == DBNull.Value) ? null : (string)countyNameParam.Value
             };
         }
+
+        public async Task<IEnumerable<LustIncident>> ApGetIncidentByIdData (int lustId)
+        {
+            var lustIdParam = (new SqlParameter("@LustId", lustId));
+            //var resultOutParam = new SqlParameter { ParameterName = "@RESULT", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            //var exeSp = "execute dbo.apGetIncidentByIdData  @lustId, @RESULT OUTPUT ";
+            //var result = await _dbContext.Set<LustIncident>().AsNoTracking().FromSql(exeSp, lustIdParam, resultOutParam).ToListAsync();
+            var exeSp = "execute dbo.apGetIncidentByIdData  @lustId ";
+            var result = await _dbContext.Set<LustIncident>().AsNoTracking().FromSql(exeSp, lustIdParam).ToListAsync();
+
+            //var resultCode = (Int16)(resultOutParam.Value);
+            //if (resultCode != 0)
+            //{
+            //    var errorMsg = $"{exeSp} returned status code = {resultCode} for LustId {lustId}.";
+            //    _logger.LogError(errorMsg);
+            //    throw new StoreProcedureNonZeroOutputParamException(errorMsg);
+            //}
+            if (result.Count == 0)
+            {
+                throw new ResourceNotFoundException($"Resource requested - LustId {lustId} not found.");
+            }
+            return result; 
+        }
+
+
+        public async Task<IEnumerable<ProjectManagerIncident>> ApGetCurrentProjMgr(int lustId)
+        {
+            var lustIdParam = (new SqlParameter("@LustId", lustId));
+            var exeSp = "execute dbo.apGetCurrentProjMgr  @lustId ";
+            return await _dbContext.Set<ProjectManagerIncident>().AsNoTracking().FromSql(exeSp, lustIdParam).ToListAsync();
+        }
     }
 }

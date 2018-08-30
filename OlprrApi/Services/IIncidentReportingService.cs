@@ -28,6 +28,8 @@ namespace OlprrApi.Services
         Task<IEnumerable<City>> GetCities();
         Task<IEnumerable<Region>> GetRegions();
         Task<IEnumerable<ProjectManager>> GetProjectManagers();
+        Task<IEnumerable<SiteType2>> GetSiteType2s();
+        Task<IEnumerable<Brownfield>> GetBrownfields();
 
         Task<int> InsertOLPRRIncidentRecord(ApOLPRRInsertIncident apOLPRRInsertIncident);
         void InsertOLPRRLogEntry(OlprrLogEntry olprrLogEntry);

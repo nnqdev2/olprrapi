@@ -25,8 +25,9 @@ namespace OlprrApi.Storage.Repositories
         Task<IEnumerable<ZipCode>> GetZipCodes();
         Task<IEnumerable<Region>> GetRegions();
         Task<IEnumerable<DateCompare>> GetDateCompares();
-        Task<IEnumerable<ProjectManager>> GetProjectManagers();
-
+        Task<IEnumerable<ProjectManageIncident>> GetProjectManagers();
+        Task<IEnumerable<SiteType2>> GetSiteType2s();
+        Task<IEnumerable<Brownfield>> GetBrownfields();
 
 
         Task<int> InsertOLPRRIncidentRecord(ApOlprrInsertIncident apOLPRRInsertIncident);

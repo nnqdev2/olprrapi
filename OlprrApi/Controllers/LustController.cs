@@ -63,5 +63,18 @@ namespace OlprrApi.Controllers
             return Ok(await _lustService.GetCountyIdAndNameFromZP4Fips(county));
         }
 
+        [Route("incident/{lustId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetIncidentByIdData(int lustId)
+        {
+            return Ok(await _lustService.GetIncidentByIdData(lustId));
+        }
+        [Route("pm/{lustId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetCurrentProjMgr(int lustId)
+        {
+            return Ok(await _lustService.GetCurrentProjMgr(lustId));
+        }
+
     }
 }

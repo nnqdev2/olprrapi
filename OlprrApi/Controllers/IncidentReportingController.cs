@@ -146,7 +146,12 @@ namespace OlprrApi.Controllers
         {
             return Ok(await _olprrService.GetProjectManagers());
         }
-
+        [Route("sitetype2")]
+        [HttpGet]
+        public async Task<IActionResult> GetSiteType2s()
+        {
+            return Ok(await _olprrService.GetSiteType2s());
+        }
 
         [Route("incident")]
         [HttpPost]

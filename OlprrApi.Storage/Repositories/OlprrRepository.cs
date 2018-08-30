@@ -34,6 +34,10 @@ namespace OlprrApi.Storage.Repositories
         public const string ZipCodeTable = "ZipCode";
         public const string ProjectManagerTable = "ProjectManager";
 
+        public const string ExecuteApGetLookupTablesByType = "execute dbo.apGetLookupTablesByType {0}";
+        public const string SiteType2Table = "SiteType";
+        public const string BrownfieldTable = "Brownfield";
+
         private LustDbContext _dbContext;
         private ILogger<OlprrRepository> _logger;
         public OlprrRepository(ILogger<OlprrRepository> logger, LustDbContext dbContext)
@@ -118,9 +122,17 @@ namespace OlprrApi.Storage.Repositories
         {
             return await _dbContext.Set<DateCompare>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables, DateCompareTable).ToListAsync();
         }
-        public async Task<IEnumerable<ProjectManager>> GetProjectManagers()
+        public async Task<IEnumerable<ProjectManageIncident>> GetProjectManagers()
         {
-            return await _dbContext.Set<ProjectManager>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables, ProjectManagerTable).ToListAsync();
+            return await _dbContext.Set<ProjectManageIncident>().AsNoTracking().FromSql(ExecuteApGetOLPRRLookupTables, ProjectManagerTable).ToListAsync();
+        }
+        public async Task<IEnumerable<SiteType2>> GetSiteType2s()
+        {
+            return await _dbContext.Set<SiteType2>().AsNoTracking().FromSql(ExecuteApGetLookupTablesByType, SiteType2Table).ToListAsync();
+        }
+        public async Task<IEnumerable<Brownfield>> GetBrownfields()
+        {
+            return await _dbContext.Set<Brownfield>().AsNoTracking().FromSql(ExecuteApGetLookupTablesByType, BrownfieldTable).ToListAsync();
         }
         public async Task<int> InsertOLPRRIncidentRecord(ApOlprrInsertIncident apOLPRRInsertIncident)
         {

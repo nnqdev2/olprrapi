@@ -13,5 +13,7 @@ namespace OlprrApi.Services
         Task ApDltSiteNameAlias(int siteNameAliasId);
         Task<IEnumerable<ResponseDto.ContactsStats>> GetContacts(string fname, string lname, string org, int sortColumn, int sortOrder, int pageNumber, int rowsPerPage);
         Task<ResponseDto.ApGetCountyIdAndNameFromZP4Fips> GetCountyIdAndNameFromZP4Fips(int usPostalCountyCodeFips);
+        Task<ResponseDto.LustIncident> GetIncidentByIdData(int lustId);
+        Task<IEnumerable<ResponseDto.ProjectManager>> GetCurrentProjMgr(int lustId);
     }
 }
