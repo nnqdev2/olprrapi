@@ -152,7 +152,12 @@ namespace OlprrApi.Controllers
         {
             return Ok(await _olprrService.GetSiteType2s());
         }
-
+        [Route("brownfield")]
+        [HttpGet]
+        public async Task<IActionResult> GetBrownfields()
+        {
+            return Ok(await _olprrService.GetBrownfields());
+        }
         [Route("incident")]
         [HttpPost]
         public async Task<IActionResult> PostIncident([FromBody] Models.Request.ApOLPRRInsertIncident apOLPRRInsertIncident)
