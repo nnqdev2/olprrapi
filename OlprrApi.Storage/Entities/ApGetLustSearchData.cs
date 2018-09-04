@@ -14,6 +14,6 @@ namespace OlprrApi.Storage.Entities
         public DateTime? FirDt { get; set; }
         public DateTime? ClosedDt { get; set; }
         public string FacilityId { get; set; }
-        public int SiteScore { get; set; }
+        public int? SiteScore { get; set; }
     }
 }

@@ -398,9 +398,9 @@ namespace OlprrApi.Storage.Repositories
             var sortOrderParam = new SqlParameter("@SortOrder", lustSearchFilter.SortOrder);
             var pageNumberParam = new SqlParameter("@PageNumber", lustSearchFilter.PageNumber);
             var rowsPerPageParam = new SqlParameter("@RowsPerPage", lustSearchFilter.RowsPerPage);
-            var resultOutParam = new SqlParameter { ParameterName = "@RESULT", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
-            var totalRowsOutParam = new SqlParameter { ParameterName = "@TotalRows", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
-            var totalPagesOutParam = new SqlParameter { ParameterName = "@TotalPages", SqlDbType = SqlDbType.SmallInt, Direction = ParameterDirection.Output };
+            var resultOutParam = new SqlParameter { ParameterName = "@RESULT", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var totalRowsOutParam = new SqlParameter { ParameterName = "@TotalRows", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var totalPagesOutParam = new SqlParameter { ParameterName = "@TotalPages", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
 
             if (logCountyParam.Value == null)           logCountyParam.Value = DBNull.Value;
             if (logYearParam.Value == null)             logYearParam.Value = DBNull.Value;
@@ -446,7 +446,7 @@ namespace OlprrApi.Storage.Repositories
                 , compareDate2IdFromDateParam, compareDate2IdToDateParam
                 , sortColParam, sortOrderParam, pageNumberParam, rowsPerPageParam, resultOutParam, totalRowsOutParam, totalPagesOutParam).ToListAsync();
 
-            var resultCode = (Int16)(resultOutParam.Value);
+            var resultCode = (Int32)((resultOutParam.Value==null?0: resultOutParam.Value));
 
             if (resultCode != 0)
             {
@@ -466,8 +466,8 @@ namespace OlprrApi.Storage.Repositories
                         ReqRowsPerPage = lustSearchFilter.RowsPerPage,
                         ReqSortColumn = lustSearchFilter.SortColumn,
                         ReqSortOrder = lustSearchFilter.SortOrder,
-                        TotalPages = (Int16)(totalPagesOutParam.Value),
-                        TotalRows = (Int16)(totalRowsOutParam.Value),
+                        TotalPages = (Int32) totalPagesOutParam.Value,
+                        TotalRows = (Int32) totalRowsOutParam.Value,
                         LustId = res.LustId,
                         LogNumber = res.LogNumber,
                         SiteName = res.SiteName,
@@ -479,6 +479,7 @@ namespace OlprrApi.Storage.Repositories
                     }
                 );
             }
+
             return rList;
 
         }
