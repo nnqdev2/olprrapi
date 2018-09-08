@@ -7,7 +7,7 @@ namespace OlprrApi.Storage.Entities
     public class OlprrReviewIncident
     {
         public int LustIdIn { get; set; }
-        public int FacilityId { get; set; }
+        public int? FacilityId { get; set; }
         public int CountyId { get; set; }
         public DateTime DateReceived { get; set; }
         public string SiteName { get; set; }

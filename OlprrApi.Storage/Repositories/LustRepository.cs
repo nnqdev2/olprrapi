@@ -173,5 +173,77 @@ namespace OlprrApi.Storage.Repositories
             var exeSp = "execute dbo.apGetCurrentProjMgr  @lustId ";
             return await _dbContext.Set<ProjectManagerIncident>().AsNoTracking().FromSql(exeSp, lustIdParam).ToListAsync();
         }
+
+        public async Task<ApInsUpdIncidentDataResult> ApInsUpdIncidentData(ApInsUpdIncidentData apInsUpdIncidentData)
+        {
+            var lustIdInParam = new SqlParameter("@LustIdIN", apInsUpdIncidentData.LustIdIn);
+            var facilityIdParam = new SqlParameter("@FacilityId", apInsUpdIncidentData.FacilityId);
+            var countyIdParam = new SqlParameter("@CountyId", apInsUpdIncidentData.CountyId);
+            var receivedDateParam = new SqlParameter("@ReceivedDate", apInsUpdIncidentData.DateReceived);
+            var siteNameParam = new SqlParameter("@SiteName", apInsUpdIncidentData.SiteName);
+            var siteAddressParam = new SqlParameter("@SiteAddress", apInsUpdIncidentData.SiteAddress);
+            var siteCityParam = new SqlParameter("@SiteCity", apInsUpdIncidentData.SiteCity);
+            var siteZipParam = new SqlParameter("@SiteZip", apInsUpdIncidentData.SiteZipcode);
+            var sitePhoneParam = new SqlParameter("@SitePhone", apInsUpdIncidentData.SitePhone);
+            var noValidAddressParam = new SqlParameter("@NoValidAddress", apInsUpdIncidentData.NoValidAddress);
+            var siteTypeIdParam = new SqlParameter("@SiteTypeId", apInsUpdIncidentData.SiteTypeId);
+            var fileStatusIdParam = new SqlParameter("@FileStatusId", apInsUpdIncidentData.FileStatusId);
+            var regTankIndParam = new SqlParameter("@RegTankInd", apInsUpdIncidentData.RegTankInd);
+            var hotIndParam = new SqlParameter("@HotInd", apInsUpdIncidentData.HotInd);
+            var nonRegTankIndParam = new SqlParameter("@NonRegTankInd", apInsUpdIncidentData.NonRegTankInd);
+            var brownfieldCodeIdParam = new SqlParameter("@BrownfieldCodeId", apInsUpdIncidentData.BrownfieldCodeId);
+            var propertyTranPendingIndParam = new SqlParameter("@PropertyTranPendingInd", apInsUpdIncidentData.PropertyTranPendingInd);
+            var programTransferIndParam = new SqlParameter("@ProgramTransferInd", apInsUpdIncidentData.ProgramTransferInd);
+            var hotAuditRejectIndParam = new SqlParameter("@HotAuditRejectInd", apInsUpdIncidentData.HotAuditRejectInd);
+            var activeReleaseIndParam = new SqlParameter("@ActiveReleaseInd", apInsUpdIncidentData.ActiveReleaseInd);
+            var optionLetterSentIndParam = new SqlParameter("@OptionLetterSentInd", apInsUpdIncidentData.OptionLetterSentInd);
+            var siteCommentParam = new SqlParameter("@SiteComment", apInsUpdIncidentData.SiteComment);
+            var seeAlsoCommentParam = new SqlParameter("@SeeAlsoComment", apInsUpdIncidentData.SeeAlsoComment);
+            var publicSummaryCommentParam = new SqlParameter("@PublicSummaryComment", apInsUpdIncidentData.PublicSummaryComment);
+            var geoLocIdParam = new SqlParameter("@GeolocId", apInsUpdIncidentData.GeoLocId);
+            var olprrIdParam = new SqlParameter("@OlprrId", apInsUpdIncidentData.OlprrId);
+            var discoverDateParam = new SqlParameter("@DiscoverDate", apInsUpdIncidentData.DiscoveryDate);
+            var logNumberOutParam = new SqlParameter{ ParameterName = "@LogNumberOUT", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            var lustIdOutParam = new SqlParameter { ParameterName = "@LustIdOUT", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var errorMessageHandlerParam = new SqlParameter { ParameterName = "@ErrorMessageHandler", SqlDbType = SqlDbType.VarChar, Size = 1024, Direction = ParameterDirection.Output };
+            var resultSpParam = new SqlParameter { ParameterName = "@ResultSP", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+            if (seeAlsoCommentParam.Value == null) seeAlsoCommentParam.Value = DBNull.Value;
+            if (siteCommentParam.Value == null) siteCommentParam.Value = DBNull.Value;
+            if (publicSummaryCommentParam.Value == null) publicSummaryCommentParam.Value = DBNull.Value;
+            if (olprrIdParam.Value == null) olprrIdParam.Value = DBNull.Value;
+            if (facilityIdParam.Value == null) facilityIdParam.Value = DBNull.Value;
+            if (publicSummaryCommentParam.Value == null) publicSummaryCommentParam.Value = DBNull.Value;
+            if (geoLocIdParam.Value == null) geoLocIdParam.Value = DBNull.Value;
+
+            var exeSp = "execute dbo.apInsUpdIncidentData " +
+            "  @LustIdIN, @FacilityId, @CountyId,@ReceivedDate,@SiteName,@SiteAddress,@SiteCity,@SiteZip,@SitePhone,@NoValidAddress" +
+            "  ,@SiteTypeId,@FileStatusId,@RegTankInd,@HotInd,@NonRegTankInd,@BrownfieldCodeId,@PropertyTranPendingInd,@ProgramTransferInd,@HotAuditRejectInd " +
+            "  ,@ActiveReleaseInd,@OptionLetterSentInd,@SiteComment,@SeeAlsoComment,@PublicSummaryComment,@GeolocId,@OlprrId,@DiscoverDate" +
+            "  ,@LogNumberOUT OUTPUT ,@LustIdOUT  OUTPUT ,@ErrorMessageHandler OUTPUT ,@ResultSP OUT";
+
+            var result = await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, lustIdInParam, facilityIdParam, countyIdParam
+                , receivedDateParam, siteNameParam, siteAddressParam, siteCityParam, siteZipParam, sitePhoneParam, noValidAddressParam
+                , siteTypeIdParam, fileStatusIdParam, regTankIndParam, hotIndParam, nonRegTankIndParam
+                , brownfieldCodeIdParam, propertyTranPendingIndParam, programTransferIndParam, hotAuditRejectIndParam, activeReleaseIndParam
+                , optionLetterSentIndParam, siteCommentParam, seeAlsoCommentParam, publicSummaryCommentParam, geoLocIdParam, olprrIdParam
+                , discoverDateParam, logNumberOutParam, lustIdOutParam, errorMessageHandlerParam, resultSpParam);
+
+            if ((errorMessageHandlerParam.Value != DBNull.Value) && (((string)errorMessageHandlerParam.Value).Length > 0))
+            {
+                var errorMsg = $"{exeSp} returned @ErrorMessage = {errorMessageHandlerParam.Value} Result = {result} for lustId {apInsUpdIncidentData.LustIdIn} site name {apInsUpdIncidentData.SiteName}";
+                _logger.LogError(errorMsg);
+                //throw new StoreProcedureNonZeroOutputParamException(errorMsg);
+            }
+            return new ApInsUpdIncidentDataResult
+            {
+                LustIdIn = apInsUpdIncidentData.LustIdIn,
+                ErrorMessageHandler = (errorMessageHandlerParam.Value == DBNull.Value) ? null : (string)errorMessageHandlerParam.Value,
+                LogNumberOut = (logNumberOutParam.Value == DBNull.Value) ? null : (string)logNumberOutParam.Value,
+                LustIdOut = (lustIdOutParam.Value == DBNull.Value) ? 0 : (Int32)lustIdOutParam.Value,
+                OlprrId = (olprrIdParam.Value == DBNull.Value) ? 0 : (Int32)olprrIdParam.Value,
+                ResultSp = (resultSpParam.Value == DBNull.Value) ? 0 : (Int32)resultSpParam.Value,
+            };
+        }
     }
 }

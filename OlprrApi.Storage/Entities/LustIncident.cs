@@ -55,7 +55,10 @@ namespace OlprrApi.Storage.Entities
         public DateTime? FinalInvcRqstDate { get; set; }
         public DateTime? ClosedDate { get; set; }
         public DateTime? LetterOfAgreementDate { get; set; }
+        public string LetterOfAgreementComment { get; set; }
         public string MgmtLastChangeBy { get; set; }
         public DateTime? MgmtLastChangeDate { get; set; }
+        [Column("DiscoverDate")]
+        public DateTime? DiscoveryDate { get; set; }
     }
 }

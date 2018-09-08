@@ -75,5 +75,11 @@ namespace OlprrApi.Services
             return resultList;
         }
 
+        public async Task<ResponseDto.ApInsUpdIncidentDataResult> InsUpdLustIncident(RequestDto.ApInsUpdIncidentData apInsUpdIncidentData)
+        {
+            var lustData = _mapper.Map<RequestDto.ApInsUpdIncidentData, EntityDto.ApInsUpdIncidentData>(apInsUpdIncidentData);
+            var result = await _lustRepository.ApInsUpdIncidentData(lustData);
+            return (_mapper.Map<EntityDto.ApInsUpdIncidentDataResult, ResponseDto.ApInsUpdIncidentDataResult>(result));
+        }
     }
 }

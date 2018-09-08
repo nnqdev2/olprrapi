@@ -952,6 +952,7 @@ namespace OlprrApi.Storage.Repositories
             var appIdParam = new SqlParameter("@AppID", olprrReviewIncident.AppId);
             var newSiteStatusParam = new SqlParameter("@NewSiteStatus", olprrReviewIncident.NewSiteStatus);
 
+            sitePhoneParam.Value = sitePhoneParam.Value ?? DBNull.Value;
             icOrganizationParam.Value = icOrganizationParam.Value ?? DBNull.Value;
             icFirstNameParam.Value = icFirstNameParam.Value ?? DBNull.Value;
             icLastNameParam.Value = icLastNameParam.Value ?? DBNull.Value;

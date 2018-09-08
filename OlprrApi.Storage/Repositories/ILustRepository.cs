@@ -13,6 +13,7 @@ namespace OlprrApi.Storage.Repositories
         Task<ApGetCountyIdAndNameFromZP4Fips> ApGetCountyIdAndNameFromZP4Fips(int usPostalCountyCodeFips);
         Task<IEnumerable<LustIncident>> ApGetIncidentByIdData (int lustId);
         Task<IEnumerable<ProjectManagerIncident>> ApGetCurrentProjMgr(int lustId);
+        Task<ApInsUpdIncidentDataResult> ApInsUpdIncidentData(ApInsUpdIncidentData apInsUpdIncidentData);
 
     }
 }

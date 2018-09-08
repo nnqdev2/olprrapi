@@ -58,6 +58,8 @@ namespace OlprrApi.Mappings
             CreateMap<Storage.Entities.ApGetCountyIdAndNameFromZP4Fips, Models.Response.ApGetCountyIdAndNameFromZP4Fips>();
             CreateMap<Storage.Entities.LustIncident, Models.Response.LustIncident>();
             CreateMap<Storage.Entities.ProjectManagerIncident, Models.Response.ProjectManager>();
+            CreateMap<Models.Request.ApInsUpdIncidentData, Storage.Entities.ApInsUpdIncidentData>();
+            CreateMap<Storage.Entities.ApInsUpdIncidentDataResult, Models.Response.ApInsUpdIncidentDataResult>();
         }
     }
 }

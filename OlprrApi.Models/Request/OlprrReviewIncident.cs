@@ -7,7 +7,7 @@ namespace OlprrApi.Models.Request
         //[Required]
         public int LustIdIn { get; set; }
         //[Required]
-        public int FacilityId { get; set; }
+        public int? FacilityId { get; set; }
         [Required]
         public int CountyId { get; set; }
         [Required]

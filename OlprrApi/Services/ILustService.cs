@@ -15,5 +15,6 @@ namespace OlprrApi.Services
         Task<ResponseDto.ApGetCountyIdAndNameFromZP4Fips> GetCountyIdAndNameFromZP4Fips(int usPostalCountyCodeFips);
         Task<ResponseDto.LustIncident> GetIncidentByIdData(int lustId);
         Task<IEnumerable<ResponseDto.ProjectManager>> GetCurrentProjMgr(int lustId);
+        Task<ApInsUpdIncidentDataResult> InsUpdLustIncident(RequestDto.ApInsUpdIncidentData apInsUpdIncidentData);
     }
 }

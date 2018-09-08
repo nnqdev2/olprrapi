@@ -38,7 +38,7 @@ namespace OlprrApi.Storage.Entities
         public DateTime DateReceived { get; set; }
 
         [Column("FACILITY_ID")]
-        public int FacilityId { get; set; }
+        public int? FacilityId { get; set; }
 
         [Column("SITE_NAME")]
         [MaxLength(40)]

@@ -76,5 +76,12 @@ namespace OlprrApi.Controllers
             return Ok(await _lustService.GetCurrentProjMgr(lustId));
         }
 
+        [Route("incident")]
+        [HttpPost]
+        public async Task<IActionResult> UpdIncidentData([FromBody] Models.Request.ApInsUpdIncidentData apInsUpdIncidentData)
+        {
+            return Ok(await _lustService.InsUpdLustIncident(apInsUpdIncidentData));
+        }
+
     }
 }

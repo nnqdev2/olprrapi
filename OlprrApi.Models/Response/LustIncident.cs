@@ -50,7 +50,9 @@ namespace OlprrApi.Models.Response
         public DateTime? FinalInvcRqstDate { get; set; }
         public DateTime? ClosedDate { get; set; }
         public DateTime? LetterOfAgreementDate { get; set; }
+        public string LetterOfAgreementComment { get; set; }
         public string MgmtLastChangeBy { get; set; }
         public DateTime? MgmtLastChangeDate { get; set; }
+         public DateTime? DiscoveryDate { get; set; }
     }
 }
