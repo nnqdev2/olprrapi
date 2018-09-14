@@ -215,6 +215,9 @@ namespace OlprrApi.Storage.Repositories
             if (facilityIdParam.Value == null) facilityIdParam.Value = DBNull.Value;
             if (publicSummaryCommentParam.Value == null) publicSummaryCommentParam.Value = DBNull.Value;
             if (geoLocIdParam.Value == null) geoLocIdParam.Value = DBNull.Value;
+            if (brownfieldCodeIdParam.Value == null) brownfieldCodeIdParam.Value = DBNull.Value;
+            if (fileStatusIdParam.Value == null) fileStatusIdParam.Value = DBNull.Value;
+            if (siteTypeIdParam.Value == null) siteTypeIdParam.Value = DBNull.Value;
 
             var exeSp = "execute dbo.apInsUpdIncidentData " +
             "  @LustIdIN, @FacilityId, @CountyId,@ReceivedDate,@SiteName,@SiteAddress,@SiteCity,@SiteZip,@SitePhone,@NoValidAddress" +
