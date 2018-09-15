@@ -21,7 +21,8 @@ namespace OlprrApi.Controllers
             _lustService = lustService;
         }
 
-        [Route("sitealiases/{lustId}")]
+        //[Route("sitealiases/{lustId}")]
+        [Route("lustid/{lustId}/sitealiases")]
         [HttpGet]
         public async Task<IActionResult> GetSiteAliases(int lustId)
         {
