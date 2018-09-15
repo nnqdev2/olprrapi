@@ -40,6 +40,7 @@ namespace OlprrApi.Storage
 
         public DbSet<ApGetPartyGridByLustId> ApGetPartyGridByLustId { get; set; }
         public DbSet<ApGetSiteAliasByLustId> ApGetSiteAliasByLustId { get; set; }
+        public DbSet<ApGetSiteAliasByLustId2> ApGetSiteAliasByLustId2 { get; set; }
         public DbSet<Contact> Contact { get; set; }
         public DbSet<LustIncident> LustIncident { get; set; }
         public DbSet<ProjectManagerIncident> ProjectManagerIncident { get; set; }

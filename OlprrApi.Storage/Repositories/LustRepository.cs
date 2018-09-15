@@ -26,8 +26,8 @@ namespace OlprrApi.Storage.Repositories
             var lustIdParam = new SqlParameter("@LustId", lustId);
             if (lustIdParam.Value == null)
                 lustIdParam.Value = DBNull.Value;
-            var exeSp = "execute dbo.ApGetSiteAliasByLustId  @LustId ";
-            var results = await _dbContext.Set<ApGetSiteAliasByLustId>().AsNoTracking().FromSql(exeSp, lustIdParam).ToListAsync();
+            var exeSp = "execute dbo.ApGetSiteAliasByLustIdData  @LustId ";
+            var results = await _dbContext.Set<ApGetSiteAliasByLustId2>().AsNoTracking().FromSql(exeSp, lustIdParam).ToListAsync();
             var resultList = new List<ApGetSiteAliasByLustId2>();
             foreach (var result in results)
             {
@@ -37,10 +37,21 @@ namespace OlprrApi.Storage.Repositories
                     SiteNameAlias = result.SiteNameAlias,
                     LastChangeBy = result.LastChangeBy,
                     LastChangeDate = result.LastChangeDate,
-                    SiteNameAliasId = result.SiteNameAliasId
+                    SiteNameAliasId = result.SiteNameAliasId,
+                    LogNumber = result.LogNumber
                 });
             }
             return resultList;
+        }
+
+        public async Task<ApGetSiteAliasByLustId2> ApGetSiteAliasBySiteNameAliasIdData(int siteNameAliasId)
+        {
+            var siteNameAliasIdParam = new SqlParameter("@SiteNameAliasId", siteNameAliasId);
+            if (siteNameAliasIdParam.Value == null)
+                siteNameAliasIdParam.Value = DBNull.Value;
+            var exeSp = "execute dbo.ApGetSiteAliasBySiteNameAliasIdData  @SiteNameAliasId ";
+            var results = await _dbContext.Set<ApGetSiteAliasByLustId2>().AsNoTracking().FromSql(exeSp, siteNameAliasIdParam).ToListAsync();
+            return results[0];
         }
 
         public async Task<int> ApInsUpdSiteAlias(ApInsUpdSiteAlias apInsUpdSiteAlias)

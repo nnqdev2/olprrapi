@@ -21,7 +21,7 @@ namespace OlprrApi.Services
             _lustRepository = lustRepository;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<ResponseDto.ApGetSiteAliasByLustId2>> GetSiteAlias(int lustId)
+        public async Task<IEnumerable<ResponseDto.ApGetSiteAliasByLustId2>> GetSiteAliases(int lustId)
         {
             var resultList = new List<ResponseDto.ApGetSiteAliasByLustId2>();
             foreach (var result in await _lustRepository.ApGetSiteAliasByLustId(lustId))
@@ -29,6 +29,11 @@ namespace OlprrApi.Services
                 resultList.Add(_mapper.Map<EntityDto.ApGetSiteAliasByLustId2, ResponseDto.ApGetSiteAliasByLustId2>(result));
             }
             return resultList;
+        }
+        public async Task<ResponseDto.ApGetSiteAliasByLustId2> GetSiteAlias(int siteNameAliasId)
+        {
+            var result = await _lustRepository.ApGetSiteAliasBySiteNameAliasIdData(siteNameAliasId);
+            return _mapper.Map<EntityDto.ApGetSiteAliasByLustId2, ResponseDto.ApGetSiteAliasByLustId2>(result);
         }
         public async Task<int> InsUpdSiteAlias(RequestDto.ApInsUpdSiteAlias apInsUpdSiteAlias)
         {

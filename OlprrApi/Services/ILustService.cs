@@ -8,7 +8,8 @@ namespace OlprrApi.Services
 {
     public interface ILustService
     {
-        Task<IEnumerable<ApGetSiteAliasByLustId2>> GetSiteAlias(int lustId);
+        Task<IEnumerable<ApGetSiteAliasByLustId2>> GetSiteAliases(int lustId);
+        Task<ApGetSiteAliasByLustId2> GetSiteAlias(int siteNameAliasId);
         Task<int> InsUpdSiteAlias(RequestDto.ApInsUpdSiteAlias apInsUpdSiteAlias);
         Task ApDltSiteNameAlias(int siteNameAliasId);
         Task<IEnumerable<ResponseDto.ContactsStats>> GetContacts(string fname, string lname, string org, int sortColumn, int sortOrder, int pageNumber, int rowsPerPage);
