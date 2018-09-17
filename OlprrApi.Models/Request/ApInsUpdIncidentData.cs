@@ -37,9 +37,13 @@ namespace OlprrApi.Models.Request
         public int? GeoLocId { get; set; }
         public int? OlprrId { get; set; }
         public DateTime DiscoveryDate { get; set; }
-        //public string LogNumberOut { get; set; }
-        //public int? LustIdOut { get; set; }
-        //public string ErrorMessageHandler { get; set; }
-        //public string ResultSp { get; set; }
+        public int ManagementIdIn { get; set; }
+        public DateTime? CleanupStartDt { get; set; }
+        public DateTime? ReleaseStopDt { get; set; }
+        public DateTime? FinalInvcRqstDt { get; set; }
+        public DateTime? ClosedDt { get; set; }
+        public DateTime? LetterOfAgreementDt { get; set; }
+        [MaxLength(8000)]
+        public string LetterOfAgreementComment { get; set; }
     }
 }

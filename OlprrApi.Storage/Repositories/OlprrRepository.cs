@@ -37,6 +37,7 @@ namespace OlprrApi.Storage.Repositories
         public const string ExecuteApGetLookupTablesByType = "execute dbo.apGetLookupTablesByType {0}";
         public const string SiteType2Table = "SiteType";
         public const string BrownfieldTable = "Brownfield";
+        public const string ContactTypesTable = "ContactTypes";
 
         private LustDbContext _dbContext;
         private ILogger<OlprrRepository> _logger;
@@ -133,6 +134,10 @@ namespace OlprrApi.Storage.Repositories
         public async Task<IEnumerable<Brownfield>> GetBrownfields()
         {
             return await _dbContext.Set<Brownfield>().AsNoTracking().FromSql(ExecuteApGetLookupTablesByType, BrownfieldTable).ToListAsync();
+        }
+        public async Task<IEnumerable<ContactType>> GetContactTypes()
+        {
+            return await _dbContext.Set<ContactType>().AsNoTracking().FromSql(ExecuteApGetLookupTablesByType, ContactTypesTable).ToListAsync();
         }
         public async Task<int> InsertOLPRRIncidentRecord(ApOlprrInsertIncident apOLPRRInsertIncident)
         {

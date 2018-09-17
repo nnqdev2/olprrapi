@@ -214,6 +214,16 @@ namespace OlprrApi.Storage.Repositories
             var geoLocIdParam = new SqlParameter("@GeolocId", apInsUpdIncidentData.GeoLocId);
             var olprrIdParam = new SqlParameter("@OlprrId", apInsUpdIncidentData.OlprrId);
             var discoverDateParam = new SqlParameter("@DiscoverDate", apInsUpdIncidentData.DiscoveryDate);
+            var managementIdInParam = new SqlParameter("@ManagementIdIn", apInsUpdIncidentData.ManagementIdIn);
+            var cleanupStartDtParam = new SqlParameter("@CleanupStartDt", apInsUpdIncidentData.CleanupStartDt);
+            var releaseStopDtParam = new SqlParameter("@ReleaseStopDt", apInsUpdIncidentData.ReleaseStopDt);
+            var closedDtParam = new SqlParameter("@ClosedDt", apInsUpdIncidentData.ClosedDt);
+            var finalInvcRqstDtParam = new SqlParameter("@FinalInvcRqstDt", apInsUpdIncidentData.ReleaseStopDt);
+            var letterOfAgreementDtParam = new SqlParameter("@LetterOfAgreementDt", apInsUpdIncidentData.LetterOfAgreementDt);
+            var letterOfAgreementCommentParam = new SqlParameter("@LetterOfAgreementComment", apInsUpdIncidentData.LetterOfAgreementComment);
+
+
+
             var logNumberOutParam = new SqlParameter{ ParameterName = "@LogNumberOUT", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
             var lustIdOutParam = new SqlParameter { ParameterName = "@LustIdOUT", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
             var errorMessageHandlerParam = new SqlParameter { ParameterName = "@ErrorMessageHandler", SqlDbType = SqlDbType.VarChar, Size = 1024, Direction = ParameterDirection.Output };
@@ -229,19 +239,28 @@ namespace OlprrApi.Storage.Repositories
             if (brownfieldCodeIdParam.Value == null) brownfieldCodeIdParam.Value = DBNull.Value;
             if (fileStatusIdParam.Value == null) fileStatusIdParam.Value = DBNull.Value;
             if (siteTypeIdParam.Value == null) siteTypeIdParam.Value = DBNull.Value;
+            if (cleanupStartDtParam.Value == null) cleanupStartDtParam.Value = DBNull.Value;
+            if (releaseStopDtParam.Value == null) releaseStopDtParam.Value = DBNull.Value;
+            if (finalInvcRqstDtParam.Value == null) finalInvcRqstDtParam.Value = DBNull.Value;
+            if (closedDtParam.Value == null) closedDtParam.Value = DBNull.Value;
+            if (letterOfAgreementDtParam.Value == null) letterOfAgreementDtParam.Value = DBNull.Value;
+            if (letterOfAgreementCommentParam.Value == null) letterOfAgreementCommentParam.Value = DBNull.Value;
+            if (discoverDateParam.Value == null) discoverDateParam.Value = DBNull.Value;
 
-            var exeSp = "execute dbo.apInsUpdIncidentData " +
+            var exeSp = "execute dbo.apUpdIncidentData " +
             "  @LustIdIN, @FacilityId, @CountyId,@ReceivedDate,@SiteName,@SiteAddress,@SiteCity,@SiteZip,@SitePhone,@NoValidAddress" +
             "  ,@SiteTypeId,@FileStatusId,@RegTankInd,@HotInd,@NonRegTankInd,@BrownfieldCodeId,@PropertyTranPendingInd,@ProgramTransferInd,@HotAuditRejectInd " +
             "  ,@ActiveReleaseInd,@OptionLetterSentInd,@SiteComment,@SeeAlsoComment,@PublicSummaryComment,@GeolocId,@OlprrId,@DiscoverDate" +
+            "  ,@ManagementIdIn,@CleanupStartDt,@ReleaseStopDt,@FinalInvcRqstDt,@ClosedDt,@LetterOfAgreementDt,@LetterOfAgreementComment" +
             "  ,@LogNumberOUT OUTPUT ,@LustIdOUT  OUTPUT ,@ErrorMessageHandler OUTPUT ,@ResultSP OUT";
 
             var result = await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, lustIdInParam, facilityIdParam, countyIdParam
                 , receivedDateParam, siteNameParam, siteAddressParam, siteCityParam, siteZipParam, sitePhoneParam, noValidAddressParam
                 , siteTypeIdParam, fileStatusIdParam, regTankIndParam, hotIndParam, nonRegTankIndParam
                 , brownfieldCodeIdParam, propertyTranPendingIndParam, programTransferIndParam, hotAuditRejectIndParam, activeReleaseIndParam
-                , optionLetterSentIndParam, siteCommentParam, seeAlsoCommentParam, publicSummaryCommentParam, geoLocIdParam, olprrIdParam
-                , discoverDateParam, logNumberOutParam, lustIdOutParam, errorMessageHandlerParam, resultSpParam);
+                , optionLetterSentIndParam, siteCommentParam, seeAlsoCommentParam, publicSummaryCommentParam, geoLocIdParam, olprrIdParam, discoverDateParam
+                , managementIdInParam, cleanupStartDtParam, releaseStopDtParam, finalInvcRqstDtParam, closedDtParam, letterOfAgreementDtParam, letterOfAgreementCommentParam
+                , logNumberOutParam, lustIdOutParam, errorMessageHandlerParam, resultSpParam);
 
             if ((errorMessageHandlerParam.Value != DBNull.Value) && (((string)errorMessageHandlerParam.Value).Length > 0))
             {
@@ -258,6 +277,22 @@ namespace OlprrApi.Storage.Repositories
                 OlprrId = (olprrIdParam.Value == DBNull.Value) ? 0 : (Int32)olprrIdParam.Value,
                 ResultSp = (resultSpParam.Value == DBNull.Value) ? 0 : (Int32)resultSpParam.Value,
             };
+        }
+
+        public async Task<ApGetLogNumber> ApGetLogNumber(int lustId)
+        {
+            var lustIdParam = new SqlParameter("@LustId", lustId);
+            if (lustIdParam.Value == null)
+                lustIdParam.Value = DBNull.Value;
+            var exeSp = "execute dbo.ApGetLogNumber  @LustId ";
+            var results = await _dbContext.Set<ApGetLogNumber>().AsNoTracking().FromSql(exeSp, lustIdParam).ToListAsync();
+            if (results.Count > 0)
+            {
+                return results[0];
+            } else
+            {
+                throw new ResourceNotFoundException($"Resource requested - LustId {lustId} not found.");
+            }
         }
     }
 }

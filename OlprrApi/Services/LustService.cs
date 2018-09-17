@@ -86,5 +86,11 @@ namespace OlprrApi.Services
             var result = await _lustRepository.ApInsUpdIncidentData(lustData);
             return (_mapper.Map<EntityDto.ApInsUpdIncidentDataResult, ResponseDto.ApInsUpdIncidentDataResult>(result));
         }
+
+        public async Task<ResponseDto.ApGetLogNumber> GetLogNumber(int lustId)
+        {
+            var result = await _lustRepository.ApGetLogNumber(lustId);
+            return (_mapper.Map<EntityDto.ApGetLogNumber, ResponseDto.ApGetLogNumber>(result));
+        }
     }
 }

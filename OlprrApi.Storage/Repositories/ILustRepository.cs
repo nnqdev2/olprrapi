@@ -15,6 +15,7 @@ namespace OlprrApi.Storage.Repositories
         Task<IEnumerable<LustIncident>> ApGetIncidentByIdData (int lustId);
         Task<IEnumerable<ProjectManagerIncident>> ApGetCurrentProjMgr(int lustId);
         Task<ApInsUpdIncidentDataResult> ApInsUpdIncidentData(ApInsUpdIncidentData apInsUpdIncidentData);
+        Task<ApGetLogNumber> ApGetLogNumber(int lustId);
 
     }
 }

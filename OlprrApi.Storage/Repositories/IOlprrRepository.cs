@@ -28,6 +28,7 @@ namespace OlprrApi.Storage.Repositories
         Task<IEnumerable<ProjectManageIncident>> GetProjectManagers();
         Task<IEnumerable<SiteType2>> GetSiteType2s();
         Task<IEnumerable<Brownfield>> GetBrownfields();
+        Task<IEnumerable<ContactType>> GetContactTypes();
 
 
         Task<int> InsertOLPRRIncidentRecord(ApOlprrInsertIncident apOLPRRInsertIncident);

@@ -29,6 +29,7 @@ namespace OlprrApi.Mappings
             CreateMap<Storage.Entities.ProjectManageIncident, Models.Response.ProjectManager>();
             CreateMap<Storage.Entities.SiteType2, Models.Response.SiteType2>();
             CreateMap<Storage.Entities.Brownfield, Models.Response.Brownfield>();
+            CreateMap<Storage.Entities.ContactType, Models.Response.ContactType>();
 
             CreateMap<Models.Request.ApOLPRRInsertIncident, Storage.Entities.ApOlprrInsertIncident>();
             CreateMap<Models.Request.LustSiteAddressSearch, Storage.Entities.LustSiteAddressSearch>();
@@ -60,6 +61,7 @@ namespace OlprrApi.Mappings
             CreateMap<Storage.Entities.ProjectManagerIncident, Models.Response.ProjectManager>();
             CreateMap<Models.Request.ApInsUpdIncidentData, Storage.Entities.ApInsUpdIncidentData>();
             CreateMap<Storage.Entities.ApInsUpdIncidentDataResult, Models.Response.ApInsUpdIncidentDataResult>();
+            CreateMap<Storage.Entities.ApGetLogNumber, Models.Response.ApGetLogNumber>();
         }
     }
 }

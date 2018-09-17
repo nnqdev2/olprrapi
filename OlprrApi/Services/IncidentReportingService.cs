@@ -314,6 +314,15 @@ namespace OlprrApi.Services
             }
             return resultList;
         }
+        public async Task<IEnumerable<ContactType>> GetContactTypes()
+        {
+            var resultList = new List<ContactType>();
+            foreach (var result in await _lustRepository.GetContactTypes())
+            {
+                resultList.Add(_mapper.Map<EntityDto.ContactType, ContactType>(result));
+            }
+            return resultList;
+        }
     }
 }
 

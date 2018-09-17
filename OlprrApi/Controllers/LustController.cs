@@ -91,5 +91,12 @@ namespace OlprrApi.Controllers
             return Ok(await _lustService.InsUpdLustIncident(apInsUpdIncidentData));
         }
 
+        [Route("lustid/{lustId}/lognumber")]
+        [HttpGet]
+        public async Task<IActionResult> GetLogNumber(int lustId)
+        {
+            return Ok(await _lustService.GetLogNumber(lustId));
+        }
+
     }
 }
