@@ -44,6 +44,8 @@ namespace OlprrApi.Storage
         public DbSet<LustIncident> LustIncident { get; set; }
         public DbSet<ProjectManagerIncident> ProjectManagerIncident { get; set; }
         public DbSet<ApGetLogNumber> ApGetLogNumber { get; set; }
+        public DbSet<ApGetAffilById> ApGetAffilById { get; set; }
+
         public LustDbContext(DbContextOptions<LustDbContext> options) : base(options)
         {
         }

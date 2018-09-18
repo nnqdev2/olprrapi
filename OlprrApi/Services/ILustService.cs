@@ -18,5 +18,6 @@ namespace OlprrApi.Services
         Task<IEnumerable<ResponseDto.ProjectManager>> GetCurrentProjMgr(int lustId);
         Task<ApInsUpdIncidentDataResult> InsUpdLustIncident(RequestDto.ApInsUpdIncidentData apInsUpdIncidentData);
         Task<ApGetLogNumber> GetLogNumber(int lustId);
+        Task<ApGetAffilById> GetAffilById(int affilId);
     }
 }

@@ -294,5 +294,22 @@ namespace OlprrApi.Storage.Repositories
                 throw new ResourceNotFoundException($"Resource requested - LustId {lustId} not found.");
             }
         }
+
+        public async Task<ApGetAffilById> ApGetAffilById(int affilId)
+        {
+            var affilIdParam = new SqlParameter("@AffilId", affilId);
+            if (affilIdParam.Value == null)
+                affilIdParam.Value = DBNull.Value;
+            var exeSp = "execute dbo.apGetAffilByIdData  @AffilId ";
+            var results = await _dbContext.Set<ApGetAffilById>().AsNoTracking().FromSql(exeSp, affilIdParam).ToListAsync();
+            if (results.Count > 0)
+            {
+                return results[0];
+            }
+            else
+            {
+                throw new ResourceNotFoundException($"Resource requested - AffilId {affilId} not found.");
+            }
+        }
     }
 }

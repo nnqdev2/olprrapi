@@ -7,6 +7,7 @@ namespace OlprrApi.Storage.Entities
     public class LustIncident
     {
         [Key]
+        public int LustId { get; set; }
         public string LogNumber { get; set; }
         public string LogNbrCounty { get; set; }
         public int? FacilityId { get; set; }

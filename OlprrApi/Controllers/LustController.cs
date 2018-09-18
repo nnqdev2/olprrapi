@@ -97,6 +97,12 @@ namespace OlprrApi.Controllers
         {
             return Ok(await _lustService.GetLogNumber(lustId));
         }
+        [Route("affil/{affilId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetAffilById(int affilId)
+        {
+            return Ok(await _lustService.GetAffilById(affilId));
+        }
 
     }
 }
