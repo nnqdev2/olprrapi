@@ -311,5 +311,78 @@ namespace OlprrApi.Storage.Repositories
                 throw new ResourceNotFoundException($"Resource requested - AffilId {affilId} not found.");
             }
         }
+
+        public async Task<ApInsUpdLustAffilPartyDataResult> ApInsUpdLustAffilPartyData(ApInsUpdLustAffilPartyData apInsUpdLustAffilPartyData)
+        {
+            var lustIdInParam = new SqlParameter("@LUSTID", apInsUpdLustAffilPartyData.LustId);
+            var affilTypeParam = new SqlParameter("@AffilType", apInsUpdLustAffilPartyData.AffilType);
+            var startDtParam = new SqlParameter("@StartDate", apInsUpdLustAffilPartyData.StartDt);
+            var endDtParam = new SqlParameter("@EndDate", apInsUpdLustAffilPartyData.EndDt);
+            var organizationParam = new SqlParameter("@Organization", apInsUpdLustAffilPartyData.Organization);
+            var subOrgParam = new SqlParameter("@SubOrg", apInsUpdLustAffilPartyData.SubOrg);
+            var jobTitleParam = new SqlParameter("@JobTitle", apInsUpdLustAffilPartyData.Jobtitle);
+            var firstNameParam = new SqlParameter("@FirstName", apInsUpdLustAffilPartyData.FirstName);
+            var lastNameParam = new SqlParameter("@LastName", apInsUpdLustAffilPartyData.LastName);
+            var phoneParam = new SqlParameter("@Phone", apInsUpdLustAffilPartyData.Phone);
+            var emailParam = new SqlParameter("@Email", apInsUpdLustAffilPartyData.Email);
+            var streetParam = new SqlParameter("@Street", apInsUpdLustAffilPartyData.Street);
+            var cityParam = new SqlParameter("@City", apInsUpdLustAffilPartyData.City);
+            var zipParam = new SqlParameter("@ZIP", apInsUpdLustAffilPartyData.Zip);
+            var stateParam = new SqlParameter("@State", apInsUpdLustAffilPartyData.State);
+            var countryParam = new SqlParameter("@Country", apInsUpdLustAffilPartyData.Country);
+            var affilCommentsParam = new SqlParameter("@AffilComments", apInsUpdLustAffilPartyData.AffilComments);
+            var affilIdParam = new SqlParameter("@AffilId", apInsUpdLustAffilPartyData.AffilId);
+
+            var partyIdOutParam = new SqlParameter { ParameterName = "@PartyId", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var affilIdOutParam = new SqlParameter { ParameterName = "@AffiliationID", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var errorMsgOutParam = new SqlParameter { ParameterName = "@ErrMsg", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+            var resultOutParam = new SqlParameter { ParameterName = "@Result", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+            if (subOrgParam.Value == null) subOrgParam.Value = DBNull.Value;
+            if (affilCommentsParam.Value == null) affilCommentsParam.Value = DBNull.Value;
+            if (affilTypeParam.Value == null) affilTypeParam.Value = DBNull.Value;
+            if (startDtParam.Value == null) startDtParam.Value = DBNull.Value;
+            if (endDtParam.Value == null) endDtParam.Value = DBNull.Value;
+            if (organizationParam.Value == null) organizationParam.Value = DBNull.Value;
+            if (jobTitleParam.Value == null) jobTitleParam.Value = DBNull.Value;
+            if (firstNameParam.Value == null) firstNameParam.Value = DBNull.Value;
+            if (lastNameParam.Value == null) lastNameParam.Value = DBNull.Value;
+            if (phoneParam.Value == null) phoneParam.Value = DBNull.Value;
+            if (emailParam.Value == null) emailParam.Value = DBNull.Value;
+            if (streetParam.Value == null) streetParam.Value = DBNull.Value;
+            if (cityParam.Value == null) cityParam.Value = DBNull.Value;
+            if (zipParam.Value == null) zipParam.Value = DBNull.Value;
+            if (stateParam.Value == null) stateParam.Value = DBNull.Value;
+            if (countryParam.Value == null) countryParam.Value = DBNull.Value;
+            if (affilCommentsParam.Value == null) affilCommentsParam.Value = DBNull.Value;
+            if (affilIdParam.Value == null) affilIdParam.Value = DBNull.Value;
+
+            var exeSp = "execute dbo.apInsUpdLUSTAffilPartyData " +
+            "  @LUSTID, @AffilType,@StartDate,@EndDate,@Organization,@SubOrg,@JobTitle,@FirstName,@LastName,@Phone" +
+            "  ,@Email,@Street,@City,@ZIP,@State,@Country,@AffilComments,@AffilID " +
+            "  ,@PartyID OUTPUT ,@AffiliationID  OUTPUT ,@ErrMsg OUTPUT ,@Result OUT";
+
+            var result = await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, lustIdInParam, affilTypeParam, startDtParam
+                , endDtParam, organizationParam, subOrgParam, jobTitleParam, firstNameParam, lastNameParam, phoneParam, emailParam
+                , streetParam, cityParam, zipParam, stateParam, countryParam, affilCommentsParam, affilIdParam
+                , partyIdOutParam, affilIdOutParam, errorMsgOutParam, resultOutParam);
+
+
+            if ((errorMsgOutParam.Value != DBNull.Value) && (((string)errorMsgOutParam.Value).Length > 0))
+            {
+                var errorMsg = $"{exeSp} returned @ErrorMessage = {errorMsgOutParam.Value} Result = {result} for lustId {apInsUpdLustAffilPartyData.LustId} organization {apInsUpdLustAffilPartyData.Organization} name {apInsUpdLustAffilPartyData.FirstName} {apInsUpdLustAffilPartyData.LastName} ";
+                _logger.LogError(errorMsg);
+                //throw new StoreProcedureNonZeroOutputParamException(errorMsg);
+            }
+            return new ApInsUpdLustAffilPartyDataResult
+            {
+                LustId = apInsUpdLustAffilPartyData.LustId,
+                AffilIdIn = apInsUpdLustAffilPartyData.AffilId,
+                ErrMsg = (errorMsgOutParam.Value == DBNull.Value) ? null : (string)errorMsgOutParam.Value,
+                PartyId = (Int32)partyIdOutParam.Value,
+                AffilId = (Int32)affilIdOutParam.Value,
+                Result = (Int32)resultOutParam.Value
+            };
+        }
     }
 }

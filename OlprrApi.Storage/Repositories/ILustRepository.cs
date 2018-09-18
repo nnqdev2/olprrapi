@@ -17,6 +17,7 @@ namespace OlprrApi.Storage.Repositories
         Task<ApInsUpdIncidentDataResult> ApInsUpdIncidentData(ApInsUpdIncidentData apInsUpdIncidentData);
         Task<ApGetLogNumber> ApGetLogNumber(int lustId);
         Task<ApGetAffilById> ApGetAffilById(int affilId);
+        Task<ApInsUpdLustAffilPartyDataResult> ApInsUpdLustAffilPartyData(ApInsUpdLustAffilPartyData apInsUpdLustAffilPartyData);
 
     }
 }

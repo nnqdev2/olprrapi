@@ -63,6 +63,8 @@ namespace OlprrApi.Mappings
             CreateMap<Storage.Entities.ApInsUpdIncidentDataResult, Models.Response.ApInsUpdIncidentDataResult>();
             CreateMap<Storage.Entities.ApGetLogNumber, Models.Response.ApGetLogNumber>();
             CreateMap<Storage.Entities.ApGetAffilById, Models.Response.ApGetAffilById>();
+            CreateMap<Models.Request.ApInsUpdLustAffilPartyData, Storage.Entities.ApInsUpdLustAffilPartyData>();
+            CreateMap<Storage.Entities.ApInsUpdLustAffilPartyDataResult, Models.Response.ApInsUpdLustAffilPartyDataResult>();
         }
     }
 }
