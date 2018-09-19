@@ -98,5 +98,14 @@ namespace OlprrApi.Services
             var result = await _lustRepository.ApGetAffilById(affilId);
             return (_mapper.Map<EntityDto.ApGetAffilById, ResponseDto.ApGetAffilById>(result));
         }
+
+        public async Task<ResponseDto.ApInsUpdLustAffilPartyDataResult> InsUpdLustAffilPartyData(RequestDto.ApInsUpdLustAffilPartyData apInsUpdLustAffilPartyData)
+        {
+            var lustData = _mapper.Map<RequestDto.ApInsUpdLustAffilPartyData, EntityDto.ApInsUpdLustAffilPartyData>(apInsUpdLustAffilPartyData);
+            var result = await _lustRepository.ApInsUpdLustAffilPartyData(lustData);
+            return (_mapper.Map<EntityDto.ApInsUpdLustAffilPartyDataResult, ResponseDto.ApInsUpdLustAffilPartyDataResult>(result));
+
+        }
+
     }
 }

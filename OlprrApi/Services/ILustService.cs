@@ -19,5 +19,6 @@ namespace OlprrApi.Services
         Task<ApInsUpdIncidentDataResult> InsUpdLustIncident(RequestDto.ApInsUpdIncidentData apInsUpdIncidentData);
         Task<ApGetLogNumber> GetLogNumber(int lustId);
         Task<ApGetAffilById> GetAffilById(int affilId);
+        Task<ApInsUpdLustAffilPartyDataResult> InsUpdLustAffilPartyData (RequestDto.ApInsUpdLustAffilPartyData apInsUpdLustAffilPartyData);
     }
 }
