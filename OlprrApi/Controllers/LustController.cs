@@ -98,11 +98,18 @@ namespace OlprrApi.Controllers
             return Ok(await _lustService.GetLogNumber(lustId));
         }
 
-        [Route("affil/{affilId}")]
+        [Route("contact/{affilId}")]
         [HttpGet]
         public async Task<IActionResult> GetAffilById(int affilId)
         {
             return Ok(await _lustService.GetAffilById(affilId));
+        }
+
+        [Route("lustid/{lustId}/contact")]
+        [HttpGet]
+        public async Task<IActionResult> GetPartyGridByLustIdData(int affilId)
+        {
+            return Ok(await _lustService.GetPartyGridByLustIdData(affilId));
         }
 
         [Route("lustid/{lustId}/contact")]

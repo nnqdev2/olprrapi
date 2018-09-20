@@ -384,5 +384,13 @@ namespace OlprrApi.Storage.Repositories
                 Result = (Int32)resultOutParam.Value
             };
         }
+
+        public async Task<IEnumerable<ApGetAffilById>> ApGetPartyGridByLustIdData(int lustId)
+        {
+            var lustIdParam = new SqlParameter("@LustId", lustId);
+            var exeSp = "execute dbo.apGetPartyGridByLustIdData  @LustId ";
+            var results = await _dbContext.Set<ApGetAffilById>().AsNoTracking().FromSql(exeSp, lustIdParam).ToListAsync();
+            return results;
+        }
     }
 }

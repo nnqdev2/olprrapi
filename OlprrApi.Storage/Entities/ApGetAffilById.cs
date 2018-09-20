@@ -10,10 +10,10 @@ namespace OlprrApi.Storage.Entities
         public int AffilId { get; set; }
         public string AffilTypeCd { get; set; }
         public string AffilTypeDesc { get; set; }
-        public DateTime StartDt { get; set; }
-        public DateTime EndDt { get; set; }
+        public DateTime? StartDt { get; set; }
+        public DateTime? EndDt { get; set; }
         //[Column("PartyID")]
-        public int PartyId  { get; set; }
+        public int? PartyId  { get; set; }
         public string Organization { get; set; }
         public string SubOrganization { get; set; }
         public string Jobtitle { get; set; }
@@ -29,8 +29,8 @@ namespace OlprrApi.Storage.Entities
         public string Country { get; set; }
         public string AffilComments { get; set; }
         public string LastUpdBy { get; set; }
-        public DateTime LastUpdDttm { get; set; }
+        public DateTime? LastUpdDttm { get; set; }
         //[Column("ZP4Checked")]
-        public Boolean Zp4Checked { get; set; }
+        public int? Zp4Checked { get; set; }
     }
 }

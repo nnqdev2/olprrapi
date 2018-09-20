@@ -107,5 +107,14 @@ namespace OlprrApi.Services
 
         }
 
+        public async Task<IEnumerable<ResponseDto.ApGetAffilById>> GetPartyGridByLustIdData(int lustId)
+        {
+            var resultList = new List<ResponseDto.ApGetAffilById>();
+            foreach (var result in await _lustRepository.ApGetPartyGridByLustIdData(lustId))
+            {
+                resultList.Add(_mapper.Map<EntityDto.ApGetAffilById, ResponseDto.ApGetAffilById>(result));
+            }
+            return resultList;
+        }
     }
 }
