@@ -116,5 +116,10 @@ namespace OlprrApi.Services
             }
             return resultList;
         }
+
+        public async Task ApDltIncidentByLustId(int lustId)
+        {
+            await _lustRepository.ApDltIncidentByLustId(lustId);
+        }
     }
 }

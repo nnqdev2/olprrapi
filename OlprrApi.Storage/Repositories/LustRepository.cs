@@ -392,5 +392,13 @@ namespace OlprrApi.Storage.Repositories
             var results = await _dbContext.Set<ApGetAffilById>().AsNoTracking().FromSql(exeSp, lustIdParam).ToListAsync();
             return results;
         }
+
+        public async Task ApDltIncidentByLustId(int lustId)
+        {
+            var lustIdParam = new SqlParameter("@LustId", lustId);
+            var resultOutParam = new SqlParameter { ParameterName = "@Result", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var exeSp = "execute dbo.apDltIncidentByLustId  @LustId @Result OUT";
+            await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, lustIdParam, resultOutParam);
+        }
     }
 }

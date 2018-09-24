@@ -119,5 +119,12 @@ namespace OlprrApi.Controllers
             return Ok(await _lustService.InsUpdLustAffilPartyData(apInsUpdLustAffilPartyData));
         }
 
+        [Route("lustid/{lustId}")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteLustIncident(int lustId)
+        {
+            await _lustService.ApDltIncidentByLustId(lustId);
+            return NoContent();
+        }
     }
 }
