@@ -397,7 +397,7 @@ namespace OlprrApi.Storage.Repositories
         {
             var lustIdParam = new SqlParameter("@LustId", lustId);
             var resultOutParam = new SqlParameter { ParameterName = "@Result", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-            var exeSp = "execute dbo.apDltIncidentByLustId  @LustId @Result OUT";
+            var exeSp = "execute dbo.apDltIncidentByLustId  @LustId, @Result OUT";
             await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, lustIdParam, resultOutParam);
         }
     }
