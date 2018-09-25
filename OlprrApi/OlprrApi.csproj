@@ -6,7 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Logs\readme.txt" />
     <None Remove="Properties\PublishProfiles\FolderProfile1.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Logs\readme.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +36,18 @@
     <ProjectReference Include="..\OlprrApi.Common\OlprrApi.Common.csproj" />
     <ProjectReference Include="..\OlprrApi.Models\OlprrApi.Models.csproj" />
     <ProjectReference Include="..\OlprrApi.Storage\OlprrApi.Storage.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="NLog.Development.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="NLog.Production.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="NLog.Staging.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
