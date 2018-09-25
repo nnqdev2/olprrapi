@@ -12,8 +12,11 @@ namespace OlprrApi
         public static void Main(string[] args)
         {
             //BuildWebHost(args).Run();
+
+            var nlogEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             // NLog: setup the logger first to catch all errors
-            var logger = NLog.LogManager.LoadConfiguration("nlog.config").GetCurrentClassLogger();
+            // var logger = NLog.LogManager.LoadConfiguration("nlog.config").GetCurrentClassLogger();
+            var logger = NLog.LogManager.LoadConfiguration(nlogEnvironment == "" ? "nlog.config" : $"nlog.{nlogEnvironment}.config").GetCurrentClassLogger();
             try
             {
                 logger.Debug("init main");
