@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -15,7 +16,7 @@ namespace OlprrApi
 
             var nlogEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             // NLog: setup the logger first to catch all errors
-            // var logger = NLog.LogManager.LoadConfiguration("nlog.config").GetCurrentClassLogger();
+            //var logger = NLog.LogManager.LoadConfiguration("nlog.config").GetCurrentClassLogger();
             var logger = NLog.LogManager.LoadConfiguration(nlogEnvironment == "" ? "NLog.config" : $"NLog.{nlogEnvironment}.config").GetCurrentClassLogger();
             try
             {
