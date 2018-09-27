@@ -83,7 +83,7 @@ namespace OlprrApi.Services
                 IcEmail = "t@t.com",
                 GroundWater = 1,
                 SurfaceWater = 1,
-                DringkingWater = 1,
+                DrinkingWater = 1,
                 Soil = 1,
                 Vapor = 1,
                 FreeProduct = 0,

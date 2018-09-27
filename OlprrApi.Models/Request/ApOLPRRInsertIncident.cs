@@ -149,7 +149,7 @@ namespace OlprrApi.Models.Request
 
         public int SurfaceWater { get; set; }
 
-        public int DringkingWater { get; set; }
+        public int DrinkingWater { get; set; }
 
         public int Soil { get; set; }
 
@@ -342,7 +342,7 @@ namespace OlprrApi.Models.Request
 
         //public int SurfaceWater { get; set; }
 
-        //public int DringkingWater { get; set; }
+        //public int DrinkingWater { get; set; }
 
         //public int Soil { get; set; }
 

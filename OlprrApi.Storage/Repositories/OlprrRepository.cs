@@ -193,7 +193,7 @@ namespace OlprrApi.Storage.Repositories
             var icEmailParam = (new SqlParameter("@IC_EMAIL", apOLPRRInsertIncident.IcEmail));
             var groundWaterParam = (new SqlParameter("@GROUNDWATER", apOLPRRInsertIncident.GroundWater));
             var surfaceWaterParam = (new SqlParameter("@SURFACEWATER", apOLPRRInsertIncident.SurfaceWater));
-            var drinkingWaterdParam = (new SqlParameter("@DRINKINGWATER", apOLPRRInsertIncident.DringkingWater));
+            var drinkingWaterdParam = (new SqlParameter("@DRINKINGWATER", apOLPRRInsertIncident.DrinkingWater));
             var soilParam = (new SqlParameter("@SOIL", apOLPRRInsertIncident.Soil));
             var vaporParam = (new SqlParameter("@VAPOR", apOLPRRInsertIncident.Vapor));
             var freeProductParam = (new SqlParameter("@FREEPRODUCT", apOLPRRInsertIncident.FreeProduct));
@@ -997,6 +997,26 @@ namespace OlprrApi.Storage.Repositories
                 , rpOrganizationParam, rpFirstNameParam, rpLastNameParam, rpPhoneParam, rpEmailParam, rpStreetParam, rpCityParam, rpZipParam, rpStateParam, rpCountryParam, rpAffilCommentsParam
                 , icOrganizationParam, icFirstNameParam, icLastNameParam, icPhoneParam, icEmailParam, icStreetParam, icCityParam, icZipParam, icStateParam, icCountryParam, icAffilCommentsParam
                 , appIdParam, newSiteStatusParam);
+
+            //var exeSp = "execute dbo.apCreateIncidentData " +
+            //"  @LustIdIN, @FacilityId, @CountyId,@ReceivedDate,@SiteName,@SiteAddress,@SiteCity,@SiteZip,@SitePhone,@NoValidAddress,@RegTankInd,@HotInd,@NonRegTankInd " +
+            //"  ,@SiteComment,@OlprrId,@ErrorMessage OUTPUT ,@LogNumberTemp  OUTPUT ,@LustIdTemp OUTPUT  ,@DiscoverDate,@ConfirmationCode,@DiscoveryCode,@ReleaseCauseCode,@ReleaseSourceId " +
+            //"  ,@SLMediaInd, @GWMediaInd, @SWMediaInd, @DWMediaInd, @FVMediaInd, @FPMediaInd ,@UGContamInd , @LGContamInd, @MGContamInd, @DSContamInd, @WOContamInd " +
+            //"  ,@LBContamInd, @OPContamInd , @SVContamInd, @CHContamInd, @UNContamInd, @MTBEContamInd, @HOContamInd " +
+            //"  , @RPOrganization, @RPFirstName, @RPLastName, @RPPhone, @RPEmail, @RPStreet, @RPCity, @RPZIP, @RPState, @RPCountry, @RPAffilComments  " +
+            //"  , @ICOrganization, @ICFirstName , @ICLastName, @ICPhone , @ICEmail, @ICStreet, @ICCity, @ICZIP, @ICState, @ICCountry, @ICAffilComments  " +
+            //"  , @AppID, @NewSiteStatus ";
+
+            //var result = await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, lustIdInParam, facilityIdParam, countyIdParam
+            //    , receivedDateParam, siteNameParam, siteAddressParam, siteCityParam, siteZipParam, sitePhoneParam, noValidAddressParam, regTankIndParam, hotIndParam, nonRegTankIndParam
+            //    , siteCommentParam, olprrIdParam, errorMessageParam, logNumberTempParam, lustIdTempParam, discoverDateParam, confirmationIdParam, discoveryIdParam, releaseCauseIdParam, releaseSourceIdParam
+            //    , soilParam, groundWaterParam, surfaceWaterParam, drinkingWaterParam, vaporParam, freeProductParam, unleadedGasParam, leadedGasParam, misGasParam, dieselParam, wasteOilParam
+            //    , lubricantParam, otherPetParam, solventParam, chemicalParam, unknownParam, mtbeParam, heatingOilParam
+            //    , rpOrganizationParam, rpFirstNameParam, rpLastNameParam, rpPhoneParam, rpEmailParam, rpStreetParam, rpCityParam, rpZipParam, rpStateParam, rpCountryParam, rpAffilCommentsParam
+            //    , icOrganizationParam, icFirstNameParam, icLastNameParam, icPhoneParam, icEmailParam, icStreetParam, icCityParam, icZipParam, icStateParam, icCountryParam, icAffilCommentsParam
+            //    , appIdParam, newSiteStatusParam);
+
+
             if ((errorMessageParam.Value != DBNull.Value) && (((string) errorMessageParam.Value).Length > 0))
             {
                 var errorMsg = $"{exeSp} returned @ErrorMessage = {errorMessageParam.Value} Result = {result} for olprrId {olprrReviewIncident.OlprrId} site name {olprrReviewIncident.SiteName}";
