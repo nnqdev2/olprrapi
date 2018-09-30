@@ -71,7 +71,7 @@ namespace OlprrApi.Storage.Entities
         //Media data
         public int GroundWater { get; set; }
         public int SurfaceWater { get; set; }
-        public int DringkingWater { get; set; }
+        public int DrinkingWater { get; set; }
         public int Soil { get; set; }
         public int Vapor { get; set; }
         public int FreeProduct { get; set; }

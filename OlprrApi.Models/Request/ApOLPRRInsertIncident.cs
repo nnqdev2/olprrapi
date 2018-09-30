@@ -30,7 +30,7 @@ namespace OlprrApi.Models.Request
 
         public DateTime DateReceived { get; set; }
 
-        public int FacilityId { get; set; }
+        public int? FacilityId { get; set; }
 
         //[MaxLength(40)]
         public string SiteName { get; set; }
