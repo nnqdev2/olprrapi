@@ -4,5 +4,6 @@
     {
         public int LustId { get; set; }
         public string LogNumber { get; set; }
+        public string ReleaseType { get; set; }
     }
 }
