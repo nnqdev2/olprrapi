@@ -107,9 +107,9 @@ namespace OlprrApi.Controllers
 
         [Route("lustid/{lustId}/contact")]
         [HttpGet]
-        public async Task<IActionResult> GetPartyGridByLustIdData(int affilId)
+        public async Task<IActionResult> GetPartyGridByLustIdData(int lustId)
         {
-            return Ok(await _lustService.GetPartyGridByLustIdData(affilId));
+            return Ok(await _lustService.GetPartyGridByLustIdData(lustId));
         }
 
         [Route("lustid/{lustId}/contact")]
