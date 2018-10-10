@@ -28,5 +28,6 @@ namespace OlprrApi.Models.Response
         public int? Zp4Checked { get; set; }
         public int LustId { get; set; }
         public string LogNumber { get; set; }
+        public string ReleaseType { get; set; }
     }
 }

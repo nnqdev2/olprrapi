@@ -34,5 +34,6 @@ namespace OlprrApi.Storage.Entities
         public int? Zp4Checked { get; set; }
         public int LustId { get; set; }
         public string LogNumber { get; set; }
+        public string ReleaseType { get; set; }
     }
 }
