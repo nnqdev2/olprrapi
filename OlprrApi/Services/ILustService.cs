@@ -22,5 +22,6 @@ namespace OlprrApi.Services
         Task<IEnumerable<ApGetAffilById>> GetPartyGridByLustIdData(int lustId);
         Task<ApInsUpdLustAffilPartyDataResult> InsUpdLustAffilPartyData (RequestDto.ApInsUpdLustAffilPartyData apInsUpdLustAffilPartyData);
         Task ApDltIncidentByLustId(int lustId);
+        Task ApDltLustContactByAffilId(int affilId);
     }
 }

@@ -400,5 +400,14 @@ namespace OlprrApi.Storage.Repositories
             var exeSp = "execute dbo.apDltIncidentByLustId  @LustId, @Result OUT";
             await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, lustIdParam, resultOutParam);
         }
+
+        public async Task ApDltLustContactByAffilId(int affilId)
+        {
+            var affilIdParam = new SqlParameter("@AffilID", affilId);
+            var errorMsgOutParam = new SqlParameter { ParameterName = "@ErrMsg", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+            var resultOutParam = new SqlParameter { ParameterName = "@Result", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            var exeSp = "execute dbo.ApDltLustContactByAffilId @AffilID, @ErrMsg OUT, @Result OUT";
+            await _dbContext.Database.ExecuteSqlCommandAsync(exeSp, affilIdParam, errorMsgOutParam, resultOutParam);
+        }
     }
 }

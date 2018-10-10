@@ -105,6 +105,14 @@ namespace OlprrApi.Controllers
             return Ok(await _lustService.GetAffilById(affilId));
         }
 
+        [Route("contact/{affilId}")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteLustContactByAffilId(int affilId)
+        {
+            await _lustService.ApDltLustContactByAffilId(affilId);
+            return NoContent();
+        }
+
         [Route("lustid/{lustId}/contact")]
         [HttpGet]
         public async Task<IActionResult> GetPartyGridByLustIdData(int lustId)
@@ -126,5 +134,7 @@ namespace OlprrApi.Controllers
             await _lustService.ApDltIncidentByLustId(lustId);
             return NoContent();
         }
+
+
     }
 }

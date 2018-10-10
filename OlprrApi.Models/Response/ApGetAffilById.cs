@@ -26,5 +26,7 @@ namespace OlprrApi.Models.Response
         public string LastUpdBy { get; set; }
         public DateTime? LastUpdDttm { get; set; }
         public int? Zp4Checked { get; set; }
+        public int LustId { get; set; }
+        public string LogNumber { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace OlprrApi.Storage.Repositories
         Task<ApGetAffilById> ApGetAffilById(int affilId);
         Task<IEnumerable<ApGetAffilById>> ApGetPartyGridByLustIdData(int lustId);
         Task<ApInsUpdLustAffilPartyDataResult> ApInsUpdLustAffilPartyData(ApInsUpdLustAffilPartyData apInsUpdLustAffilPartyData);
+        Task ApDltLustContactByAffilId(int affilId);
         Task ApDltIncidentByLustId(int lustId);
     }
 }

@@ -121,5 +121,10 @@ namespace OlprrApi.Services
         {
             await _lustRepository.ApDltIncidentByLustId(lustId);
         }
+
+        public async Task ApDltLustContactByAffilId(int affilId)
+        {
+            await _lustRepository.ApDltLustContactByAffilId(affilId);
+        }
     }
 }

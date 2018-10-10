@@ -32,5 +32,7 @@ namespace OlprrApi.Storage.Entities
         public DateTime? LastUpdDttm { get; set; }
         //[Column("ZP4Checked")]
         public int? Zp4Checked { get; set; }
+        public int LustId { get; set; }
+        public string LogNumber { get; set; }
     }
 }
