@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OlprrApi</name>
+    </assembly>
+    <members>
+        <member name="M:OlprrApi.Controllers.LustController.GetSiteAliases(System.Int32)">
+            <summary>
+            List of all site aliases for a lust id
+            </summary>
+            <remarks></remarks>
+            <param name="lustId">LUST incident id</param>
+        </member>
+    </members>
+</doc>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OlprrApi.Models.Response;
 using OlprrApi.Services;
 
 namespace OlprrApi.Controllers
@@ -21,7 +22,13 @@ namespace OlprrApi.Controllers
             _lustService = lustService;
         }
 
-        //[Route("sitealiases/{lustId}")]
+        /// <summary>
+        /// List of all site aliases for a lust id
+        /// </summary>
+        /// <remarks></remarks>
+        /// <param name="lustId">LUST incident id</param>
+        [ProducesResponseType(200, Type = typeof(ApGetSiteAliasByLustId2))]
+        [ProducesResponseType(400, Type = typeof(void))]
         [Route("lustid/{lustId}/sitealiases")]
         [HttpGet]
         public async Task<IActionResult> GetSiteAliases(int lustId)

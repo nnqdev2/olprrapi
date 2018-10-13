@@ -3,14 +3,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using OlprrApi.Models;
 using OlprrApi.Storage;
 using OlprrApi.Middlewares;
 using OlprrApi.Storage.Repositories;
 using OlprrApi.Services;
 using AutoMapper;
 using OlprrApi.Attributes;
-using Microsoft.IdentityModel.Protocols;
+using System.IO;
+using Swashbuckle.AspNetCore.Swagger;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OlprrApi
 {
@@ -46,26 +48,40 @@ namespace OlprrApi
             //services.AddMvc();
             services.AddMvc(options =>
             {
-                options.Filters.Add(new ModelValidationFilterAttribute()); // an instance
+                options.Filters.Add(new ModelValidationFilterAttribute()); 
             });
-
-
             services.Configure<IISOptions>(options =>
             {
                 options.ForwardClientCertificate = false;
             });
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                    {
+                        Title = "HOL API",
+                        Version = "v1",
+                    }
+                );
+                //c.AddSecurityDefinition("Bearer", new ApiKeyScheme { In = "header", Description = "Please enter JWT with Bearer into field", Name = "Authorization", Type = "apiKey" });
+                //c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                //    {
+                //        { "Bearer", Enumerable.Empty<string>() },
+                //    }
+                //);
+                var xmlFile = Path.ChangeExtension(typeof(Startup).Assembly.Location, ".xml");
+                c.IncludeXmlComments(xmlFile);
+            });
 
+
+
+            services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<LustDbContext>(options =>
                 {
                     options.UseSqlServer(Configuration.GetConnectionString("LustDbConnection1"));
                 },
                 ServiceLifetime.Scoped
-                );
-            //services.AddDbContext<LustDbContext>(
-            //    options => options.UseSqlServer(
-            //         Configuration.GetConnectionString("LustDbConnection1")));
+             );
             services.AddScoped<IOlprrRepository, OlprrRepository>();
             services.AddScoped<ILustRepository, LustRepository>();
             services.AddScoped<IIncidentReportingService, IncidentReportingService>();
@@ -78,11 +94,13 @@ namespace OlprrApi
         {
             app.UseCors("AllowSpecificOrigin");
             //app.UseCors("AllowAllHeaders");
-
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
-
             app.UseMvc();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HOL API");
+            });
         }
     }
 }
