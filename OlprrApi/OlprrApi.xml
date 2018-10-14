@@ -7,8 +7,102 @@
         <member name="M:OlprrApi.Controllers.LustController.GetSiteAliases(System.Int32)">
             <summary>
             List of all site aliases for a lust id
+            (ApGetSiteAliasByLustIdData)
             </summary>
-            <remarks></remarks>
+            <param name="lustId">LUST incident id</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.LustController.GetSiteAlias(System.Int32)">
+            <summary>
+            Site Alias by site alias id
+            (ApGetSiteAliasBySiteNameAliasIdData)
+            </summary>
+            <param name="siteNameAliasId">LUST incident site alias id</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.LustController.InsUpdSiteAlias(OlprrApi.Models.Request.ApInsUpdSiteAlias)">
+            <summary>
+            Insert/Update site alias data for a lust incident
+            (ApInsUpdSiteAliasData)
+            </summary>
+            <param name="apInsUpdSiteAlias">Site alias data to insert or update</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.LustController.DeleteSiteAlias(System.Int32)">
+            <summary>
+            Delete site alias data for a lust incident
+            (ApDltSiteNameAlias)
+            </summary>
+            <param name="siteNameAliasId">site alias id</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.LustController.GetContacts(System.String,System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            List of all contacts 
+            (ApGetPartyByFirstLastOrgNameData)
+            </summary>
+            <param name="fname">First name</param>
+            <param name="lname">Last name</param>
+            <param name="org">Organization</param>
+            <param name="sc">Sort column</param>
+            <param name="so">Sort order</param>
+            <param name="pn">Page number</param>
+            <param name="rpp">Rows per page</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.LustController.GetCountyIdAndNameFromZP4Fips(System.Int32)">
+            <summary>
+            GetCountyIdAndNameFromZP4Fips 
+            (ApGetCountyIdAndNameFromZP4Fips) 
+            </summary>
+            <param name="county">County code</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.LustController.GetIncidentByIdData(System.Int32)">
+            <summary>
+            Get LUST incident 
+            (ApGetIncidentByIdData) 
+            </summary>
+            <param name="lustId">LUST incident id</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.LustController.GetCurrentProjMgr(System.Int32)">
+            <summary>
+            Get list of current project managers
+            (ApGetCurrentProjMgr)
+            </summary>
+            <param name="lustId">LUST incident id</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.LustController.UpdIncidentData(OlprrApi.Models.Request.ApInsUpdIncidentData)">
+            <summary>
+            Update LUST incident
+            (ApUpdIncidentData)
+            </summary>
+            <param name="apInsUpdIncidentData">LUST incident data</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.LustController.GetLogNumber(System.Int32)">
+            <summary>
+            Update LUST incident
+            (ApGetLogNumber)  
+            </summary>
+            <param name="lustId">LUST incident id</param>
+            [ProducesResponseType(200, Type = typeof(ApGetLogNumber))]
+        </member>
+        <member name="M:OlprrApi.Controllers.LustController.GetAffilById(System.Int32)">
+            <summary>
+            Get a contact id for lust incident
+            (ApGetAffilByIdData) 
+            </summary>
+            <param name="affilId">LUST incident affiliate id</param>
+            [ProducesResponseType(200, Type = typeof(ApGetAffilById))]
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:OlprrApi.Controllers.LustController.GetPartyGridByLustIdData(System.Int32)" -->
+        <member name="M:OlprrApi.Controllers.LustController.InsUpdLustAffilPartyData(OlprrApi.Models.Request.ApInsUpdLustAffilPartyData)">
+            <summary>
+            Insert/Update Contact for a LUST incident
+            (ApInsUpdLustAffilPartyData) 
+            </summary>
+            <param name="apInsUpdLustAffilPartyData">Contact data for a LUST incident</param>
+            [ProducesResponseType(200, Type = typeof(ApInsUpdLustAffilPartyDataResult))]
+        </member>
+        <member name="M:OlprrApi.Controllers.LustController.DeleteLustIncident(System.Int32)">
+            <summary>
+            Delete a lust incident
+            (ApDltIncidentByLustId)
+            </summary>
             <param name="lustId">LUST incident id</param>
         </member>
     </members>
