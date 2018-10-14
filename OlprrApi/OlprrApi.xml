@@ -4,6 +4,151 @@
         <name>OlprrApi</name>
     </assembly>
     <members>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetConfirmationTypes">
+            <summary>
+            List of confirmation types 
+            (apGetOLPRRLookupTables {ConfirmationType})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetCounties">
+            <summary>
+            List of counties 
+            (apGetOLPRRLookupTables {County})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetDiscoveryTypes">
+            <summary>
+            List of discovery types
+            (apGetOLPRRLookupTables {DiscoveryType})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetQuadrants">
+            <summary>
+            List of quadrants
+            (apGetOLPRRLookupTables {Quadrant})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetReleaseCauseTypes">
+            <summary>
+            List of Release Cause Types
+            (apGetOLPRRLookupTables {ReleaseCauseTypes})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetSiteTypes">
+            <summary>
+            List of Site Types
+            (apGetOLPRRLookupTables {SiteType})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetSourceTypes">
+            <summary>
+            List of Source Types
+            (apGetOLPRRLookupTables {SourceType})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetStates">
+            <summary>
+            List of States
+            (apGetOLPRRLookupTables {State})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetStreetTypes">
+            <summary>
+            List of States
+            (apGetOLPRRLookupTables {State})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetDeqOffices">
+            <summary>
+            List of DEQ Offices
+            (apGetOLPRRLookupTables {DeqOffice})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetIncidentStatuses">
+            <summary>
+            List of Incident Statuses
+            (apGetOLPRRLookupTables {IncidentStatus})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetTankStatuses">
+            <summary>
+            List of Tank Statuses
+            (apGetOLPRRLookupTables {TankStatus})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetFileStatuses">
+            <summary>
+            List of File Statuses
+            (apGetOLPRRLookupTables {FileStatus})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetZipCodes">
+            <summary>
+            List of ZipCodes
+            (apGetOLPRRLookupTables {ZipCode})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetDateCompares">
+            <summary>
+            List of Date Compares
+            (apGetOLPRRLookupTables {DateCompare})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetRegions">
+            <summary>
+            List of Regions
+            (apGetOLPRRLookupTables {Region})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetCities">
+            <summary>
+            List of Cities
+            (apGetOLPRRLookupTables {City})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetCleanupSiteTypes">
+            <summary>
+            List of Cleanup Site Types
+            (apGetOLPRRLookupTables {CleanupSiteType})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetProjectManagers">
+            <summary>
+            List of ProjectManagers
+            (apGetOLPRRLookupTables {ProjectManager})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetSiteType2s">
+            <summary>
+            List of Site Types 
+            (apGetLookupTablesByType {SiteType})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetBrownfields">
+            <summary>
+            List of Brownfields 
+            (apGetLookupTablesByType {Brownfield})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetContactTypes">
+            <summary>
+            List of Contact Types 
+            (apGetLookupTablesByType {ContactTypes})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.GetContactType2s">
+            <summary>
+            List of Contact Types with no Invoice
+            (apGetLookupTablesByType {ContactTypesNoINV})
+            </summary>
+        </member>
+        <member name="M:OlprrApi.Controllers.IncidentReportingController.PostIncident(OlprrApi.Models.Request.ApOLPRRInsertIncident)">
+            <summary>
+            Insert an OLPRR Incident
+            (apOLPRRInsertIncident)
+            </summary>
+            <param name="apOLPRRInsertIncident">OLPRR data to insert</param>
+        </member>
         <member name="M:OlprrApi.Controllers.LustController.GetSiteAliases(System.Int32)">
             <summary>
             List of all site aliases for a lust id
