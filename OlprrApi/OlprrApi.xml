@@ -250,5 +250,70 @@
             </summary>
             <param name="lustId">LUST incident id</param>
         </member>
+        <member name="M:OlprrApi.Controllers.ReviewController.GetIncidentById(System.Int32)">
+            <summary>
+            Get OLPRR incident
+            (apOlprrGetIncidentById)
+            </summary>
+            <param name="olprrId">Get OLPRR Incident</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.ReviewController.SearchLust(OlprrApi.Models.Request.LustSearchFilter)">
+            <summary>
+            Search LUST incident by filters
+            (apGetLustSearchData)
+            </summary>
+            <param name="lustSearchFilter">Search filters</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.ReviewController.SearchUst(OlprrApi.Models.Request.UstSearchFilter)">
+            <summary>
+            Search UST by filters
+            (apOLPRRGetUstLookupData)
+            </summary>
+            <param name="ustSearchFilter">Search filters</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.ReviewController.GetContactByIdByContactType(System.Int32,System.String)">
+            <summary>
+            get a contact for OLPRR incident  by contact type
+            (ApOLPRRGetContactByIdByContactType)
+            </summary>
+            <param name="olprrId">OLPRR id</param>
+            <param name="contactType">Contact Type</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.ReviewController.GetIncidents(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Search UST by filters
+            (apOLPRRGetIncidents)
+            </summary>
+            <param name="deqo">DEQ office</param>
+            <param name="stat">Status</param>
+            <param name="st">Site Type</param>
+            <param name="id">OLPRR id</param>
+            <param name="sc">Sort column</param>
+            <param name="so">Sort order</param>
+            <param name="pn">Page number</param>
+            <param name="rpp">Rows per page</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.ReviewController.GetIncidentDataById(System.Int32)">
+            <summary>
+            get OLPRR incident by OLRR id
+            (apOLPRRGetIncidentDataByID)
+            </summary>
+            <param name="olprrId">OLPRR id</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.ReviewController.GetApOlprrCheckPostalCounty(System.Int32,System.String)">
+            <summary>
+            County check
+            (apOLPRRCheckPostalCountyData)
+            </summary>
+            <param name="reported">Reported county</param>
+            <param name="uspostal">County from US Postal check</param>
+        </member>
+        <member name="M:OlprrApi.Controllers.ReviewController.CreateLustIncident(OlprrApi.Models.Request.OlprrReviewIncident)">
+            <summary>
+            Insert OLPRR review into LUST
+            (apCreateIncidentData)
+            </summary>
+            <param name="olprrReviewIncident">OLPRR review incident to insert into LUST</param>
+        </member>
     </members>
 </doc>
