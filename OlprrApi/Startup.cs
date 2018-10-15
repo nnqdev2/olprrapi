@@ -13,6 +13,8 @@ using System.IO;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System;
 
 namespace OlprrApi
 {
@@ -74,7 +76,6 @@ namespace OlprrApi
             });
 
 
-
             services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<LustDbContext>(options =>
                 {
@@ -99,7 +100,7 @@ namespace OlprrApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HOL API");
+                c.SwaggerEndpoint("../swagger/v1/swagger.json", "HOL API");
             });
         }
     }
