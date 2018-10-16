@@ -10,8 +10,8 @@ namespace OlprrApi.Storage.Entities
         public int LustId { get; set; }
         public int? AffilId { get; set; }
         public string AffilType { get; set; }
-        public DateTime StartDt { get; set; }
-        public DateTime EndDt { get; set; }
+        public DateTime? StartDt { get; set; }
+        public DateTime? EndDt { get; set; }
         public string Organization { get; set; }       
         public string SubOrg { get; set; }
         public string Jobtitle { get; set; }
@@ -25,6 +25,6 @@ namespace OlprrApi.Storage.Entities
         public string State { get; set; }        
         public string Country { get; set; }
         public string AffilComments { get; set; }
-
+        public string LastChangedBy { get; set; }
     }
 }

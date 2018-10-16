@@ -126,7 +126,8 @@ namespace OlprrApi.Storage.Repositories
                         Zipcode = res.Zipcode,
                         Address = res.Address,
                         Country = res.Country,
-                        Email = res.Email
+                        Email = res.Email,
+                        SubOrganization = res.SubOrganization
                     }
                 );
             }
@@ -378,10 +379,10 @@ namespace OlprrApi.Storage.Repositories
             {
                 LustId = apInsUpdLustAffilPartyData.LustId,
                 AffilIdIn = apInsUpdLustAffilPartyData.AffilId,
-                ErrMsg = (errorMsgOutParam.Value == DBNull.Value) ? null : (string)errorMsgOutParam.Value,
-                PartyId = (Int32)partyIdOutParam.Value,
-                AffilId = (Int32)affilIdOutParam.Value,
-                Result = (Int32)resultOutParam.Value
+                ErrMsg  = (errorMsgOutParam.Value == DBNull.Value) ? null : (string)errorMsgOutParam.Value,
+                PartyId = (partyIdOutParam.Value == DBNull.Value) ? 0 : (Int32)partyIdOutParam.Value,
+                AffilId = (affilIdOutParam.Value == DBNull.Value) ? 0 : (Int32)affilIdOutParam.Value,
+                Result  = (resultOutParam.Value == DBNull.Value) ? 0 : (Int32)resultOutParam.Value
             };
         }
 

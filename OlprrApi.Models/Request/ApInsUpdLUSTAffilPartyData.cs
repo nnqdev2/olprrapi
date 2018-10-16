@@ -41,5 +41,8 @@ namespace OlprrApi.Models.Request
         public string Country { get; set; }
         [MaxLength(2000)]
         public string AffilComments { get; set; }
+        [Required]
+        [MaxLength(64)]
+        public string LastChangedBy { get; set; }
     }
 }
